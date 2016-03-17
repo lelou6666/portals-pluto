@@ -1,0 +1,33 @@
+#  Licensed to the Apache Software Foundation (ASF) under one or more
+#  contributor license agreements.  See the NOTICE file distributed with
+#  this work for additional information regarding copyright ownership.
+#  The ASF licenses this file to You under the Apache License, Version 2.0
+#  (the "License"); you may not use this file except in compliance with
+#  the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License
+#
+
+Apach Pluto 2.1 is the second version of the JSR-286 Reference Implementation (Java Portlet API 2.0).
+See the Getting Started page on the Pluto web site (http://portals.apache.org/pluto)
+for instructions on how to build Pluto from source. 
+
+A simplified way to build a bundled Pluto 2.1 distribution is to use the dist-build.xml Ant build which downloads 
+Tomcat and calls the appropriate Maven commands to create a distribution with Pluto embedded in Tomcat. The 
+built distribution, which contains this file, when started via the startup script in the bin directory will 
+start the Pluto portal by browsing to http://localhost:8080/pluto/portal/ and logging in as pluto/pluto 
+(or tomcat/tomcat). See the documentation in dist-build.xml for more details. Also invoke the Help mode on the
+Pluto Admin page for instructions on how to use the admin portlet to deploy custom portlets.
+
+This version was based on Pluto 1.1 and was refactored in the 1.1-286-COMPATIBILITY branch to add 
+JSR-286 features and create the official JSR-286 RI submitted to the Java Community Process.
+
+The Pluto 2.0 code was subsequently refactored within the 2.0-spi-refactoring branch to make the descriptor
+API more flexible and fix other issues. This branch became the new trunk on 11/3/2008. 
+
