@@ -1,9 +1,10 @@
 /*
- * Copyright 2004 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -21,11 +22,12 @@ import java.io.PrintWriter;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import org.apache.pluto.driver.services.portal.PortletWindowConfig;
+
 /**
  * The portlet render tag is used to print portlet rendering result (or error
  * details) to the page.
- * 
- * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>
+ *
  * @version 1.0
  * @since Oct 4, 2004
  */
@@ -60,7 +62,10 @@ public class PortletRenderTag extends TagSupport {
         // Otherwise, print the error stack trace.
         else {
             try {
-                pageContext.getOut().print("Error rendering portlet.");
+            	PortletWindowConfig windowConfig =
+                    PortletWindowConfig.fromId(parentTag.getEvaluatedPortletId());
+            	
+                pageContext.getOut().print("Error rendering portlet " + windowConfig.getPortletName() + ".");
                 pageContext.getOut().print("<pre>");
                 parentTag.getThrowable().printStackTrace(
                 		new PrintWriter(pageContext.getOut()));

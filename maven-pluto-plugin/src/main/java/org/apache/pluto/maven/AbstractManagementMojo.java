@@ -1,9 +1,10 @@
 /*
- * Copyright 2003,2004 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,31 +16,30 @@
  */
 package org.apache.pluto.maven;
 
-import org.apache.maven.artifact.factory.ArtifactFactory;
-import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.artifact.resolver.ArtifactResolver;
-import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
-import org.apache.maven.artifact.resolver.ArtifactResolutionException;
-import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.pluto.util.install.ServerConfig;
-import org.apache.pluto.util.install.InstallationConfig;
-import org.apache.pluto.util.install.PortalInstallerFactory;
-import org.apache.pluto.util.install.PortalInstaller;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Iterator;
 import java.util.Collection;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
+import org.apache.maven.artifact.resolver.ArtifactResolutionException;
+import org.apache.maven.artifact.resolver.ArtifactResolver;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.pluto.util.install.InstallationConfig;
+import org.apache.pluto.util.install.PortalInstaller;
+import org.apache.pluto.util.install.PortalInstallerFactory;
+import org.apache.pluto.util.install.ServerConfig;
 
 /**
  * Abstract Mojo for installation tasks.
  *
  * @since 07/29/2005
- * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>
  */
 public abstract class AbstractManagementMojo extends AbstractPlutoMojo {
 

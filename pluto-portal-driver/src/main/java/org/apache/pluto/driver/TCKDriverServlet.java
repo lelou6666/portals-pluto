@@ -1,9 +1,10 @@
 /*
- * Copyright 2003,2004 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,31 +16,30 @@
  */
 package org.apache.pluto.driver;
 
-import org.apache.pluto.PortletContainer;
-import org.apache.pluto.driver.services.portal.PageConfig;
-import org.apache.pluto.driver.config.AdminConfiguration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import java.io.IOException;
 import java.text.DecimalFormat;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.container.PortletContainer;
+import org.apache.pluto.driver.config.AdminConfiguration;
+import org.apache.pluto.driver.services.portal.PageConfig;
 
 /**
  * TCK Driver Servlet.
  *
- * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>
- * @author <a href="mailto:zheng@apache.org">ZHENG Zhong</a>
  * @version 1.0
  * @since Dec 11, 2005
  */
 public class TCKDriverServlet extends PortalDriverServlet {
 	
 	/** Logger. */
-    private static final Log LOG = LogFactory.getLog(TCKDriverServlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TCKDriverServlet.class);
     
     private int pageCounter = 0;
     
@@ -113,8 +113,8 @@ public class TCKDriverServlet extends PortalDriverServlet {
                 String contextPath = "/" + portletNames[i].substring(0, index);
                 String portletName = portletNames[i].substring(index + 1);
                 pageConfig.addPortlet(contextPath, portletName);
-                adminConfig.getPortletRegistryAdminService()
-                		.addPortletApplication(contextPath);
+//                adminConfig.getPortletRegistryAdminService()
+//                		.addPortletApplication(contextPath);
             }
 
             adminConfig.getRenderConfigAdminService().addPage(pageConfig);

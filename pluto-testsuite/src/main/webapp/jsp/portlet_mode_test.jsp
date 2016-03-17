@@ -1,8 +1,10 @@
 <%--
-Copyright 2004 The Apache Software Foundation
-Licensed  under the  Apache License,  Version 2.0  (the "License");
-you may not use  this file  except in  compliance with the License.
-You may obtain a copy of the License at
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
@@ -15,7 +17,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 --%>
 <%@ page import="javax.portlet.PortletMode"%>
-<%@ taglib uri='http://java.sun.com/portlet' prefix='portlet'%>
+<%@ taglib uri='http://java.sun.com/portlet_2_0' prefix='portlet'%>
 
 <portlet:defineObjects/>
 
@@ -27,24 +29,24 @@ limitations under the License.
         to ensure that it passes.  Click on the links below
         and make sure that the specified mode is displayed.</TD></TR>
 
-<portlet:actionURL portletMode="<%=PortletMode.HELP.toString()%>" secure="<%=renderRequest.isSecure()?"True":"False"%>" var="url">
-	<portlet:param name="testId" value="<%=renderRequest.getParameter("testId")%>"/>
+<portlet:actionURL portletMode="<%=PortletMode.HELP.toString()%>" secure='<%=renderRequest.isSecure()?"True":"False"%>' var="url">
+	<portlet:param name="testId" value='<%=renderRequest.getParameter("testId")%>'/>
 </portlet:actionURL>
 
 <TR><TD style="font-size: 12px" valign="top"><A href="<%=url%>">Help</A></TD>
     <TD style="font-size: 10px;">The help mode provides help info.  Click to ensure that help info is
         displayed.</TD></TR>
 
-<portlet:actionURL portletMode="<%=PortletMode.EDIT.toString()%>" secure="<%=renderRequest.isSecure()?"True":"False"%>" var="url">
-	<portlet:param name="testId" value="<%=renderRequest.getParameter("testId")%>"/>
+<portlet:actionURL portletMode="<%=PortletMode.EDIT.toString()%>" secure='<%=renderRequest.isSecure()?"True":"False"%>' var="url">
+	<portlet:param name="testId" value='<%=renderRequest.getParameter("testId")%>'/>
 </portlet:actionURL>
 
 <TR><TD style="font-size: 12px" valign="top"><A href="<%=url%>">Edit</A></TD>
     <TD style="font-size: 10px;">The edit mode allows you to edit preferences. Click to view all preferences
     currently stored in this portlet.</TD></TR>
 
-<portlet:actionURL portletMode="<%=PortletMode.VIEW.toString()%>" secure="<%=renderRequest.isSecure()?"True":"False"%>" var="url">
-	<portlet:param name="testId" value="<%=renderRequest.getParameter("testId")%>"/>
+<portlet:actionURL portletMode="<%=PortletMode.VIEW.toString()%>" secure='<%=renderRequest.isSecure()?"True":"False"%>' var="url">
+	<portlet:param name="testId" value='<%=renderRequest.getParameter("testId")%>'/>
 </portlet:actionURL>
 
 <TR><TD style="font-size: 12px"><A href="<%=url%>">View</A></TD>

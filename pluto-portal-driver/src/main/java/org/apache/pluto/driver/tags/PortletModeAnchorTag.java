@@ -1,12 +1,13 @@
 /*
- * Copyright 2006 The Apache Software Foundation.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -25,12 +26,11 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.pluto.driver.AttributeKeys;
 import org.apache.pluto.driver.config.DriverConfiguration;
 import org.apache.pluto.driver.core.PortalRequestContext;
-import org.apache.pluto.driver.services.portal.PortletWindowConfig;
 import org.apache.pluto.driver.url.PortalURL;
 import org.apache.taglibs.standard.lang.support.ExpressionEvaluatorManager;
 
@@ -40,14 +40,12 @@ import org.apache.taglibs.standard.lang.support.ExpressionEvaluatorManager;
  * 
  * <pluto:modeAnchor portletId="" portletMode="edit"/>
  *
- * @author <a href="mailto:esm@apache.org">Elliot Metsger</a>
- * @author <a href="mailto:cdoremus@apache.org">Craig Doremus</a>
  * @todo Test supported Window States using a version of ActionResponseImpl.isWindowStateAllowed()
  */
 public class PortletModeAnchorTag extends BodyTagSupport {
     
     /** Logger. */
-    private static final Log LOG = LogFactory.getLog(PortletModeAnchorTag.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PortletModeAnchorTag.class);
         
     
     // Private Member Variables ------------------------------------------------
@@ -83,10 +81,8 @@ public class PortletModeAnchorTag extends BodyTagSupport {
         ServletContext servletContext = pageContext.getServletContext();
         DriverConfiguration driverConfig = (DriverConfiguration)
                 servletContext.getAttribute(AttributeKeys.DRIVER_CONFIG);
-        PortletWindowConfig windowConfig = driverConfig
-                .getPortletWindowConfig(evaluatedPortletId);
-       
-        if (isPortletModeAllowed(driverConfig, windowConfig, portletMode)) {
+
+        if (isPortletModeAllowed(driverConfig, portletMode)) {
             // Retrieve the portal environment.
             PortalRequestContext portalEnv = PortalRequestContext.getContext(
                     (HttpServletRequest) pageContext.getRequest());        
@@ -94,15 +90,23 @@ public class PortletModeAnchorTag extends BodyTagSupport {
             PortalURL portalUrl =  portalEnv.createPortalURL();
             portalUrl.setPortletMode(evaluatedPortletId, new PortletMode(portletMode));
 
+            // Build a string buffer containing the anchor tag
+            StringBuffer tag = new StringBuffer();
+//            tag.append("<a class=\"" + ToolTips.CSS_CLASS_NAME + "\" href=\"" + portalUrl.toString() + "\">");
+//            tag.append("<span class=\"" + portletMode + "\"></span>");
+//            tag.append("<span class=\"" + ToolTips.CSS_CLASS_NAME + "\">");
+//            tag.append(ToolTips.forMode(new PortletMode(portletMode)));
+//            tag.append("</span></a>");
+            tag.append("<a title=\"");
+            tag.append(ToolTips.forMode(new PortletMode(portletMode)));
+            tag.append("\" ");
+            tag.append("href=\"" + portalUrl.toString() + "\">");
+            tag.append("<span class=\"" + portletMode + "\"></span>");       
+            tag.append("</a>");
             // Print the mode anchor tag.
             try {
                 JspWriter out = pageContext.getOut();
-                out.print("<a href=\"");
-                out.print(portalUrl.toString());
-                out.print("\">");
-                out.print("<span class=\"");
-                out.print(portletMode);
-                out.print("\"></span></a>");
+                out.print(tag.toString());
             } catch (IOException ex) {
                 throw new JspException(ex);
             }
@@ -157,9 +161,13 @@ public class PortletModeAnchorTag extends BodyTagSupport {
         this.portletMode = portletMode;
     }
     
-    private boolean isPortletModeAllowed(DriverConfiguration config, PortletWindowConfig window, String mode) {
-        LOG.debug("Testing if PortletWindowConfig [" + Integer.toHexString(window.hashCode()) + "] supports mode [" + mode + "]");
-        return config.isPortletModeSupported(getEvaluatedPortletId(), mode);       
+//    private boolean isPortletModeAllowed(DriverConfiguration config, PortletWindowConfig window, String mode) {
+//        LOG.debug("Testing if PortletWindowConfig [" + Integer.toHexString(window.hashCode()) + "] supports mode [" + mode + "]");
+//        return config.isPortletModeSupported(getEvaluatedPortletId(), mode);       
+//    }
+    private boolean isPortletModeAllowed(DriverConfiguration config, String mode) {
+        LOG.debug("Testing if PortletWindowConfig [" + getEvaluatedPortletId() + "] supports mode [" + mode + "]");
+        return config.isPortletModeSupported(getEvaluatedPortletId(), mode);
     }
 
     

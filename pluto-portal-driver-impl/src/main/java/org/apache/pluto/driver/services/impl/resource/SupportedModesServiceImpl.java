@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.driver.services.impl.resource;
 
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -37,84 +38,134 @@ import org.apache.pluto.driver.config.DriverConfigurationException;
 import org.apache.pluto.driver.services.container.FilterManagerImpl;
 import org.apache.pluto.driver.services.portal.PortletApplicationConfig;
 import org.apache.pluto.driver.services.portal.PortletRegistryService;
+=======
+import org.apache.pluto.container.PortletContainerException;
+import org.apache.pluto.container.driver.PortletContextService;
+import org.apache.pluto.container.driver.PortletRegistryService;
+import org.apache.pluto.container.om.portlet.PortletApplicationDefinition;
+import org.apache.pluto.container.om.portlet.PortletDefinition;
+import org.apache.pluto.container.om.portlet.Supports;
+import org.apache.pluto.container.om.portlet.impl.CustomPortletModeType;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.driver.services.portal.PortletWindowConfig;
 import org.apache.pluto.driver.services.portal.PropertyConfigService;
 import org.apache.pluto.driver.services.portal.SupportedModesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletMode;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 /**
  * Allows clients to determine if a particular PortletMode is supported
  * by the portal, a particular portlet, or both.
- * 
- * This implementation depends on {@link PropertyConfigService},  
- * {@link PortletRegistryService}, and {@link PortletContainer}.  
- * The two services are injected by Spring, and the container is obtained
- * from the <code>ServletContext</code>. 
- * 
- * @author <a href="mailto:esm@apache.org">Elliot Metsger</a>
+ * <p/>
+ * This implementation depends on {@link PropertyConfigService}.
+ * <p/>
+ * The service implementations are injected by Spring.
+ *
  * @version $Id$
  * @since September 9, 2006
- * @todo How will hot-deploy of portlets via the admin portlet work with this impl?
  */
-public class SupportedModesServiceImpl implements SupportedModesService 
+public class SupportedModesServiceImpl implements SupportedModesService
 {
-    /** Logger */
-    private static final Log LOG = LogFactory.getLog(SupportedModesServiceImpl.class);
+    /**
+     * Logger
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(SupportedModesServiceImpl.class);
 
-    /** PortletApplicationConfig objects keyed by their String context path */
-    private Map portletApps = new HashMap();
-    
-    /** Sets containing PortletMode objects keyed by String portlet Id */
-    private Map supportedPortletModesByPortlet = new HashMap();
-    
-    /** PortletMode objects supported by the portal */
-    private Set supportedPortletModesByPortal = new HashSet();        
-    
-    /** PortletContainer used to obtain Portlet Descriptors (PortletAppDD) */
-    private PortletContainer container = null;
-    
-    /** PortletRegistryService used to obtain PortletApplicationConfig objects */
-    private PortletRegistryService portletRegistry = null;
-    
-    /** PropertyConfig Service used to obtain supported portal modes */
-    private PropertyConfigService propertySvc = null;
-    
-    
+
+    /**
+     * PortletMode objects supported by the portal
+     */
+    private Set<PortletMode> supportedPortletModesByPortal = new HashSet<PortletMode>();
+
+    /**
+     * PropertyConfig Service used to obtain supported portal modes
+     */
+    private final PropertyConfigService propertyService;
+
+    private final PortletContextService portletContextService;
+
+    /**
+     * PortletRegistryService used to obtain PortletApplicationConfig objects
+     */
+    private final PortletRegistryService portletRegistry;
+
     /**
      * Constructs a SupportedModesService with its dependencies.
-     * 
-     * @param portletRegistry the PortletRegistryService
-     * @param propertySvc the PropertyConfigService
+     *
+     * @param propertyService the PropertyConfigService
      */
-    public SupportedModesServiceImpl(PortletRegistryService portletRegistry, PropertyConfigService propertySvc)
+    public SupportedModesServiceImpl(PropertyConfigService propertyService, PortletContextService portletContextService, PortletRegistryService portletRegistry)
     {
+        this.propertyService = propertyService;
+        this.portletContextService = portletContextService;
         this.portletRegistry = portletRegistry;
-        this.propertySvc = propertySvc;        
-    }
-    
-    //  SupportedModesService Implementation -----------------
-    
-    public boolean isPortletModeSupported(String portletId, String mode) 
-    {
-        return isPortletModeSupportedByPortal(mode) && isPortletModeSupportedByPortlet(portletId, mode);
+        loadPortalModes();
     }
 
-    public boolean isPortletModeSupportedByPortal(String mode) 
+    //  SupportedModesService Implementation -----------------
+
+    public boolean isPortletModeSupported(String portletId, String mode)
     {
-        LOG.debug("Is mode [" + mode + "] supported by the portal?");
+        return (isPortletModeSupportedByPortal(mode) &&
+                isPortletModeSupportedByPortlet(portletId, mode)
+                || isPortletManagedMode(portletId, mode));
+    }
+
+    public boolean isPortletModeSupportedByPortal(String mode)
+    {
         return supportedPortletModesByPortal.contains(new PortletMode(mode));
     }
 
-    public boolean isPortletModeSupportedByPortlet(String portletId, String mode) 
+    public boolean isPortletModeSupportedByPortlet(String portletId, String mode)
     {
-        LOG.debug("Is mode [" + mode + "] for portlet [" + portletId + "] supported by the portlet?");
-        Set supportedModes = (Set)supportedPortletModesByPortlet.get(portletId);
-        if (supportedModes == null)
-        {
-            return false;
-        }        
-        return supportedModes.contains(new PortletMode(mode));
-    }
+        String applicationId = PortletWindowConfig.parseContextPath(portletId);
+        String applicationName = applicationId;
+        String portletName = PortletWindowConfig.parsePortletName(portletId);
 
+        try
+        {
+            if (portletRegistry == null)
+            {
+                LOG.error("Optional Portlet Registry Service not found.");
+                throw new PortletContainerException("Optional Portlet Registry Service not found.");
+            }
+            PortletApplicationDefinition ctx = portletRegistry.getPortletApplication(applicationName);
+            Iterator i = ctx.getPortlets().iterator();
+            while (i.hasNext())
+            {
+                PortletDefinition dd = (PortletDefinition) i.next();
+                if (portletName.equals(dd.getPortletName()))
+                {
+                    Iterator i2 = dd.getSupports().iterator();
+                    while (i2.hasNext())
+                    {
+                        Supports sd = (Supports) i2.next();
+                        if (sd.getPortletModes() == null)
+                        {
+                            if (mode.equalsIgnoreCase(PortletMode.VIEW.toString()))
+                                return true;
+                        } else
+                        {
+                            Iterator pd = sd.getPortletModes().iterator();
+                            while (pd.hasNext())
+                            {
+                                if (mode.equalsIgnoreCase((String) pd.next()))
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+<<<<<<< HEAD
     // DriverConfiguration Lifecycle Implementation ---------
     
     public void destroy() throws DriverConfigurationException 
@@ -128,77 +179,47 @@ public class SupportedModesServiceImpl implements SupportedModesService
         propertySvc = null;
         FilterManagerImpl.removeAllFilterApps();
         LOG.debug("Supported Modes Service destroyed.");
+=======
+        } catch (PortletContainerException e)
+        {
+            LOG.error("Error determining mode support.", e);
+        }
+        LOG.info("Portlet mode '" + mode + "' not found for portletId: '" + portletId + "'");
+        return false;
+>>>>>>> refs/remotes/apache/master
     }
 
-    public void init(ServletContext ctx) throws DriverConfigurationException 
-    {
-        LOG.debug("Initializing Supported Modes Service...");
-        // Obtain the Portlet Container
-        this.container = (PortletContainer)ctx.getAttribute(AttributeKeys.PORTLET_CONTAINER);
-        initInternal();
-        LOG.debug("Supported Modes Service initalized.");
-    }
-    
-    // Private Methods --------------------------------------
-    
     /**
-     * Initialize the data structures for supportedPortletModesByPortal,
-     * supportedPortletModesByPortlet, and portletApps.
-     * 
-     * Note that the order of initalization matters.
+     * Populates the supportedPortletModesByPortal set.
      */
-    private void initInternal() 
-    {
-        // portlet applications should be loaded first
-        loadPortletApplications();
-        loadPortalModes();
-        loadPortletModes();        
-    }    
-    
-    /** 
-     * Populates the portletApps map with PortletApplicationConfig objects
-     * keyed by their context path.
-     */
-    private void loadPortletApplications() 
-    {
-        LOG.debug("Loading Portlet Applications...");
-        Iterator apps = portletRegistry.getPortletApplications().iterator();
-        while (apps.hasNext())
-        {
-            PortletApplicationConfig app = (PortletApplicationConfig)apps.next();
-            LOG.debug("Loading [" + app.getContextPath() + "]");
-            portletApps.put(app.getContextPath(), app);
-        }
-        LOG.debug("Loaded [" + portletApps.size() + "] Portlet Applications.");
-    }
-    
-    /** Populates the supportedPortletModesByPortal set. */
-    private void loadPortalModes() 
+    private void loadPortalModes()
     {
         // Add the PortletModes supported by the portal to the
         // supportedPortletModesByPortal set.
-        LOG.debug("Loading supported portal modes...");        
-        Iterator modes = propertySvc.getSupportedPortletModes().iterator();
-        while (modes.hasNext()) {
+        LOG.debug("Loading supported portal modes...");
+        Iterator modes = propertyService.getSupportedPortletModes().iterator();
+        while (modes.hasNext())
+        {
             String mode = (String) modes.next();
             LOG.debug("Loading mode [" + mode + "]");
             supportedPortletModesByPortal.add(new PortletMode(mode));
         }
         LOG.debug("Loaded [" + supportedPortletModesByPortal.size() + "] supported portal modes");
+
     }
-    
-    /** 
-     * Populates the supportedPortletModesByPortlet map, which contains
-     * Sets of PortletMode objects keyed by String portlet Ids.
-     */
-    private void loadPortletModes()
-    {                
-        // Add the PortletModes supported by each portlet to
-        // the supportedPortletModesByPortlet map.
-        LOG.debug("Loading modes supported by each Portlet...");
-        Iterator apps = portletApps.values().iterator();
-        while (apps.hasNext())
+
+
+    public boolean isPortletManagedMode(String portletId, String mode)
+    {
+        String applicationId = PortletWindowConfig.parseContextPath(portletId);
+        String applicationName = applicationId;
+//        if (applicationName.length() > 0)
+//        {
+//            applicationName = applicationName.substring(1);
+//        }
+        try
         {
+<<<<<<< HEAD
             PortletApplicationConfig app = (PortletApplicationConfig)apps.next();            
             PortletAppDD portletAppDD;
             try {
@@ -231,35 +252,92 @@ public class SupportedModesServiceImpl implements SupportedModesService
 	                        pModes.add(pMode);                                
 	                    }
                     }
+=======
+            PortletApplicationDefinition portletApp = portletRegistry.getPortletApplication(applicationName);
+            Iterator customModes = portletApp.getCustomPortletModes().iterator();
+            while (customModes.hasNext())
+            {
+                CustomPortletModeType customMode = (CustomPortletModeType) customModes.next();
+                boolean isPortletManagedMode = !customMode.isPortalManaged();
+                if (isPortletManagedMode && customMode.getPortletMode().equalsIgnoreCase(mode))
+                {
+                    return true;
+>>>>>>> refs/remotes/apache/master
                 }
-                
-                supportedPortletModesByPortlet.put(
-                        PortletWindowConfig.createPortletId(app.getContextPath(), portlet.getPortletName()), 
-                        pModes);                     
-            } 
-        }
-    }
-    
-    /**
-     * Retrieve the PortletApplicationConfig by its context path.
-     * 
-     * @param contextPath the context
-     * @return the PortletApplicationConfig, or null if it wasn't found.
-     */
-    private PortletApplicationConfig getPortletApplication(String contextPath) 
-    {
-        PortletApplicationConfig app = null;
-        // attempt to retrieve the PortletApplicationConfig from the map
-        app = (PortletApplicationConfig)portletApps.get(contextPath);
-        
-        // if it wasn't in the map, perhaps it has been added since 
-        // the container was started
-        if (app == null)
+            }
+        } catch (PortletContainerException e)
         {
-            loadPortletApplications();
-        }        
-        app = (PortletApplicationConfig)portletApps.get(contextPath);
-        return app;
-    }    
+            LOG.error("Error determining portlet managed mode support, so we assume that it is false.", e);
+        }
 
+
+        return false;
+    }
+
+
+    /**
+     * Gets all modes supported by a portlet that are defined in the portlet's supports child element
+     * in portlet.xml.
+     *
+     * @param portletId of interest.
+     * @return all portlet modes supported by a portlet.
+     */
+    public Set<PortletMode> getSupportedPortletModes(String portletId) throws PortletContainerException
+    {
+        Set<PortletMode> modeSet = new HashSet<PortletMode>();
+
+        String applicationId = PortletWindowConfig.parseContextPath(portletId);
+        String applicationName = applicationId;
+//        if (applicationName.length() > 0)
+//        {
+//            applicationName = applicationName.substring(1);
+//        }
+        String portletName = PortletWindowConfig.parsePortletName(portletId);
+
+        if (portletRegistry == null)
+        {
+            LOG.error("Optional Portlet Registry Service not found.");
+            throw new PortletContainerException("Optional Portlet Registry Service not found.");
+        }
+        PortletApplicationDefinition portletApp = portletRegistry.getPortletApplication(applicationName);
+        Iterator i = portletApp.getPortlets().iterator();
+        while (i.hasNext())
+        {
+            PortletDefinition dd = (PortletDefinition) i.next();
+            if (portletName.equals(dd.getPortletName()))
+            {
+                Iterator i2 = dd.getSupports().iterator();
+                while (i2.hasNext())
+                {
+                    Supports sd = (Supports) i2.next();
+                    if (sd.getPortletModes() == null)
+                    {
+                        modeSet.add(PortletMode.VIEW);
+                    } else
+                    {
+                        Iterator<String> pd = sd.getPortletModes().iterator();
+                        while (pd.hasNext())
+                        {
+                            modeSet.add(new PortletMode(pd.next()));
+                        }
+                    }
+                }
+            }
+        }
+
+        return modeSet;
+    }
+
+    public PortletConfig getPortletConfig(String portletId) throws PortletContainerException
+    {
+        String applicationId = PortletWindowConfig.parseContextPath(portletId);
+        String applicationName = applicationId;
+//        if (applicationName.length() > 0)
+//        {
+//            applicationName = applicationName.substring(1);
+//        }
+        String portletName = PortletWindowConfig.parsePortletName(portletId);
+
+        return portletContextService.getPortletConfig(applicationName, portletName);
+    }
 }

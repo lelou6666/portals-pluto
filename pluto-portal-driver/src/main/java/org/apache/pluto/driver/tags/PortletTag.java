@@ -1,12 +1,13 @@
 /*
- * Copyright 2003,2004 The Apache Software Foundation.
- * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,6 +16,7 @@
  */
 package org.apache.pluto.driver.tags;
 
+import java.io.StringWriter;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -25,33 +27,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.pluto.PortletContainer;
-import org.apache.pluto.PortletWindow;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.container.PortletContainer;
+import org.apache.pluto.container.PortletWindow;
 import org.apache.pluto.driver.AttributeKeys;
-import org.apache.pluto.driver.services.portal.PortletWindowConfig;
-import org.apache.pluto.driver.url.PortalURL;
-import org.apache.pluto.driver.config.DriverConfiguration;
 import org.apache.pluto.driver.core.PortalRequestContext;
-import org.apache.pluto.driver.core.PortalServletRequest;
 import org.apache.pluto.driver.core.PortalServletResponse;
 import org.apache.pluto.driver.core.PortletWindowImpl;
-import org.apache.taglibs.standard.lang.support.ExpressionEvaluatorManager;
+import org.apache.pluto.driver.services.portal.PortletWindowConfig;
+import org.apache.pluto.driver.url.PortalURL;
+import org.apache.pluto.tags.el.ExpressionEvaluatorProxy;
 
 /**
  * The portlet tag is used to render a portlet specified by the portlet ID.
- * 
- * @see javax.portlet.Portlet#render(RenderRequest, RenderResponse)
- * @see org.apache.pluto.PortletContainer#doRender(PortletWindow, HttpServletRequest, HttpServletResponse)
- * 
- * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>
- * @author <a href="mailto:zheng@apache.org">ZHENG Zhong</a>
+ *
+ * @see javax.portlet.Portlet#render(javax.portlet.RenderRequest,javax.portlet.RenderResponse)
+ * @see org.apache.pluto.container.PortletContainer#doRender(PortletWindow, HttpServletRequest, HttpServletResponse)
+ *
  */
 public class PortletTag extends BodyTagSupport {
 	
 	/** Logger. */
-    private static final Log LOG = LogFactory.getLog(PortletTag.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PortletTag.class);
     
     /** Status constant for failed rendering. */
     public static final int FAILED = 0;
@@ -63,21 +61,21 @@ public class PortletTag extends BodyTagSupport {
     // Private Member Variables ------------------------------------------------
     
     /** The portlet ID attribute passed into this tag. */
-    private String portletId = null;
-    
+    private String portletId;
+
     /** The evaluated value of the portlet ID attribute. */
-    private String evaluatedPortletId = null;
-    
+    private String evaluatedPortletId;
+
     /** The cached portal servlet response holding rendering result. */
-    private PortalServletResponse response = null;
-    
+    private PortalServletResponse response;
+
     /** The cached rendering status: SUCCESS or FAILED. */
     private int status;
     
     /** The cached Throwable instance when fail to render the portlet. */
-    private Throwable throwable = null;
-    
-    
+    private Throwable throwable;
+
+
     // Tag Attribute Accessors -------------------------------------------------
     
     /**
@@ -110,10 +108,10 @@ public class PortletTag extends BodyTagSupport {
         
     	// Retrieve the portlet window config for the evaluated portlet ID.
         ServletContext servletContext = pageContext.getServletContext();
-        DriverConfiguration driverConfig = (DriverConfiguration)
-            	servletContext.getAttribute(AttributeKeys.DRIVER_CONFIG);
-        PortletWindowConfig windowConfig = driverConfig
-        		.getPortletWindowConfig(evaluatedPortletId);
+
+        PortletWindowConfig windowConfig =
+            PortletWindowConfig.fromId(evaluatedPortletId);
+
         if (LOG.isDebugEnabled()) {
             LOG.debug("Rendering Portlet Window: " + windowConfig);
         }
@@ -123,34 +121,48 @@ public class PortletTag extends BodyTagSupport {
                 (HttpServletRequest) pageContext.getRequest());
         PortalURL portalURL = portalEnv.getRequestedPortalURL();
         
-        // Create the portlet window to render.
-        PortletWindow window = new PortletWindowImpl(windowConfig, portalURL);
-        
-        // Check if someone else is maximized. If yes, don't show content.
-        Map windowStates = portalURL.getWindowStates();
-        for (Iterator it = windowStates.keySet().iterator(); it.hasNext(); ) {
-            String windowId = (String) it.next();
-            WindowState windowState = (WindowState) windowStates.get(windowId);
-            if (WindowState.MAXIMIZED.equals(windowState)
-            		&& !window.getId().getStringId().equals(windowId)) {
-                return SKIP_BODY;
-            }
-        }
-        
-        // Create portal servlet request and response to wrap the original
-        // HTTP servlet request and response.
-        PortalServletRequest portalRequest = new PortalServletRequest(
-        		(HttpServletRequest) pageContext.getRequest(), window);
-        PortalServletResponse portalResponse = new PortalServletResponse(
-                (HttpServletResponse) pageContext.getResponse());
-        
         // Retrieve the portlet container from servlet context.
         PortletContainer container = (PortletContainer)
-            	servletContext.getAttribute(AttributeKeys.PORTLET_CONTAINER);
+                servletContext.getAttribute(AttributeKeys.PORTLET_CONTAINER);
+        
+        // Create the portlet window to render.
+        PortletWindow window = null;
+
+
+        try {
+        	window = new PortletWindowImpl(container, windowConfig, portalURL);
+        } catch(RuntimeException e) // FIXME: Prose a change to anything else, handle it.
+        {
+      	  if (LOG.isDebugEnabled()) {
+              LOG.debug("The portlet " + windowConfig.getPortletName() + " is not available. Is already deployed?");
+          }
+        }
+
+    	// Create portal servlet response to wrap the original
+    	// HTTP servlet response.
+    	PortalServletResponse portalResponse = new PortalServletResponse(
+                (HttpServletResponse) pageContext.getResponse());
+    	
+    	
+        if(window!=null)
+        {
+        	// Check if someone else is maximized. If yes, don't show content.
+        	Map windowStates = portalURL.getWindowStates();
+        	for (Iterator it = windowStates.keySet().iterator(); it.hasNext(); ) {
+        		String windowId = (String) it.next();
+        		WindowState windowState = (WindowState) windowStates.get(windowId);
+        		if (WindowState.MAXIMIZED.equals(windowState)
+        				&& !window.getId().getStringId().equals(windowId)) {
+        			return SKIP_BODY;
+        		}
+        	}
+
+        
+        }
         
         // Render the portlet and cache the response.
         try {
-            container.doRender(window, portalRequest, portalResponse);
+            container.doRender(window, (HttpServletRequest)pageContext.getRequest(), portalResponse);
             response = portalResponse;
             status = SUCCESS;
         } catch (Throwable th) {
@@ -208,8 +220,8 @@ public class PortletTag extends BodyTagSupport {
      * @throws JspException  if an error occurs.
      */
     private void evaluatePortletId() throws JspException {
-        Object obj = ExpressionEvaluatorManager.evaluate(
-        		"portletId", portletId, String.class, this, pageContext);
+        ExpressionEvaluatorProxy proxy = ExpressionEvaluatorProxy.getProxy();
+        Object obj = proxy.evaluate(portletId, pageContext);
         if (LOG.isDebugEnabled()) {
             LOG.debug("Evaluated portletId to: " + obj);
         }

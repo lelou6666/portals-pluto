@@ -1,8 +1,10 @@
 <%--
-Copyright 2004 The Apache Software Foundation
-Licensed  under the  Apache License,  Version 2.0  (the "License");
-you may not use  this file  except in  compliance with the License.
-You may obtain a copy of the License at
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
@@ -16,17 +18,17 @@ limitations under the License.
 --%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 
 <portlet:defineObjects/>
 
-<script name="JavaScript">
+<script type="text/javascript">
 function openCompanionWindow() {
 	w = 500;
 	h = 400;
 	x = (screen.width - w) / 2;
 	y = (screen.height - h) / 2;
-	window.open('<HTML><BODY><CENTER><FONT color=red>Testing Session Attributes</FONT></CENTER></BODY></HTML>', 'companionWindow', 'resizable=yes,scrollbars=yes,status=yes,width=' + w + ',height=' + h + ',screenX=' + x + ',screenY=' + y + ',left=' + x + ',top=' + y);
+	window.open('about:blank', 'companionWindow', 'resizable=yes,scrollbars=yes,status=yes,width=' + w + ',height=' + h + ',screenX=' + x + ',screenY=' + y + ',left=' + x + ',top=' + y);
 }
 </script>
 
@@ -64,5 +66,3 @@ function openCompanionWindow() {
 </c:choose>
 
 <%@ include file="navigation.inc" %>
-
-

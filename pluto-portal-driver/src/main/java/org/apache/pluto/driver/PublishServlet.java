@@ -1,9 +1,10 @@
 /*
- * Copyright 2003,2004 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,15 +16,16 @@
  */
 package org.apache.pluto.driver;
 
-import org.apache.pluto.driver.services.portal.admin.DriverAdministrationException;
-import org.apache.pluto.driver.services.portal.admin.PortletRegistryAdminService;
-import org.apache.pluto.driver.config.AdminConfiguration;
+import java.io.IOException;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletException;
-import java.io.IOException;
+
+import org.apache.pluto.driver.config.AdminConfiguration;
+import org.apache.pluto.driver.services.portal.admin.DriverAdministrationException;
+import org.apache.pluto.driver.services.portal.admin.PortletRegistryAdminService;
 
 
 /**
@@ -31,7 +33,6 @@ import java.io.IOException;
  * Allows external clients to connect and notify the portal
  * of available portlet applications.
  *
- * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>:
  * @version 1.0
  * @since Nov 23, 2005
  */

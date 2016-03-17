@@ -1,9 +1,10 @@
 /*
- * Copyright 2004 The Apache Software Foundation
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,11 +16,9 @@
  */
 package org.apache.pluto.util.install;
 
-import org.apache.pluto.util.install.ServerConfig;
-
+import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.io.File;
 
 /**
  * The installation configuration used to install Pluto to servlet container.

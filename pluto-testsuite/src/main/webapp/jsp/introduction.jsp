@@ -1,8 +1,10 @@
 <%--
-Copyright 2004 The Apache Software Foundation
-Licensed  under the  Apache License,  Version 2.0  (the "License");
-you may not use  this file  except in  compliance with the License.
-You may obtain a copy of the License at
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
@@ -20,7 +22,7 @@ limitations under the License.
 <%@ page import="org.apache.pluto.testsuite.TestConfig" %>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
 
 <portlet:defineObjects/>
 
@@ -35,7 +37,7 @@ limitations under the License.
 <p>
   Please select one of the following tests:
   <table>
-    <c:forEach var="testConfig" items="${tests}" varStatus="status">
+    <c:forEach var="testConfig" items="${testConfigs}" varStatus="status">
       <tr>
         <td>
           # <c:out value="${status.index}"/>.
@@ -45,7 +47,7 @@ limitations under the License.
         </td>
         
         <%-- Generate portlet action URL: Start =========================== --%>
-        <portlet:actionURL secure='<%= renderRequest.isSecure() ? "True" : "False" %>'
+        <portlet:actionURL secure='<%= renderRequest.isSecure() ? "True" : "False" %>' escapeXml="true"
                            var="url">
           <portlet:param name="testId"
                          value='<%= ((LoopTagStatus) pageContext.getAttribute("status")).getIndex() + "" %>'/>
@@ -63,7 +65,7 @@ limitations under the License.
         <%-- Generate portlet action URL: End ============================= --%>
         
         <td>
-          <a href="<c:out value="${url}"/>">Test</a>
+          <a href="<c:out value="${url}" escapeXml="false"/>">Test</a>
         </td>
       </tr>
     </c:forEach>

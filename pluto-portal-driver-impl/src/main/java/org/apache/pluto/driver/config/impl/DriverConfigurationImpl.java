@@ -1,9 +1,10 @@
 /*
- * Copyright 2004 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -16,53 +17,50 @@
 package org.apache.pluto.driver.config.impl;
 
 import java.util.Collection;
+import java.util.Set;
 
-import javax.servlet.ServletContext;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletMode;
 
+import org.apache.pluto.container.PortletContainerException;
+import org.apache.pluto.container.PortletPreferencesService;
 import org.apache.pluto.driver.config.DriverConfiguration;
 import org.apache.pluto.driver.services.portal.PageConfig;
-import org.apache.pluto.driver.services.portal.PortletApplicationConfig;
-import org.apache.pluto.driver.services.portal.PortletRegistryService;
-import org.apache.pluto.driver.services.portal.PortletWindowConfig;
 import org.apache.pluto.driver.services.portal.PropertyConfigService;
 import org.apache.pluto.driver.services.portal.RenderConfigService;
 import org.apache.pluto.driver.services.portal.SupportedModesService;
+import org.apache.pluto.driver.services.portal.SupportedWindowStateService;
 import org.apache.pluto.driver.url.PortalURLParser;
-import org.apache.pluto.spi.PortalCallbackService;
-import org.apache.pluto.spi.optional.PortletPreferencesService;
 
 /**
  * Encapsulation of the Pluto Driver ResourceConfig.
  *
- * @author <a href="ddewolf@apache.org">David H. DeWolf</a>
  * @version 1.0
  * @since Sep 23, 2004
  */
 public class DriverConfigurationImpl
     implements DriverConfiguration {
 
-    private PortalURLParser portalUrlParser;
-    private PropertyConfigService propertyService;
-    private PortletRegistryService registryService;
-    private RenderConfigService renderService;
-    private SupportedModesService supportedModesService;
+    private final PortalURLParser portalUrlParser;
+    private final PropertyConfigService propertyService;
+    private final RenderConfigService renderService;
+    private final SupportedModesService supportedModesService;
+    private final SupportedWindowStateService supportedWindowStateService;
 
     // Container Services
-    private PortalCallbackService portalCallbackService;
     private PortletPreferencesService portletPreferencesService;
-
+    
     public DriverConfigurationImpl(PortalURLParser portalUrlParser,
                                    PropertyConfigService propertyService,
-                                   PortletRegistryService registryService,
                                    RenderConfigService renderService,
-                                   PortalCallbackService portalCallback,
-                                   SupportedModesService supportedModesService) {
+                                   SupportedModesService supportedModesService,
+                                   SupportedWindowStateService supportedWindowStateService) {
+
         this.portalUrlParser = portalUrlParser;
         this.propertyService = propertyService;
-        this.registryService = registryService;
         this.renderService = renderService;
-        this.portalCallbackService = portalCallback;
         this.supportedModesService = supportedModesService;
+        this.supportedWindowStateService = supportedWindowStateService;
     }
 
     /**
@@ -107,32 +105,6 @@ public class DriverConfigurationImpl
 
     /**
      * Standard Getter.
-     * @return the configuration data of all configured portlet applications.
-     */
-    public Collection getPortletApplications() {
-        return registryService.getPortletApplications();
-    }
-
-   /**
-     * Retrieve the portlet application with the given id.
-     * @param id the id of the portlet application.
-     * @return the portlet application configuration data.
-     */
-    public PortletApplicationConfig getPortletApp(String id) {
-        return registryService.getPortletApplication(id);
-    }
-
-    /**
-     * Retrieve the window configuration associated with the given id.
-     * @param id the id of the portlet window.
-     * @return the portlet window configuration data.
-     */
-    public PortletWindowConfig getPortletWindowConfig(String id) {
-        return registryService.getPortlet(id);
-    }
-
-    /**
-     * Standard Getter.
      * @return the render configuration.
      */
     public Collection getPages() {
@@ -155,23 +127,6 @@ public class DriverConfigurationImpl
         return supportedModesService.isPortletModeSupported(portletId, mode);
     }
 
-    public void init(ServletContext context) {
-        this.propertyService.init(context);
-        this.registryService.init(context);
-        this.renderService.init(context);
-    }
-
-    public void destroy() {
-        if(propertyService != null)
-            propertyService.destroy();
-
-        if(registryService != null)
-            registryService.destroy();
-
-        if(renderService != null)
-            renderService.destroy();
-    }
-
 //
 // Portal Driver Services
 //
@@ -180,27 +135,46 @@ public class DriverConfigurationImpl
         return portalUrlParser;
     }
 
-    public void setPortalUrlParser(PortalURLParser portalUrlParser) {
-        this.portalUrlParser = portalUrlParser;
-    }       
-
 //
 // Container Services
 //
-    public PortalCallbackService getPortalCallbackService() {
-        return portalCallbackService;
-    }
-
-    public void setPortalCallbackService(PortalCallbackService portalCallbackService) {
-        this.portalCallbackService = portalCallbackService;
-    }
-
     public PortletPreferencesService getPortletPreferencesService() {
         return portletPreferencesService;
     }
 
     public void setPortletPreferencesService(PortletPreferencesService portletPreferencesService) {
         this.portletPreferencesService = portletPreferencesService;
+    }
+
+    public boolean isWindowStateSupported(String portletId, String windowState)
+    {
+        return supportedWindowStateService.isWindowStateSupported(portletId, windowState);
+    }
+
+    public boolean isWindowStateSupportedByPortal(String windowState)
+    {
+        return supportedWindowStateService.isWindowStateSupportedByPortal(windowState);
+    }
+
+    public boolean isWindowStateSupportedByPortlet(String portletId, String windowState)
+    {
+        return supportedWindowStateService.isWindowStateSupportedByPortlet(portletId, windowState);
+    }
+    
+    public RenderConfigService getRenderConfigService(){
+    	return renderService;
+    }
+
+    public Set<PortletMode> getSupportedPortletModes(String portletId) throws PortletContainerException {
+    	return supportedModesService.getSupportedPortletModes(portletId);
+    }
+
+	public boolean isPortletManagedMode(String portletId, String mode) {
+		return supportedModesService.isPortletManagedMode(portletId, mode);
+	}
+	
+    public PortletConfig getPortletConfig(String portletId)  throws PortletContainerException {
+    	return supportedModesService.getPortletConfig(portletId);
     }
 }
 

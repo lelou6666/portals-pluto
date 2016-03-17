@@ -1,8 +1,10 @@
 <%--
-Copyright 2004 The Apache Software Foundation
-Licensed  under the  Apache License,  Version 2.0  (the "License");
-you may not use  this file  except in  compliance with the License.
-You may obtain a copy of the License at
+Licensed to the Apache Software Foundation (ASF) under one or more
+contributor license agreements.  See the NOTICE file distributed with
+this work for additional information regarding copyright ownership.
+The ASF licenses this file to You under the Apache License, Version 2.0
+(the "License"); you may not use this file except in compliance with
+the License.  You may obtain a copy of the License at
 
 http://www.apache.org/licenses/LICENSE-2.0
 
@@ -18,7 +20,7 @@ limitations under the License.
 <%@ page import="org.apache.pluto.testsuite.TestResult" %>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%
     pageContext.setAttribute("PASSED_CODE", new Integer(TestResult.PASSED));
@@ -38,7 +40,7 @@ limitations under the License.
       </tr>
       <tr>
         <td valign="top">
-          <img src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/images/question.gif") %>"
+          <img src="<%= response.encodeURL(request.getContextPath() + "/images/question.gif") %>"
                border="0" />
         </td>
         <td>
@@ -89,15 +91,15 @@ limitations under the License.
       <td valign="top">
         <c:choose>
           <c:when test="${result.returnCode == PASSED_CODE}">
-            <img src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/images/yes.gif") %>"
+            <img src="<%= response.encodeURL(request.getContextPath() + "/images/yes.gif") %>"
                  border="0" />
           </c:when>
           <c:when test="${result.returnCode == FAILED_CODE}">
-            <img src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/images/no.gif") %>"
+            <img src="<%= response.encodeURL(request.getContextPath() + "/images/no.gif") %>"
                  border="0" />
           </c:when>
           <c:otherwise>
-            <img src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/images/question.gif") %>"
+            <img src="<%= response.encodeURL(request.getContextPath() + "/images/question.gif") %>"
                  border="0" />
           </c:otherwise>
         </c:choose>

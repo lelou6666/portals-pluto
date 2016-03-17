@@ -1,9 +1,10 @@
 /*
- * Copyright 2003,2004 The Apache Software Foundation.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -15,15 +16,14 @@
  */
 package org.apache.pluto.driver.config.impl;
 
-import org.apache.pluto.driver.services.portal.admin.RenderConfigAdminService;
-import org.apache.pluto.driver.services.portal.admin.PortletRegistryAdminService;
-import org.apache.pluto.driver.config.AdminConfiguration;
-
 import javax.servlet.ServletContext;
+
+import org.apache.pluto.driver.config.AdminConfiguration;
+import org.apache.pluto.driver.services.portal.admin.PortletRegistryAdminService;
+import org.apache.pluto.driver.services.portal.admin.RenderConfigAdminService;
 
 /**
  *
- * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>:
  * @version 1.0
  * @since Nov 30, 2005
  */
