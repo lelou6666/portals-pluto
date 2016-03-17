@@ -16,15 +16,26 @@
  */
 package org.apache.pluto.util.install.file.jetty;
 
+<<<<<<< HEAD
 import org.apache.commons.io.FileUtils;
 import org.apache.pluto.util.install.InstallationConfig;
 import org.apache.pluto.util.install.file.FileSystemInstaller;
 import org.apache.pluto.util.UtilityException;
 
+=======
+>>>>>>> refs/remotes/apache/master
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
+<<<<<<< HEAD
+=======
+import org.apache.commons.io.FileUtils;
+import org.apache.pluto.util.UtilityException;
+import org.apache.pluto.util.install.InstallationConfig;
+import org.apache.pluto.util.install.file.FileSystemInstaller;
+
+>>>>>>> refs/remotes/apache/master
 public class Jetty5FileSystemInstaller extends FileSystemInstaller {
 
     protected File getEndorsedDir(InstallationConfig config) {
@@ -40,7 +51,11 @@ public class Jetty5FileSystemInstaller extends FileSystemInstaller {
         if ( new File(config.getInstallationDirectory(), "ext/commons-logging.jar").exists()) {
             for (Iterator iter = config.getSharedDependencies().iterator(); iter.hasNext();) {
                 File dep = (File) iter.next();
+<<<<<<< HEAD
                 if (dep.getPath().indexOf("commons-logging-api") != -1) {
+=======
+                if (dep.getPath().contains("commons-logging-api")) {
+>>>>>>> refs/remotes/apache/master
                     iter.remove();
                 }
             }

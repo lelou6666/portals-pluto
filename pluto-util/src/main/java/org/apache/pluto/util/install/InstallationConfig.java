@@ -16,11 +16,17 @@
  */
 package org.apache.pluto.util.install;
 
+<<<<<<< HEAD
 import org.apache.pluto.util.install.ServerConfig;
 
 import java.util.List;
 import java.util.Map;
 import java.io.File;
+=======
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * The installation configuration used to install Pluto to servlet container.

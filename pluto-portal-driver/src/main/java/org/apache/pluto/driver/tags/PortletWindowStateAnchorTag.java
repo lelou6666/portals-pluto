@@ -26,8 +26,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.pluto.driver.AttributeKeys;
 import org.apache.pluto.driver.config.DriverConfiguration;
 import org.apache.pluto.driver.core.PortalRequestContext;
@@ -44,12 +44,25 @@ import org.apache.taglibs.standard.lang.support.ExpressionEvaluatorManager;
 public class PortletWindowStateAnchorTag extends BodyTagSupport {
 
     /** Logger. */
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog(PortletWindowStateAnchorTag.class);
 
 
     // Private Member Variables ------------------------------------------------
     private String state;
 
+=======
+    private static final Logger LOG = LoggerFactory.getLogger(PortletWindowStateAnchorTag.class);
+
+
+    // Private Member Variables ------------------------------------------------
+    /** Window state name */
+    private String state;
+
+    /** Context-relative URL to icon representing window state */
+	private String icon;
+    
+>>>>>>> refs/remotes/apache/master
     /** The portlet ID attribute obtained from parent tag. */
     private String portletId;
 
@@ -100,8 +113,13 @@ public class PortletWindowStateAnchorTag extends BodyTagSupport {
             tag.append(ToolTips.forWindowState(new WindowState(state)));
             tag.append("\" ");
             tag.append("href=\"" + portalUrl.toString() + "\">");
+<<<<<<< HEAD
             tag.append("<span class=\"" + state + "\">");
             tag.append("</span></a>");
+=======
+            tag.append("<img border=\"0\" src=\"" + icon + "\" />");
+            tag.append("</a>");
+>>>>>>> refs/remotes/apache/master
 
             // Print the mode anchor tag.
             try {
@@ -161,10 +179,26 @@ public class PortletWindowStateAnchorTag extends BodyTagSupport {
         this.state = state;
     }
 
+<<<<<<< HEAD
+=======
+    public String getIcon() {
+		return icon;
+	}
+
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+    
+>>>>>>> refs/remotes/apache/master
     private boolean isWindowStateAllowed(DriverConfiguration config, String state) {
         LOG.debug("Testing if PortletWindowConfig [" + getEvaluatedPortletId() + "] supports window state [" + state + "]");
         return config.isWindowStateSupported(getEvaluatedPortletId(), state);
     }
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/apache/master

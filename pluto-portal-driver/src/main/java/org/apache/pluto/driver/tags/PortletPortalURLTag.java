@@ -26,8 +26,13 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 
+<<<<<<< HEAD
 import org.apache.pluto.driver.url.PortalURL;
 import org.apache.pluto.driver.core.PortalRequestContext;
+=======
+import org.apache.pluto.driver.core.PortalRequestContext;
+import org.apache.pluto.driver.url.PortalURL;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * The portlet URL tag is used to generate portal URL pointing to the current
@@ -90,8 +95,12 @@ public class PortletPortalURLTag extends BodyTagSupport {
         HttpServletResponse response = (HttpServletResponse)
                 pageContext.getResponse();
 
+<<<<<<< HEAD
         PortalRequestContext ctx = (PortalRequestContext)
             request.getAttribute(PortalRequestContext.REQUEST_KEY);
+=======
+        PortalRequestContext ctx = PortalRequestContext.getContext(request);
+>>>>>>> refs/remotes/apache/master
 
         PortalURL portalUrl =  ctx.createPortalURL();
 

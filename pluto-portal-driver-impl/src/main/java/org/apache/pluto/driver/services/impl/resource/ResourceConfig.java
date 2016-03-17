@@ -20,9 +20,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pluto.driver.services.portal.RenderConfig;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.driver.services.portal.RenderConfig;
+import org.apache.pluto.driver.services.portal.PropertyConfigService;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Encapsulation of the Pluto Driver ResourceConfig Info.
@@ -30,11 +37,20 @@ import org.apache.pluto.driver.services.portal.RenderConfig;
  * @version 1.0
  * @since Sep 23, 2004
  */
+<<<<<<< HEAD
 public class ResourceConfig {
 
     /** Internal Logger. */
     private static final Log LOG =
         LogFactory.getLog(ResourceConfig.class);
+=======
+public class ResourceConfig implements PropertyConfigService
+{
+
+    /** Internal Logger. */
+    private static final Logger LOG =
+        LoggerFactory.getLogger(ResourceConfig.class);
+>>>>>>> refs/remotes/apache/master
 
     /** The name of the portal. */
     private String portalName;
@@ -46,6 +62,7 @@ public class ResourceConfig {
     private String containerName;
 
     /** The portlet modes we will support. */
+<<<<<<< HEAD
     private Set supportedPortletModes;
 
     /** The window states we will support. */
@@ -53,11 +70,21 @@ public class ResourceConfig {
 
     /** The portlet applications registered with us. */
     private Map portletApplications;
+=======
+    private final Set<String> supportedPortletModes = new HashSet<String>();
+
+    /** The window states we will support. */
+    private final Set<String> supportedWindowStates = new HashSet<String>();
+
+    /** The portlet applications registered with us. */
+//    private final Map portletApplications;
+>>>>>>> refs/remotes/apache/master
 
     /** Encapsulation of render configuration data. */
     private RenderConfig renderConfig;
 
     /**
+<<<<<<< HEAD
      * Default Constructor.
      */
     public ResourceConfig() {
@@ -67,6 +94,8 @@ public class ResourceConfig {
     }
 
     /**
+=======
+>>>>>>> refs/remotes/apache/master
      * Standard Getter.
      * @return the name of the portal.
      */
@@ -118,7 +147,11 @@ public class ResourceConfig {
      * Standard Getter.
      * @return the names of the supported portlet modes.
      */
+<<<<<<< HEAD
     public Set getSupportedPortletModes() {
+=======
+    public Set<String> getSupportedPortletModes() {
+>>>>>>> refs/remotes/apache/master
         return supportedPortletModes;
     }
 
@@ -126,8 +159,14 @@ public class ResourceConfig {
      * Standard Setter.
      * @param supportedPortletModes the names of the supported portlet modes.
      */
+<<<<<<< HEAD
     public void setSupportedPortletModes(Set supportedPortletModes) {
         this.supportedPortletModes = supportedPortletModes;
+=======
+    public void setSupportedPortletModes(Set<String> supportedPortletModes) {
+        this.supportedPortletModes.clear();
+        this.supportedPortletModes.addAll(supportedPortletModes);
+>>>>>>> refs/remotes/apache/master
     }
 
     /**
@@ -142,7 +181,11 @@ public class ResourceConfig {
      * Standard Getter.
      * @return the names of the supported window states.
      */
+<<<<<<< HEAD
     public Set getSupportedWindowStates() {
+=======
+    public Set<String> getSupportedWindowStates() {
+>>>>>>> refs/remotes/apache/master
         return supportedWindowStates;
     }
 
@@ -150,8 +193,14 @@ public class ResourceConfig {
      * Standard Setter.
      * @param supportedWindowStates the names of the supported window states.
      */
+<<<<<<< HEAD
     public void setSupportedWindowStates(Set supportedWindowStates) {
         this.supportedWindowStates = supportedWindowStates;
+=======
+    public void setSupportedWindowStates(Set<String> supportedWindowStates) {
+        this.supportedWindowStates.clear();
+        this.supportedWindowStates.addAll(supportedWindowStates);
+>>>>>>> refs/remotes/apache/master
     }
 
     /**

@@ -24,7 +24,11 @@ package org.apache.pluto.driver.services.portal;
  * @version $Id$
  * @see javax.portlet.WindowState
  */
+<<<<<<< HEAD
 public interface SupportedWindowStateService extends DriverConfigurationService {
+=======
+public interface SupportedWindowStateService {
+>>>>>>> refs/remotes/apache/master
 
     /**
      * Returns true if the portlet and the portal support the supplied
@@ -33,14 +37,22 @@ public interface SupportedWindowStateService extends DriverConfigurationService 
      * @param state the portlet window state
      * @return true if the portlet and portal both support the supplied window state
      */
+<<<<<<< HEAD
     public boolean isWindowStateSupported( String portletId, String state );
+=======
+    boolean isWindowStateSupported( String portletId, String state );
+>>>>>>> refs/remotes/apache/master
 
     /**
      * Returns true if the portal supports the supplied window state.
      * @param state the portlet window state
      * @return true if the portal supports the supplied window state
      */
+<<<<<<< HEAD
     public boolean isWindowStateSupportedByPortal( String state );
+=======
+    boolean isWindowStateSupportedByPortal( String state );
+>>>>>>> refs/remotes/apache/master
 
     /**
      * Returns true if the portlet supports the supplied window state.
@@ -48,6 +60,10 @@ public interface SupportedWindowStateService extends DriverConfigurationService 
      * @param state the window state
      * @return true if the portlet support the supplied state
      */
+<<<<<<< HEAD
     public boolean isWindowStateSupportedByPortlet( String portletId, String state );
+=======
+    boolean isWindowStateSupportedByPortlet( String portletId, String state );
+>>>>>>> refs/remotes/apache/master
 
 }

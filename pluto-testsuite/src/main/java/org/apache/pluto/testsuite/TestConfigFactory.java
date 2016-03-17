@@ -44,6 +44,10 @@ public class TestConfigFactory {
      */
     public TestConfigFactory() {
         digester = new Digester();
+<<<<<<< HEAD
+=======
+        digester.setClassLoader(Thread.currentThread().getContextClassLoader());
+>>>>>>> refs/remotes/apache/master
         digester.addObjectCreate("testportlet-config", ArrayList.class);
 
 
@@ -86,9 +90,16 @@ public class TestConfigFactory {
      * @throws IOException  if an IO error occurs.
      * @see TestConfig
      */
+<<<<<<< HEAD
     public List createTestConfigs(InputStream in)
     throws SAXException, IOException {
         return (List) digester.parse(in);
+=======
+    @SuppressWarnings("unchecked")
+	public List<TestConfig> createTestConfigs(InputStream in)
+    throws SAXException, IOException {
+        return (List<TestConfig>) digester.parse(in);
+>>>>>>> refs/remotes/apache/master
     }
 
 }

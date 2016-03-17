@@ -16,13 +16,24 @@
  */
 package org.apache.pluto.testsuite;
 
+<<<<<<< HEAD
+=======
+import java.util.HashMap;
+import java.util.Map;
+
+>>>>>>> refs/remotes/apache/master
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+<<<<<<< HEAD
 
 import java.util.HashMap;
 import java.util.Map;
+=======
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * @version 1.0
@@ -50,8 +61,13 @@ public class NoOpTest implements PortletTest {
         return "NoOpTest";
     }
 
+<<<<<<< HEAD
     public Map getRenderParameters(PortletRequest request) {
         return new HashMap();
+=======
+    public Map<String, String[]> getRenderParameters(PortletRequest request) {
+        return new HashMap<String, String[]>();
+>>>>>>> refs/remotes/apache/master
     }
 
     public TestResults doTest(PortletConfig config,
@@ -69,5 +85,13 @@ public class NoOpTest implements PortletTest {
         return config;
     }
 
+<<<<<<< HEAD
+=======
+    public void doHeaders(PortletConfig config, PortletContext context,
+            RenderRequest request, RenderResponse response) {
+        
+    }
+
+>>>>>>> refs/remotes/apache/master
 }
 

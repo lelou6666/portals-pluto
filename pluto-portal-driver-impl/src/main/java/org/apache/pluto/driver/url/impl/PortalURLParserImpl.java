@@ -17,6 +17,7 @@
 package org.apache.pluto.driver.url.impl;
 
 import java.io.UnsupportedEncodingException;
+<<<<<<< HEAD
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,12 +25,25 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+=======
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.StringTokenizer;
+>>>>>>> refs/remotes/apache/master
 
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 import javax.servlet.http.HttpServletRequest;
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.driver.url.PortalURL;
 import org.apache.pluto.driver.url.PortalURLParameter;
 import org.apache.pluto.driver.url.PortalURLParser;
@@ -41,7 +55,11 @@ import org.apache.pluto.driver.url.PortalURLParser;
 public class PortalURLParserImpl implements PortalURLParser {
 
 	/** Logger. */
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog(PortalURLParserImpl.class);
+=======
+    private static final Logger LOG = LoggerFactory.getLogger(PortalURLParserImpl.class);
+>>>>>>> refs/remotes/apache/master
 
     /** The singleton parser instance. */
     private static final PortalURLParser PARSER = new PortalURLParserImpl();
@@ -53,7 +71,16 @@ public class PortalURLParserImpl implements PortalURLParser {
     private static final String DELIM = "_";
     private static final String PORTLET_ID = "pd";
     private static final String ACTION = "ac";
+<<<<<<< HEAD
     private static final String RENDER_PARAM = "rp";
+=======
+    private static final String RESOURCE = "rs";
+    private static final String RESOURCE_ID = "ri";
+    private static final String CACHE_LEVEL = "cl";
+    private static final String RENDER_PARAM = "rp";
+    private static final String PRIVATE_RENDER_PARAM = "pr";
+    private static final String PUBLIC_RENDER_PARAM = "sp";
+>>>>>>> refs/remotes/apache/master
     private static final String WINDOW_STATE = "ws";
     private static final String PORTLET_MODE = "pm";
     private static final String VALUE_DELIM = "0x0";
@@ -73,6 +100,7 @@ public class PortalURLParserImpl implements PortalURLParser {
             new String[] { "?",  "0xa" },
             new String[] { "\\", "0xb" },
             new String[] { "%",  "0xc" },
+<<<<<<< HEAD
             new String[] { ";",  "0xd" },
             new String[] { "0x0",  "0xe" }
     };
@@ -108,6 +136,9 @@ public class PortalURLParserImpl implements PortalURLParser {
         ENCODING_PATTERN = Pattern.compile(encodingPatternBuilder.toString());        
         DECODING_PATTERN = Pattern.compile(decodingPatternBuilder.toString());       
     }
+=======
+    };
+>>>>>>> refs/remotes/apache/master
 
     // Constructor -------------------------------------------------------------
 
@@ -143,17 +174,31 @@ public class PortalURLParserImpl implements PortalURLParser {
         String contextPath = request.getContextPath();
         String servletName = request.getServletPath();
 
+<<<<<<< HEAD
         // Construct portal URL using info retrieved from servlet request.
         PortalURL portalURL =  new RelativePortalURLImpl(contextPath, servletName, this);
+=======
+        String urlBase = request.getScheme()+"://" + request.getServerName() + ":" + request.getServerPort();
+        // Construct portal URL using info retrieved from servlet request.
+        PortalURL portalURL =  new RelativePortalURLImpl(urlBase, contextPath, servletName, this);
+>>>>>>> refs/remotes/apache/master
 
         // Support added for filter.  Should we seperate into a different impl?
         String pathInfo = request.getPathInfo();
         if (pathInfo == null) {
+<<<<<<< HEAD
             if((servletName.indexOf(".jsp") != -1) && !servletName.endsWith(".jsp")) {
                 int idx = servletName.indexOf(".jsp")+".jsp".length();
                 pathInfo = servletName.substring(idx);
                 servletName = servletName.substring(0, idx);
                 portalURL = new RelativePortalURLImpl(contextPath, servletName, this);
+=======
+            if(servletName.contains(".jsp") && !servletName.endsWith(".jsp")) {
+                int idx = servletName.indexOf(".jsp")+".jsp".length();
+                pathInfo = servletName.substring(idx);
+                servletName = servletName.substring(0, idx);
+                portalURL = new RelativePortalURLImpl(urlBase, contextPath, servletName, this);
+>>>>>>> refs/remotes/apache/master
             } else {
                 return portalURL;
             }
@@ -162,6 +207,10 @@ public class PortalURLParserImpl implements PortalURLParser {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Parsing request pathInfo: " + pathInfo);
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/apache/master
         StringBuffer renderPath = new StringBuffer();
         StringTokenizer st = new StringTokenizer(pathInfo, "/", false);
         while (st.hasMoreTokens()) {
@@ -174,10 +223,28 @@ public class PortalURLParserImpl implements PortalURLParser {
         		//Fix for PLUTO-243
         		renderPath.append('/').append(token);
         	}
+<<<<<<< HEAD
+=======
+//        	 Resource window definition: portalURL.setResourceWindow().
+           else if (token.startsWith(PREFIX + RESOURCE)) {
+               portalURL.setResourceWindow(decodeControlParameter(token)[0]);
+           }
+>>>>>>> refs/remotes/apache/master
         	// Action window definition: portalURL.setActionWindow().
         	else if (token.startsWith(PREFIX + ACTION)) {
         		portalURL.setActionWindow(decodeControlParameter(token)[0]);
         	}
+<<<<<<< HEAD
+=======
+            // Cacheability definition: portalURL.setCacheability().
+            else if (token.startsWith(PREFIX + CACHE_LEVEL)) {
+                portalURL.setCacheability(decodeControlParameter(token)[0]);
+            }
+            // ResourceID definition: portalURL.setResourceID().
+            else if (token.startsWith(PREFIX + RESOURCE_ID)) {
+                portalURL.setResourceID(decodeControlParameter(token)[0]);
+            }
+>>>>>>> refs/remotes/apache/master
         	// Window state definition: portalURL.setWindowState().
         	else if (token.startsWith(PREFIX + WINDOW_STATE)) {
         		String[] decoded = decodeControlParameter(token);
@@ -189,11 +256,16 @@ public class PortalURLParserImpl implements PortalURLParser {
         		portalURL.setPortletMode(decoded[0], new PortletMode(decoded[1]));
         	}
         	// Portal URL parameter: portalURL.addParameter().
+<<<<<<< HEAD
         	else {
+=======
+        	else if(token.startsWith(PREFIX + RENDER_PARAM)) {
+>>>>>>> refs/remotes/apache/master
         		String value = null;
         		if (st.hasMoreTokens()) {
         			value = st.nextToken();
         		}
+<<<<<<< HEAD
 
         		// Defect PLUTO-361
         		// ADDED
@@ -204,6 +276,37 @@ public class PortalURLParserImpl implements PortalURLParser {
         		}
         		// REMOVED
         		// portalURL.addParameter(decodeParameter(token, value));
+=======
+        		//set the
+        		PortalURLParameter param = decodeParameter(token, value);
+        		portalURL.addParameter(param);
+
+
+        	}
+            else if (token.startsWith(PREFIX + PRIVATE_RENDER_PARAM)){
+                String value = null;
+                if (st.hasMoreTokens()) {
+                    value = st.nextToken();
+                }
+                PortalURLParameter param = decodePublicParameter(token, value);
+                if( param != null )
+                {
+                    //set private (Resource) parameter in portalURL
+                    portalURL.getPrivateRenderParameters().put(param.getName(), param.getValues());
+                }
+            }
+        	else if (token.startsWith(PREFIX + PUBLIC_RENDER_PARAM)){
+        		String value = null;
+        		if (st.hasMoreTokens()) {
+        			value = st.nextToken();
+        		}
+        		PortalURLParameter param = decodePublicParameter(token, value);
+        		if( param != null )
+        		{
+        			//set public parameter in portalURL
+    	    		portalURL.addPublicParameterCurrent(param.getName(), param.getValues());
+        		}
+>>>>>>> refs/remotes/apache/master
         	}
         }
         if (renderPath.length() > 0) {
@@ -230,15 +333,43 @@ public class PortalURLParserImpl implements PortalURLParser {
 
         // Start the pathInfo with the path to the render URL (page).
         if (portalURL.getRenderPath() != null) {
+<<<<<<< HEAD
             buffer.append(portalURL.getRenderPath().startsWith("/") ? "" : "/").append(portalURL.getRenderPath());
         }
 
+=======
+        	buffer.append(portalURL.getRenderPath());
+        }
+        //Append the resource window definition, if it exists.
+        if (portalURL.getResourceWindow() != null){
+               buffer.append("/");
+               buffer.append(PREFIX).append(RESOURCE)
+                               .append(encodeCharacters(portalURL.getResourceWindow()));
+        }
+>>>>>>> refs/remotes/apache/master
         // Append the action window definition, if it exists.
         if (portalURL.getActionWindow() != null) {
         	buffer.append("/");
         	buffer.append(PREFIX).append(ACTION)
         			.append(encodeCharacters(portalURL.getActionWindow()));
         }
+<<<<<<< HEAD
+=======
+        
+        if (portalURL.getResourceWindow() != null)
+        {
+            if (portalURL.getCacheability() != null)
+            {
+                buffer.append("/");
+                buffer.append(PREFIX).append(CACHE_LEVEL).append(encodeCharacters(portalURL.getCacheability()));
+            }
+            if (portalURL.getResourceID() != null)
+            {
+                buffer.append("/");
+                buffer.append(PREFIX).append(RESOURCE_ID).append(encodeCharacters(portalURL.getResourceID()));
+            }
+        }
+>>>>>>> refs/remotes/apache/master
 
         // Append portlet mode definitions.
         for (Iterator it = portalURL.getPortletModes().entrySet().iterator();
@@ -268,8 +399,15 @@ public class PortalURLParserImpl implements PortalURLParser {
 
             // Encode action params in the query appended at the end of the URL.
             if (portalURL.getActionWindow() != null
+<<<<<<< HEAD
             		&& portalURL.getActionWindow().equals(param.getWindowId())) {
                 for (int i = 0; i < param.getValues().length; i++) {
+=======
+            		&& portalURL.getActionWindow().equals(param.getWindowId())
+            		|| (portalURL.getResourceWindow() != null
+            				&& portalURL.getResourceWindow().equals(param.getWindowId()))) {
+            	for (int i = 0; i < param.getValues().length; i++) {
+>>>>>>> refs/remotes/apache/master
                     // FIX for PLUTO-247
                     if ( firstParam ) {
                         firstParam = false;
@@ -294,15 +432,70 @@ public class PortalURLParserImpl implements PortalURLParser {
             }
         }
 
+<<<<<<< HEAD
+=======
+        encode(buffer);
+
+        if (portalURL.getResourceWindow() != null)
+        {
+            Map<String, String[]> privateParamList = portalURL.getPrivateRenderParameters();
+            if (privateParamList!=null){
+                for (Iterator iter = privateParamList.keySet().iterator();iter.hasNext();){
+                    String paramname = (String)iter.next();
+                    String[] tmp = privateParamList.get(paramname);
+                    String valueString = encodeMultiValues(tmp);
+                    if (valueString.length()>0){
+                        buffer.append("/").append(encodePublicParamname(PRIVATE_RENDER_PARAM, paramname));
+                        buffer.append("/").append(valueString);
+                    }
+                }
+            }
+        }
+        
+        Map<String, String[]> publicParamList = portalURL.getPublicParameters();
+        if (publicParamList!=null){
+	        for (Iterator iter = publicParamList.keySet().iterator();iter.hasNext();){
+	        	String paramname = (String)iter.next();
+	        	String[] tmp = publicParamList.get(paramname);
+	        	String valueString = encodeMultiValues(tmp);
+	        	if (valueString.length()>0){
+	        		buffer.append("/").append(encodePublicParamname(PUBLIC_RENDER_PARAM, paramname));
+	        		buffer.append("/").append(valueString);
+	        	}
+	        }
+        }
+
+>>>>>>> refs/remotes/apache/master
         // Construct the string representing the portal URL.
         // Fix for PLUTO-247 - check if query string contains parameters
         if ( query.length() > 1 ) {
             return buffer.append(query).toString();
         }
 
+<<<<<<< HEAD
         return buffer.toString();
     }
 
+=======
+        // Construct the string representing the portal URL.
+        return buffer.toString();
+    }
+
+    public static void encode(StringBuffer url){
+        replaceChar(url,"|","%7C");
+        replaceChar(url,"\"","%22");
+    }
+    private static void replaceChar(StringBuffer url, String character, String change){
+        boolean contains = url.toString().contains(character);
+        while (contains){
+            int index = url.indexOf(character);
+            url.deleteCharAt(index);
+            url.insert(index, change, 0, 3);
+            contains = url.toString().contains(character);
+        }
+    }
+
+>>>>>>> refs/remotes/apache/master
     private String encodeQueryParam(String param) {
         try {
             return URLEncoder.encode(param, "UTF-8");
@@ -332,6 +525,16 @@ public class PortalURLParserImpl implements PortalURLParser {
     	return buffer.toString();
     }
 
+<<<<<<< HEAD
+=======
+    private String encodePublicParamname(String type, String name){
+    	StringBuffer buffer = new StringBuffer();
+    	buffer.append(PREFIX).append(type)
+    	.append(DELIM).append(name);
+    	return buffer.toString();
+    }
+
+>>>>>>> refs/remotes/apache/master
     /**
      * Encode a string array containing multiple values into a single string.
      * This method is used to encode multiple render parameter values.
@@ -341,12 +544,28 @@ public class PortalURLParserImpl implements PortalURLParser {
     private String encodeMultiValues(String[] values) {
     	StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < values.length; i++) {
+<<<<<<< HEAD
         	buffer.append(values[i] != null ? encodeCharacters(values[i]) : "");
+=======
+        	// Do not operate on the array reference
+        	String currentValue = values[i];
+        	try {
+        		if (currentValue != null)
+        			currentValue = URLEncoder.encode(values[i], "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				LOG.warn(e.getMessage(),e);
+			}
+        	buffer.append(currentValue != null ? currentValue : "");
+>>>>>>> refs/remotes/apache/master
             if (i + 1 < values.length) {
             	buffer.append(VALUE_DELIM);
             }
         }
+<<<<<<< HEAD
         return buffer.toString();
+=======
+        return encodeCharacters(buffer.toString());
+>>>>>>> refs/remotes/apache/master
     }
 
     /**
@@ -355,6 +574,7 @@ public class PortalURLParserImpl implements PortalURLParser {
      * @return the encoded string.
      */
     private String encodeCharacters(String string) {
+<<<<<<< HEAD
         Matcher matcher = ENCODING_PATTERN.matcher(string);
         StringBuffer buffer = new StringBuffer();
         while (matcher.find()) {
@@ -362,6 +582,12 @@ public class PortalURLParserImpl implements PortalURLParser {
         }
         matcher.appendTail(buffer);
         return buffer.toString();
+=======
+        for (int i = 0; i < ENCODINGS.length; i++) {
+            string = string.replace(ENCODINGS[i][0], ENCODINGS[i][1]);
+        }
+        return string;
+>>>>>>> refs/remotes/apache/master
     }
 
 
@@ -402,6 +628,7 @@ public class PortalURLParserImpl implements PortalURLParser {
             		+ ", value=" + value);
         }
 
+<<<<<<< HEAD
         // Defect PLUTO-361
         // ADDED: if the length is less than this, there is no parameter...
         if( name.length() < (PREFIX + PORTLET_ID).length() )
@@ -409,6 +636,8 @@ public class PortalURLParserImpl implements PortalURLParser {
         	return null;
         }
 
+=======
+>>>>>>> refs/remotes/apache/master
     	// Decode the name into window ID and parameter name.
         String noPrefix = name.substring((PREFIX + PORTLET_ID).length());
         String windowId = noPrefix.substring(0, noPrefix.indexOf(DELIM));
@@ -416,6 +645,7 @@ public class PortalURLParserImpl implements PortalURLParser {
 
         // Decode special characters in window ID and parameter value.
         windowId = decodeCharacters(windowId);
+<<<<<<< HEAD
         
         // Split multiple values into a value array.
         String[] paramValues = value.split(VALUE_DELIM);
@@ -424,15 +654,65 @@ public class PortalURLParserImpl implements PortalURLParser {
             paramValues[i] = decodeCharacters(paramValues[i]);
         }
 
+=======
+        if (value != null) {
+        	value = decodeCharacters(value);
+        }
+
+        // Split multiple values into a value array.
+        String[] paramValues = value.split(VALUE_DELIM);
+        for (int i = 0; i < paramValues.length;i++){
+        	try {
+        		paramValues[i] = URLDecoder.decode(paramValues[i], "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				LOG.warn(e.getMessage(),e);
+			}
+        }
+>>>>>>> refs/remotes/apache/master
         // Construct portal URL parameter and return.
         return new PortalURLParameter(windowId, paramName, paramValues);
     }
 
+<<<<<<< HEAD
+=======
+    private PortalURLParameter decodePublicParameter(String name, String value) {
+
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Decoding parameter: name=" + name
+            		+ ", value=" + value);
+        }
+
+//    	// Decode the name into window ID and parameter name.
+        String noPrefix = name.substring((PREFIX + PORTLET_ID).length());
+        String paramName = noPrefix.substring(noPrefix.indexOf(DELIM) + 1);
+
+        // Decode special characters in parameter value.
+
+        if (value != null) {
+        	value = decodeCharacters(value);
+        }
+
+        // Split multiple values into a value array.
+        String[] paramValues = value.split(VALUE_DELIM);
+        for (int i = 0; i < paramValues.length;i++){
+        	try {
+        		paramValues[i] = URLDecoder.decode(paramValues[i], "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				LOG.warn(e.getMessage(),e);
+			}
+        }
+
+        // Construct portal URL parameter and return.
+        return new PortalURLParameter(null, paramName, paramValues);
+    }
+
+>>>>>>> refs/remotes/apache/master
     /**
      * Decode special characters contained in the string value.
      * @param string  the string value to decode.
      * @return the decoded string.
      */
+<<<<<<< HEAD
     private String decodeCharacters(String string) {        
         Matcher matcher = DECODING_PATTERN.matcher(string);
         StringBuffer buffer = new StringBuffer();
@@ -441,6 +721,13 @@ public class PortalURLParserImpl implements PortalURLParser {
         }
         matcher.appendTail(buffer);
         return buffer.toString();       
+=======
+    private String decodeCharacters(String string) {
+        for (int i = 0; i < ENCODINGS.length; i++) {
+        	string = string.replace(ENCODINGS[i][1], ENCODINGS[i][0]);
+        }
+		return string;
+>>>>>>> refs/remotes/apache/master
     }
 
 }

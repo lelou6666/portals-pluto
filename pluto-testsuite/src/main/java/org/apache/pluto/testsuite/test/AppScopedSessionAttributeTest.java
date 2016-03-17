@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD
 
 package org.apache.pluto.testsuite.test;
 
@@ -26,6 +27,19 @@ import javax.portlet.PortletSession;
  */
 public class AppScopedSessionAttributeTest
 extends AbstractReflectivePortletTest {
+=======
+package org.apache.pluto.testsuite.test;
+
+import javax.portlet.PortletSession;
+
+import org.apache.pluto.testsuite.TestResult;
+import org.apache.pluto.testsuite.TestUtils;
+
+/**
+ */
+public class AppScopedSessionAttributeTest
+extends AbstractReflectivePortletTest  {
+>>>>>>> refs/remotes/apache/master
 
     private static final String BOGUS_KEY = "org.apache.pluto.testsuite.BOGUS_KEY";
     private static final String KEY = "org.apache.pluto.testsuite.KEY";

@@ -30,6 +30,10 @@ import java.net.URL;
  * @version $Revision$
  */
 public class FileAssemblerTest extends XMLTestCase {
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/apache/master
     private File webXmlFile;
     private File portletXmlFile;
     private File assembledWebXmlFile;

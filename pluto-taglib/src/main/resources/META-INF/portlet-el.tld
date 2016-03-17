@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE taglib PUBLIC
+<<<<<<< HEAD
   "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN"
   "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+=======
+  "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+  "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_2.dtd">
+>>>>>>> refs/remotes/apache/master
 <!-- 
 Licensed to the Apache Software Foundation (ASF) under one or more
 contributor license agreements.  See the NOTICE file distributed with
@@ -21,6 +26,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <taglib>
+<<<<<<< HEAD
     <tlibversion>1.0</tlibversion>
     <jspversion>1.2</jspversion>
     <shortname>portlet</shortname>
@@ -35,6 +41,22 @@ limitations under the License.
         <name>param</name>
         <tagclass>org.apache.pluto.tags.el.ParamTag</tagclass>
         <bodycontent>empty</bodycontent>
+=======
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>portlet-el</short-name>
+    <uri>http://portals.apache.org/pluto/portlet-el</uri>
+    <tag>
+        <name>defineObjects</name>
+        <tag-class>org.apache.pluto.tags.DefineObjectsTag168</tag-class>
+        <tei-class>org.apache.pluto.tags.DefineObjectsTag168$TEI</tei-class>
+        <body-content>empty</body-content>
+    </tag>
+    <tag>
+        <name>param</name>
+        <tag-class>org.apache.pluto.tags.el.ParamTag</tag-class>
+        <body-content>empty</body-content>
+>>>>>>> refs/remotes/apache/master
         <attribute>
             <name>name</name>
             <required>true</required>
@@ -48,9 +70,15 @@ limitations under the License.
     </tag>
     <tag>
         <name>actionURL</name>
+<<<<<<< HEAD
         <tagclass>org.apache.pluto.tags.ActionURLTag</tagclass>
         <teiclass>org.apache.pluto.tags.BasicURLTag$TEI</teiclass>
         <bodycontent>JSP</bodycontent>
+=======
+        <tag-class>org.apache.pluto.tags.ActionURLTag168</tag-class>
+        <tei-class>org.apache.pluto.tags.PortletURLTag168$TEI</tei-class>
+        <body-content>JSP</body-content>
+>>>>>>> refs/remotes/apache/master
         <attribute>
             <name>windowState</name>
             <required>false</required>
@@ -74,9 +102,15 @@ limitations under the License.
     </tag>
     <tag>
         <name>renderURL</name>
+<<<<<<< HEAD
         <tagclass>org.apache.pluto.tags.RenderURLTag</tagclass>
         <teiclass>org.apache.pluto.tags.BasicURLTag$TEI</teiclass>
         <bodycontent>JSP</bodycontent>
+=======
+        <tag-class>org.apache.pluto.tags.RenderURLTag168</tag-class>
+        <tei-class>org.apache.pluto.tags.PortletURLTag168$TEI</tei-class>
+        <body-content>JSP</body-content>
+>>>>>>> refs/remotes/apache/master
         <attribute>
             <name>windowState</name>
             <required>false</required>
@@ -100,7 +134,12 @@ limitations under the License.
     </tag>
     <tag>
         <name>namespace</name>
+<<<<<<< HEAD
         <tagclass>org.apache.pluto.tags.NamespaceTag</tagclass>
         <bodycontent>empty</bodycontent>
+=======
+        <tag-class>org.apache.pluto.tags.NamespaceTag</tag-class>
+        <body-content>empty</body-content>
+>>>>>>> refs/remotes/apache/master
     </tag>
 </taglib>

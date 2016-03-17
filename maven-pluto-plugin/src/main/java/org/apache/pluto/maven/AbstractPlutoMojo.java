@@ -16,12 +16,20 @@
  */
 package org.apache.pluto.maven;
 
+<<<<<<< HEAD
+=======
+import java.io.File;
+
+>>>>>>> refs/remotes/apache/master
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
 
+<<<<<<< HEAD
 import java.io.File;
 
+=======
+>>>>>>> refs/remotes/apache/master
 /**
  * @todo Document
  * @since Jul 30, 2005

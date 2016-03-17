@@ -24,7 +24,11 @@ import java.util.Set;
  *
  * @since Aug 10, 2005
  */
+<<<<<<< HEAD
 public interface PropertyConfigService extends DriverConfigurationService {
+=======
+public interface PropertyConfigService {
+>>>>>>> refs/remotes/apache/master
 
     /**
      * Name of the portal driver.
@@ -53,7 +57,11 @@ public interface PropertyConfigService extends DriverConfigurationService {
      * {@link javax.portlet.PortletMode#HELP}
      * @return set of unique portlet modes.
      */
+<<<<<<< HEAD
     Set getSupportedPortletModes();
+=======
+    Set<String> getSupportedPortletModes();
+>>>>>>> refs/remotes/apache/master
 
     /**
      * Set of unique Window States.
@@ -63,5 +71,9 @@ public interface PropertyConfigService extends DriverConfigurationService {
      * {@link javax.portlet.WindowState#MINIMIZED}
      * @return set of unique window states.
      */
+<<<<<<< HEAD
     Set getSupportedWindowStates();
+=======
+    Set<String> getSupportedWindowStates();
+>>>>>>> refs/remotes/apache/master
 }

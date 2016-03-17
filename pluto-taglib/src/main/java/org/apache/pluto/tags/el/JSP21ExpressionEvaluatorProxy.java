@@ -16,11 +16,20 @@
  */
 package org.apache.pluto.tags.el;
 
+<<<<<<< HEAD
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.ServletContext;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+=======
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import javax.servlet.ServletContext;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
+>>>>>>> refs/remotes/apache/master
 
 class JSP21ExpressionEvaluatorProxy extends ExpressionEvaluatorProxy {
 
@@ -34,14 +43,21 @@ class JSP21ExpressionEvaluatorProxy extends ExpressionEvaluatorProxy {
 
     public static Method evalMethod;
 
+<<<<<<< HEAD
     private static boolean initialized;
 
+=======
+>>>>>>> refs/remotes/apache/master
     private static Object jspFactory;
 
     static {
         try {
             jspFactory = Class.forName("javax.servlet.jsp.JspFactory")
+<<<<<<< HEAD
                 .getMethod("getDefaultFactory", new Class[0]).invoke(null, null);
+=======
+                .getMethod("getDefaultFactory", new Class[0]).invoke(null);
+>>>>>>> refs/remotes/apache/master
             jspApplicationContextGetter = 
                 jspFactory.getClass().getMethod("getJspApplicationContext",
                     new Class[] { ServletContext.class });
@@ -69,9 +85,15 @@ class JSP21ExpressionEvaluatorProxy extends ExpressionEvaluatorProxy {
                     new Object[] { pageContext.getServletContext() });
 
             Object expressionFactory = expressionFactoryGetter.invoke(
+<<<<<<< HEAD
                     jspApplicationContext, null);
 
             Object elContext = elContextGetter.invoke(pageContext, null);
+=======
+                    jspApplicationContext, new Object[] {});
+
+            Object elContext = elContextGetter.invoke(pageContext);
+>>>>>>> refs/remotes/apache/master
 
             Object valueExpression = valueExpressionGetter.invoke(
                     expressionFactory, new Object[] { elContext, value,

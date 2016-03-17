@@ -16,31 +16,55 @@
  */
 package org.apache.pluto.driver.url;
 
-import javax.portlet.PortletMode;
-import javax.portlet.WindowState;
 import java.util.Collection;
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
+import javax.portlet.PortletMode;
+import javax.portlet.WindowState;
+import javax.servlet.ServletContext;
+
+import org.apache.pluto.driver.services.portal.PageConfig;
+
+/**
+ * Created by IntelliJ IDEA.
+ * User: ddewolf
+ * Date: Sep 4, 2006
+ * Time: 5:17:34 PM
+ * To change this template use File | Settings | File Templates.
+ */
+>>>>>>> refs/remotes/apache/master
 public interface PortalURL extends Cloneable {
     void setRenderPath(String renderPath);
 
     String getRenderPath();
 
     void addParameter(PortalURLParameter param);
+    
+    void addPublicRenderParametersNew(Map<String, String[]> parameters);
 
-    Collection getParameters();
+    Collection<PortalURLParameter> getParameters();
 
+    public void addPublicParameterCurrent(String name, String[] values);
+
+    public Map<String, String[]> getPublicParameters();
+    
+    Map<String, String[]> getNewPublicParameters();
+    
+    Map<String, String[]> getPrivateRenderParameters();
+    
     void setActionWindow(String actionWindow);
 
     String getActionWindow();
 
-    Map getPortletModes();
+    Map<String, PortletMode> getPortletModes();
 
     PortletMode getPortletMode(String windowId);
 
     void setPortletMode(String windowId, PortletMode portletMode);
 
-    Map getWindowStates();
+    Map<String, WindowState> getWindowStates();
 
     WindowState getWindowState(String windowId);
 
@@ -48,7 +72,13 @@ public interface PortalURL extends Cloneable {
 
     void clearParameters(String windowId);
 
+    /**
+     * 
+     * @deprecated use toURL(boolean) instead
+     */
     String toString();
+    
+    String toURL(boolean absolute);
 
     /**
      * @deprecated no longer used. will be removed in 1.1.x
@@ -58,5 +88,21 @@ public interface PortalURL extends Cloneable {
 
     String getServletPath();
 
-    Object clone();
+    PortalURL clone();
+
+    String getResourceWindow();
+
+	void setResourceWindow(String window);
+
+	PageConfig getPageConfig(ServletContext servletContext);
+
+	void addPublicParameterActionResourceParameter(String parameterName, String value);
+	
+	void setCacheability(String cacheLevel);
+	String getCacheability();
+	
+	void setResourceID(String resourceID);
+	String getResourceID();
+	
+	void merge(PortalURL url, String windowId);	
 }

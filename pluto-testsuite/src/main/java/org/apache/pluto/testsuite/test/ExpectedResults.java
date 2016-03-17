@@ -15,7 +15,10 @@
  * limitations under the License.
  *
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/apache/master
 package org.apache.pluto.testsuite.test;
 
 import java.io.IOException;
@@ -40,7 +43,11 @@ public class ExpectedResults {
 	// Private Member Variables ------------------------------------------------
 
 	/** The nested properties. */
+<<<<<<< HEAD
 	private final Properties properties;
+=======
+	private Properties properties;
+>>>>>>> refs/remotes/apache/master
 
 
 	// Constructor -------------------------------------------------------------

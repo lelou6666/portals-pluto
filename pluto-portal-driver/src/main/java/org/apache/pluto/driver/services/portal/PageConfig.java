@@ -25,11 +25,19 @@ public class PageConfig {
 
     private String name;
     private String uri;
+<<<<<<< HEAD
     private Collection portletIds;
     private int orderNumber;
 
     public PageConfig() {
         this.portletIds = new ArrayList();
+=======
+    private Collection<String> portletIds;
+    private int orderNumber;
+
+    public PageConfig() {
+        this.portletIds = new ArrayList<String>();
+>>>>>>> refs/remotes/apache/master
     }
 
     public String getName() {
@@ -48,11 +56,19 @@ public class PageConfig {
         this.uri = uri;
     }
 
+<<<<<<< HEAD
     public Collection getPortletIds() {
         return portletIds;
     }
 
     public void setPortletIds(Collection ids) {
+=======
+    public Collection<String> getPortletIds() {
+        return portletIds;
+    }
+
+    public void setPortletIds(Collection<String> ids) {
+>>>>>>> refs/remotes/apache/master
         this.portletIds = ids;
     }
 

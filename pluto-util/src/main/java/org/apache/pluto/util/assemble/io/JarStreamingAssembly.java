@@ -28,8 +28,13 @@ import java.util.zip.CRC32;
 import java.util.zip.ZipEntry;
 
 import org.apache.commons.io.IOUtils;
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.util.assemble.Assembler;
 
 /** 
@@ -39,7 +44,11 @@ import org.apache.pluto.util.assemble.Assembler;
  */
 public class JarStreamingAssembly {
     
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog( JarStreamingAssembly.class );
+=======
+    private static final Logger LOG = LoggerFactory.getLogger( JarStreamingAssembly.class );
+>>>>>>> refs/remotes/apache/master
 
     /**
      * Reads the source JarInputStream, copying entries to the destination JarOutputStream. 

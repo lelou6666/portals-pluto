@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.maven;
 
+<<<<<<< HEAD
 import org.apache.maven.artifact.factory.ArtifactFactory;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
@@ -35,6 +36,27 @@ import java.util.Iterator;
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
+=======
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.factory.ArtifactFactory;
+import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
+import org.apache.maven.artifact.resolver.ArtifactResolutionException;
+import org.apache.maven.artifact.resolver.ArtifactResolver;
+import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.pluto.util.install.InstallationConfig;
+import org.apache.pluto.util.install.PortalInstaller;
+import org.apache.pluto.util.install.PortalInstallerFactory;
+import org.apache.pluto.util.install.ServerConfig;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Abstract Mojo for installation tasks.

@@ -24,6 +24,11 @@ import java.io.Serializable;
  */
 public class TestResult implements Serializable {
 
+<<<<<<< HEAD
+=======
+	private static final long serialVersionUID = 5247797277017349129L;
+
+>>>>>>> refs/remotes/apache/master
 	/** The undefined return code. */
 	public static final int UNDEFINED = -1;
 
@@ -40,7 +45,11 @@ public class TestResult implements Serializable {
     // Private Member Variables ------------------------------------------------
 
     /** The name of the test. */
+<<<<<<< HEAD
     private String name = null;
+=======
+    private String name;
+>>>>>>> refs/remotes/apache/master
 
     /** The description of the test. */
     private String description = "[unknown]";

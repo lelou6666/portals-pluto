@@ -18,17 +18,29 @@ limitations under the License.
 --%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
 
 <portlet:defineObjects/>
 
 <script name="JavaScript">
+=======
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+
+<portlet:defineObjects/>
+
+<script type="text/javascript">
+>>>>>>> refs/remotes/apache/master
 function openCompanionWindow() {
 	w = 500;
 	h = 400;
 	x = (screen.width - w) / 2;
 	y = (screen.height - h) / 2;
+<<<<<<< HEAD
     window.open('about:blank', 'companionWindow', 'resizable=yes,scrollb        ars=yes,status=yes,width=' + w + ',height=' + h + ',screenX=' + x + ',sc        reenY=' + y + ',left=' + x + ',top=' + y);
+=======
+	window.open('about:blank', 'companionWindow', 'resizable=yes,scrollbars=yes,status=yes,width=' + w + ',height=' + h + ',screenX=' + x + ',screenY=' + y + ',left=' + x + ',top=' + y);
+>>>>>>> refs/remotes/apache/master
 }
 </script>
 
@@ -65,6 +77,10 @@ function openCompanionWindow() {
   </c:otherwise>
 </c:choose>
 
+<<<<<<< HEAD
 <%@ include file="navigation.inc" %>
 
 
+=======
+<%@ include file="navigation.inc" %>
+>>>>>>> refs/remotes/apache/master

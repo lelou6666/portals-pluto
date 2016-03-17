@@ -16,10 +16,11 @@
  */
 package org.apache.pluto.tags.el;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
-import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
 
 
 class ApacheTaglibStandardExpressionEvaluatorProxy extends ExpressionEvaluatorProxy {
@@ -28,7 +29,7 @@ class ApacheTaglibStandardExpressionEvaluatorProxy extends ExpressionEvaluatorPr
 
     static {
         try {
-            Class expressionEvaluatorManagerClass = Class.forName("org.apache.taglibs.standard.lang.support.ExpressionEvaluatorManager");
+            Class<?> expressionEvaluatorManagerClass = Class.forName("org.apache.taglibs.standard.lang.support.ExpressionEvaluatorManager");
             evaluateMethod = expressionEvaluatorManagerClass.getMethod("evaluate", new Class[] { String.class, String.class,  Class.class, PageContext.class});
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Unable to find ExpressionEvaluatorManager.  Make sure standard.jar is in your classpath");

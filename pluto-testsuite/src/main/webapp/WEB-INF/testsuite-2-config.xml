@@ -32,6 +32,7 @@
     <class>org.apache.pluto.testsuite.test.ActionParameterTest</class>
     <display-uri>/jsp/test_results.jsp</display-uri>
     <action-param>
+<<<<<<< HEAD
       <name>org.apache.pluto.testsuite.PARAM_ACTION_KEY_NO_VAL</name>
     </action-param>
     <action-param>
@@ -46,6 +47,11 @@
       <name>org.apache.pluto.testsuite.PARAM_ACTION_MULTI_KEY</name>
       <value>org.apache.pluto.testsuite.ACTION_MULTI_VALUE_B</value>
     </action-param>
+=======
+      <name>org.apache.pluto.testsuite.PARAM_ACTION_KEY</name>
+      <value>org.apache.pluto.testsuite.ACTION_VALUE</value>
+    </action-param>
+>>>>>>> refs/remotes/apache/master
   </testsuite-config>
     
   <testsuite-config>

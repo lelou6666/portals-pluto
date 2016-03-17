@@ -17,7 +17,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <%@ page session="false" %>
+<<<<<<< HEAD
 <%@ taglib uri='http://java.sun.com/portlet' prefix='portlet'%>
+=======
+<%@ taglib uri='http://java.sun.com/portlet_2_0' prefix='portlet'%>
+>>>>>>> refs/remotes/apache/master
 <%@ page import="javax.portlet.*"%>
 <%@ page import="java.util.*"%>
 <portlet:defineObjects/>

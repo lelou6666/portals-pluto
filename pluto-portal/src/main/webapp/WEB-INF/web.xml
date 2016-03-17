@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE web-app PUBLIC
+<<<<<<< HEAD
     "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
     "http://java.sun.com/dtd/web-app_2_3.dtd">
+=======
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd">
+>>>>>>> refs/remotes/apache/master
 <!-- 
 Licensed to the Apache Software Foundation (ASF) under one or more
 contributor license agreements.  See the NOTICE file distributed with
@@ -31,7 +36,10 @@ limitations under the License.
     <param-value>/WEB-INF/pluto-portal-driver-services-config.xml</param-value>
   </context-param>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/apache/master
   <filter>
     <filter-name>plutoPortalDriver</filter-name>
     <filter-class>org.apache.pluto.driver.PortalDriverFilter</filter-class>
@@ -48,10 +56,13 @@ limitations under the License.
   </filter-mapping>
 
   <listener>
+<<<<<<< HEAD
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
   <listener>
+=======
+>>>>>>> refs/remotes/apache/master
     <listener-class>org.apache.pluto.driver.PortalStartupListener</listener-class>
   </listener>
 
@@ -85,7 +96,11 @@ limitations under the License.
 
   <servlet>
     <servlet-name>AboutPortlet</servlet-name>
+<<<<<<< HEAD
     <servlet-class>org.apache.pluto.core.PortletServlet</servlet-class>
+=======
+    <servlet-class>org.apache.pluto.container.driver.PortletServlet</servlet-class>
+>>>>>>> refs/remotes/apache/master
     <init-param>
       <param-name>portlet-name</param-name>
       <param-value>AboutPortlet</param-value>
@@ -95,7 +110,11 @@ limitations under the License.
 
   <servlet>
     <servlet-name>AdminPortlet</servlet-name>
+<<<<<<< HEAD
     <servlet-class>org.apache.pluto.core.PortletServlet</servlet-class>
+=======
+    <servlet-class>org.apache.pluto.container.driver.PortletServlet</servlet-class>
+>>>>>>> refs/remotes/apache/master
     <init-param>
       <param-name>portlet-name</param-name>
       <param-value>AdminPortlet</param-value>
@@ -105,7 +124,11 @@ limitations under the License.
 
   <servlet>
     <servlet-name>PlutoPageAdmin</servlet-name>
+<<<<<<< HEAD
     <servlet-class>org.apache.pluto.core.PortletServlet</servlet-class>
+=======
+    <servlet-class>org.apache.pluto.container.driver.PortletServlet</servlet-class>
+>>>>>>> refs/remotes/apache/master
     <init-param>
       <param-name>portlet-name</param-name>
       <param-value>PlutoPageAdmin</param-value>
@@ -147,6 +170,7 @@ limitations under the License.
     <servlet-name>PlutoPageAdmin</servlet-name>
     <url-pattern>/PlutoInvoker/PlutoPageAdmin</url-pattern>
   </servlet-mapping>
+<<<<<<< HEAD
   <taglib>
     <taglib-uri>http://java.sun.com/portlet</taglib-uri>
     <taglib-location>/WEB-INF/tld/portlet.tld</taglib-location>
@@ -156,6 +180,8 @@ limitations under the License.
     <taglib-uri>http://portals.apache.org/pluto/portlet-el</taglib-uri>
     <taglib-location>/WEB-INF/tld/portlet-el.tld</taglib-location>
   </taglib>
+=======
+>>>>>>> refs/remotes/apache/master
 
   <taglib>
     <taglib-uri>http://portals.apache.org/pluto</taglib-uri>

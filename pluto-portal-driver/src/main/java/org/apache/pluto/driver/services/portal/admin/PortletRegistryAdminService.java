@@ -18,12 +18,21 @@ package org.apache.pluto.driver.services.portal.admin;
 
 /**
  *
+<<<<<<< HEAD
+=======
+ * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>
+ * @author <a href="mailto:zheng@apache.org">ZHENG Zhong</a>
+>>>>>>> refs/remotes/apache/master
  * @version 1.0
  * @since Nov 30, 2005
  */
 public interface PortletRegistryAdminService {
 
+<<<<<<< HEAD
     void addPortletApplication(String portletContext)
+=======
+    public void addPortletApplication(String portletContext)
+>>>>>>> refs/remotes/apache/master
     throws DriverAdministrationException;
 
 }

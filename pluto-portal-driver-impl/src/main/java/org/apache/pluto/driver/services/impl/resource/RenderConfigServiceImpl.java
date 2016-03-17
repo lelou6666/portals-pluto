@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.driver.services.impl.resource;
 
+<<<<<<< HEAD
 import java.io.InputStream;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +24,11 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 
 import org.apache.pluto.driver.config.DriverConfigurationException;
+=======
+import java.util.List;
+import java.util.Set;
+
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.driver.services.portal.PageConfig;
 import org.apache.pluto.driver.services.portal.RenderConfigService;
 import org.apache.pluto.driver.services.portal.admin.RenderConfigAdminService;
@@ -38,6 +44,7 @@ public class RenderConfigServiceImpl
     implements RenderConfigService, RenderConfigAdminService {
 
 
+<<<<<<< HEAD
     private ResourceConfig config;
 
 //
@@ -65,6 +72,14 @@ public class RenderConfigServiceImpl
     }
 
 
+=======
+    private final ResourceConfig config;
+
+    public RenderConfigServiceImpl(ResourceConfig config) {
+        this.config = config;
+    }
+
+>>>>>>> refs/remotes/apache/master
     public String getPortalName() {
         return config.getPortalName();
     }

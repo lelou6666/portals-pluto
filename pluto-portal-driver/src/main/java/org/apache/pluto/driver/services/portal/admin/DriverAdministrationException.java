@@ -20,6 +20,10 @@ import javax.servlet.ServletException;
 
 /**
  *
+<<<<<<< HEAD
+=======
+ * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>:
+>>>>>>> refs/remotes/apache/master
  * @version 1.0
  * @since Nov 23, 2005
  */

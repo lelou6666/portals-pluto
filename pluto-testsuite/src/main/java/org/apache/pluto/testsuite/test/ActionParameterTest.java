@@ -19,6 +19,7 @@ package org.apache.pluto.testsuite.test;
 import java.util.Enumeration;
 import java.util.Map;
 
+<<<<<<< HEAD
 import javax.portlet.PortletRequest;
 
 import org.apache.pluto.testsuite.ActionTest;
@@ -41,15 +42,39 @@ implements ActionTest {
     public static final String MULTI_KEY = "org.apache.pluto.testsuite.PARAM_ACTION_MULTI_KEY";
     public static final String VALUE_A = "org.apache.pluto.testsuite.ACTION_MULTI_VALUE_A";
     public static final String VALUE_B = "org.apache.pluto.testsuite.ACTION_MULTI_VALUE_B";
+=======
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
+
+import org.apache.pluto.testsuite.TestResult;
+import org.apache.pluto.testsuite.TestUtils;
+import org.apache.pluto.testsuite.annotations.DefaultTestPhase;
+
+/**
+ */
+@DefaultTestPhase(PortletRequest.ACTION_PHASE)
+public class ActionParameterTest extends AbstractReflectivePortletTest {
+
+	/** Parameter key encoded in the action URL. */
+    public static final String KEY = "org.apache.pluto.testsuite.PARAM_ACTION_KEY";
+
+    /** Parameter value encoded in the action URL. */
+    public static final String VALUE = "org.apache.pluto.testsuite.ACTION_VALUE";
+>>>>>>> refs/remotes/apache/master
 
 
     // Test Methods ------------------------------------------------------------
 
+<<<<<<< HEAD
     protected TestResult checkGetActionParameter(PortletRequest request) {
+=======
+    protected TestResult checkGetActionParameter(ActionRequest request) {
+>>>>>>> refs/remotes/apache/master
         TestResult result = new TestResult();
         result.setDescription("Ensure parameters encoded in action URL are "
         		+ "available in the action request.");
 
+<<<<<<< HEAD
         String noValue = request.getParameter(KEY_NO_VAL);
         if (noValue != null && noValue.equals(NO_VAL)) {
             result.setReturnCode(TestResult.PASSED);
@@ -57,10 +82,13 @@ implements ActionTest {
             TestUtils.failOnAssertion(KEY_NO_VAL, noValue, NO_VAL, result);
         }
         
+=======
+>>>>>>> refs/remotes/apache/master
         String value = request.getParameter(KEY);
         if (value != null && value.equals(VALUE)) {
         	result.setReturnCode(TestResult.PASSED);
         } else {
+<<<<<<< HEAD
         	TestUtils.failOnAssertion(KEY, value, VALUE, result);
         }
         
@@ -106,10 +134,19 @@ implements ActionTest {
     }
 
     protected TestResult checkGetActionParamerMap(PortletRequest request) {
+=======
+        	TestUtils.failOnAssertion("parameter", value, VALUE, result);
+        }
+        return result;
+    }
+
+    protected TestResult checkGetActionParamerMap(ActionRequest request) {
+>>>>>>> refs/remotes/apache/master
         TestResult result = new TestResult();
         result.setDescription("Ensure parameters encoded in action URL are "
         		+ "available in the action request parameter map.");
 
+<<<<<<< HEAD
         Map parameterMap = request.getParameterMap();
         
         String[] noValue = (String[]) parameterMap.get(KEY_NO_VAL);
@@ -120,12 +157,17 @@ implements ActionTest {
         }
         
         String[] values = (String[]) parameterMap.get(KEY);
+=======
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        String[] values = parameterMap.get(KEY);
+>>>>>>> refs/remotes/apache/master
         if (values != null && values.length == 1 && VALUE.equals(values[0])) {
         	result.setReturnCode(TestResult.PASSED);
         } else {
         	TestUtils.failOnAssertion("parameter values",
         			values, new String[] { VALUE }, result);
         }
+<<<<<<< HEAD
         
         String[] singleValue = (String[]) parameterMap.get(MULTI_KEY);
         if (singleValue != null && singleValue.length == 2 && 
@@ -181,6 +223,31 @@ implements ActionTest {
         	msg += "] not found in parameter name enumeration.";
         	
         	result.setResultMessage(msg);
+=======
+        return result;
+    }
+
+    protected TestResult checkParameterNames(ActionRequest request) {
+        TestResult result = new TestResult();
+        result.setDescription("Ensure parameters encoded in action URL "
+        		+ "exists in the parameter name enumeration.");
+
+        boolean hasParameterName = false;
+        for (Enumeration<String> en = request.getParameterNames();
+        		!hasParameterName && en.hasMoreElements(); ) {
+        	String name = en.nextElement();
+        	if (KEY.equals(name)) {
+        		hasParameterName = true;
+        	}
+        }
+
+        if (hasParameterName) {
+        	result.setReturnCode(TestResult.PASSED);
+        } else {
+        	result.setReturnCode(TestResult.FAILED);
+        	result.setResultMessage("Parameter name " + KEY
+        			+ " not found in parameter name enumeration.");
+>>>>>>> refs/remotes/apache/master
         }
         return result;
     }

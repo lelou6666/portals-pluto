@@ -19,8 +19,19 @@ package org.apache.pluto.driver.core;
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
+<<<<<<< HEAD
 import org.apache.pluto.PortletWindow;
 import org.apache.pluto.PortletWindowID;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.container.PortletContainer;
+import org.apache.pluto.container.PortletContainerException;
+import org.apache.pluto.container.PortletWindow;
+import org.apache.pluto.container.PortletWindowID;
+import org.apache.pluto.container.driver.PlutoServices;
+import org.apache.pluto.container.om.portlet.PortletDefinition;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.driver.services.portal.PortletWindowConfig;
 import org.apache.pluto.driver.url.PortalURL;
 
@@ -29,11 +40,21 @@ import org.apache.pluto.driver.url.PortalURL;
  */
 public class PortletWindowImpl implements PortletWindow {
 
+<<<<<<< HEAD
+=======
+    /** Logger. */
+    private static final Logger LOG = LoggerFactory.getLogger(PortletWindowImpl.class);
+    
+>>>>>>> refs/remotes/apache/master
     // Private Member Variables ------------------------------------------------
 
     private PortletWindowConfig config;
     private PortalURL portalURL;
     private PortletWindowIDImpl objectIdImpl;
+<<<<<<< HEAD
+=======
+    private PortletDefinition portlet;
+>>>>>>> refs/remotes/apache/master
 
 
     // Constructor -------------------------------------------------------------
@@ -43,9 +64,27 @@ public class PortletWindowImpl implements PortletWindow {
      * @param config  the portlet window configuration.
      * @param portalURL  the portal URL.
      */
+<<<<<<< HEAD
     public PortletWindowImpl(PortletWindowConfig config, PortalURL portalURL) {
         this.config = config;
         this.portalURL = portalURL;
+=======
+    public PortletWindowImpl(PortletContainer container, PortletWindowConfig config, PortalURL portalURL) {
+        this.config = config;
+        this.portalURL = portalURL;
+        try
+        {
+            String applicationName = config.getContextPath();
+            this.portlet = PlutoServices.getServices().getPortletRegistryService().getPortlet(applicationName, config.getPortletName());
+        }
+        catch (PortletContainerException ex)
+        {
+            String message = "Unable to load Portlet App Deployment Descriptor:"+ ex.getMessage();
+            ex.printStackTrace();
+            LOG.error(message, ex);
+            throw new RuntimeException(message);
+        }
+>>>>>>> refs/remotes/apache/master
     }
 
 
@@ -73,4 +112,12 @@ public class PortletWindowImpl implements PortletWindow {
         }
         return objectIdImpl;
     }
+<<<<<<< HEAD
 }
+=======
+
+    public PortletDefinition getPortletDefinition() {
+        return portlet;
+    }
+}
+>>>>>>> refs/remotes/apache/master

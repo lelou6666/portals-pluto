@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.driver;
 
+<<<<<<< HEAD
 import org.apache.pluto.PortletContainer;
 import org.apache.pluto.driver.services.portal.PageConfig;
 import org.apache.pluto.driver.config.AdminConfiguration;
@@ -28,6 +29,21 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.text.DecimalFormat;
+=======
+import java.io.IOException;
+import java.text.DecimalFormat;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.container.PortletContainer;
+import org.apache.pluto.driver.config.AdminConfiguration;
+import org.apache.pluto.driver.services.portal.PageConfig;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * TCK Driver Servlet.
@@ -36,12 +52,21 @@ import java.text.DecimalFormat;
  * @since Dec 11, 2005
  */
 public class TCKDriverServlet extends PortalDriverServlet {
+<<<<<<< HEAD
 
 	/** Logger. */
     private static final Log LOG = LogFactory.getLog(TCKDriverServlet.class);
 
     private int pageCounter = 0;
 
+=======
+	
+	/** Logger. */
+    private static final Logger LOG = LoggerFactory.getLogger(TCKDriverServlet.class);
+    
+    private int pageCounter = 0;
+    
+>>>>>>> refs/remotes/apache/master
     public String getServletInfo() {
         return "Pluto TCK Driver Servlet";
     }
@@ -52,7 +77,11 @@ public class TCKDriverServlet extends PortalDriverServlet {
         container = (PortletContainer) servletContext.getAttribute(
                 AttributeKeys.PORTLET_CONTAINER);
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Overwrites <code>super.doGet(..)</code>. If <code>portletName</code>
      * (multiple occurrences) parameter is received, the driver is attempting
@@ -80,10 +109,17 @@ public class TCKDriverServlet extends PortalDriverServlet {
     throws IOException, ServletException {
         super.doGet(req, response);
     }
+<<<<<<< HEAD
 
 
     // Private Methods ---------------------------------------------------------
 
+=======
+    
+    
+    // Private Methods ---------------------------------------------------------
+    
+>>>>>>> refs/remotes/apache/master
     private void doSetup(HttpServletRequest request,
                          HttpServletResponse response)
     throws IOException, ServletException {
@@ -101,7 +137,11 @@ public class TCKDriverServlet extends PortalDriverServlet {
                 		+ "an AdminConfiguration must be specified "
                 		+ "to run the TCK.");
             }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> refs/remotes/apache/master
             pageName = (new DecimalFormat("TCK00000")).format(pageCounter++);
             PageConfig pageConfig = new PageConfig();
             pageConfig.setName(pageName);
@@ -112,8 +152,13 @@ public class TCKDriverServlet extends PortalDriverServlet {
                 String contextPath = "/" + portletNames[i].substring(0, index);
                 String portletName = portletNames[i].substring(index + 1);
                 pageConfig.addPortlet(contextPath, portletName);
+<<<<<<< HEAD
                 adminConfig.getPortletRegistryAdminService()
                 		.addPortletApplication(contextPath);
+=======
+//                adminConfig.getPortletRegistryAdminService()
+//                		.addPortletApplication(contextPath);
+>>>>>>> refs/remotes/apache/master
             }
 
             adminConfig.getRenderConfigAdminService().addPage(pageConfig);
@@ -131,7 +176,11 @@ public class TCKDriverServlet extends PortalDriverServlet {
         debugWithName("Sending redirect to: " + buffer.toString());
         response.sendRedirect(buffer.toString());
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Prints debug message with a <code>[Pluto TCK Driver]</code> prefix.
      * @param message  message to debug.
@@ -141,5 +190,10 @@ public class TCKDriverServlet extends PortalDriverServlet {
     		LOG.debug("[Pluto TCK Driver] " + message);
     	}
     }
+<<<<<<< HEAD
 
 }
+=======
+    
+}
+>>>>>>> refs/remotes/apache/master

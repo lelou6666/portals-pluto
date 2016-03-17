@@ -30,15 +30,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.testsuite.TestResult;
 import org.apache.pluto.testsuite.TestUtils;
 
 public class DispatcherRequestTest extends AbstractReflectivePortletTest {
 	
 	/** Logger. */
+<<<<<<< HEAD
 	private static final Log LOG = LogFactory.getLog(DispatcherRequestTest.class);
+=======
+	private static final Logger LOG = LoggerFactory.getLogger(DispatcherRequestTest.class);
+>>>>>>> refs/remotes/apache/master
 	
 	/** The path to the companion servlet. */
     private static final String SERVLET_PATH = "/test/DispatcherRequestTest_Servlet";
@@ -174,7 +183,13 @@ public class DispatcherRequestTest extends AbstractReflectivePortletTest {
     
     public static class CompanionServlet extends HttpServlet {
     	
+<<<<<<< HEAD
         private static final String KEY_REQUEST_URI = "javax.servlet.include.request_uri";
+=======
+		private static final long serialVersionUID = -6032809452145653960L;
+		
+		private static final String KEY_REQUEST_URI = "javax.servlet.include.request_uri";
+>>>>>>> refs/remotes/apache/master
         private static final String KEY_CONTEXT_PATH = "javax.servlet.include.context_path";
         private static final String KEY_SERVLET_PATH = "javax.servlet.include.servlet_path";
         private static final String KEY_PATH_INFO = "javax.servlet.include.path_info";

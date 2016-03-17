@@ -1,0 +1,37 @@
+<<<<<<< HEAD:pluto-container/src/main/resources/org/apache/pluto/core/pluto-configuration.properties
+#
+=======
+# 
+>>>>>>> refs/remotes/apache/master:pluto-portal/src/main/webapp/WEB-INF/classes/user-info-attributes.properties.template
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+<<<<<<< HEAD:pluto-container/src/main/resources/org/apache/pluto/core/pluto-configuration.properties
+# the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+=======
+# the License.  You may obtain a copy of the License at 
+# 
+#   http://www.apache.org/licenses/LICENSE-2.0
+# 
+>>>>>>> refs/remotes/apache/master:pluto-portal/src/main/webapp/WEB-INF/classes/user-info-attributes.properties.template
+# Unless required by applicable law or agreed to in writing, software
+# distributed  under the  License is distributed on an "AS IS" BASIS,
+# WITHOUT  WARRANTIES OR CONDITIONS  OF ANY KIND, either  express  or
+# implied.
+<<<<<<< HEAD:pluto-container/src/main/resources/org/apache/pluto/core/pluto-configuration.properties
+#
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+######################################################################
+org.apache.pluto.descriptors.services.PortletAppDescriptorService=org.apache.pluto.descriptors.services.castor.PortletAppDescriptorServiceImpl
+=======
+#  
+# See the License for the specific language governing permissions and
+# limitations under the License.
+>>>>>>> refs/remotes/apache/master:pluto-portal/src/main/webapp/WEB-INF/classes/user-info-attributes.properties.template

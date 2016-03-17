@@ -22,7 +22,11 @@ limitations under the License.
     xmlns="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://portals.apache.org/pluto/xsd/pluto-portal-driver-config.xsd
+<<<<<<< HEAD
                         http://portals.apache.org/pluto/pluto-portal/1.1/pluto-portal-driver-config.xsd"
+=======
+                        http://portals.apache.org/pluto/pluto-portal/2.0/pluto-portal-driver-config.xsd"
+>>>>>>> refs/remotes/apache/master
     version="1.1">
 
   <portal-name>pluto-portal-driver</portal-name>
@@ -51,9 +55,15 @@ limitations under the License.
       <portlet context="/testsuite" name="TestPortlet1"/>
       <portlet context="/testsuite" name="TestPortlet2"/>
     </page>
+<<<<<<< HEAD
     <page name="Secondary Page" uri="/WEB-INF/themes/pluto-default-theme.jsp">
       <portlet context="/testsuite" name="TestPortlet1"/>
       <portlet context="/testsuite" name="TestPortlet2"/>
+=======
+    <page name="JSR 286 Tests" uri="/WEB-INF/themes/pluto-default-theme.jsp">
+      <portlet context="/testsuite" name="286TestPortlet"/>
+      <portlet context="/testsuite" name="286TestCompanionPortlet"/>
+>>>>>>> refs/remotes/apache/master
     </page>
     <page name="Pluto Admin" uri="/WEB-INF/themes/pluto-default-theme.jsp">
       <portlet context="/pluto" name="PlutoPageAdmin"/>
@@ -62,5 +72,8 @@ limitations under the License.
   </render-config>
   
 </pluto-portal-driver>
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> refs/remotes/apache/master

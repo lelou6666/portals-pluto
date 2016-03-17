@@ -19,14 +19,23 @@ package org.apache.pluto.testsuite.test;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.testsuite.TestResult;
 
 public class SessionTimeoutTest extends AbstractReflectivePortletTest {
 	
 	/** Logger. */
+<<<<<<< HEAD
 	private static final Log LOG = LogFactory.getLog(SessionTimeoutTest.class);
+=======
+	private static final Logger LOG = LoggerFactory.getLogger(SessionTimeoutTest.class);
+>>>>>>> refs/remotes/apache/master
 	
 	/**
 	 * Render parameter name indicating if the max inactive interval is set to

@@ -20,8 +20,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.digester.Digester;
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.driver.services.portal.PageConfig;
 import org.apache.pluto.driver.services.portal.RenderConfig;
 import org.xml.sax.SAXException;
@@ -32,7 +37,11 @@ import org.xml.sax.SAXException;
  */
 public class ResourceConfigReader {
 
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog(
+=======
+    private static final Logger LOG = LoggerFactory.getLogger(
+>>>>>>> refs/remotes/apache/master
         ResourceConfigReader.class
     );
 

@@ -46,8 +46,13 @@ limitations under the License.
 
           function <portlet:namespace/>doSwitchPage(select) {
               var placePortletsSelect = document.forms['adminForm'].elements['placedPortlets'];
+<<<<<<< HEAD
               for(var i=0; i < placePortletsSelect.options.length;i++) {
                   placePortletsSelect.options[i] = null;
+=======
+              while (placePortletsSelect.options.length > 0) {
+                  placePortletsSelect.options[0] = null;
+>>>>>>> refs/remotes/apache/master
               }
 
               var disabled = select.value == 'Select. . .'
@@ -95,18 +100,31 @@ limitations under the License.
 
     <script type="text/javascript">
         var <portlet:namespace/>portlets = new Array();
+<<<<<<< HEAD
         <c:forEach items="${portletContainer.optionalContainerServices.portletRegistryService.registeredPortletApplications}" var="app">
             <portlet:namespace/>portlets['<c:out value="${app.applicationId}"/>'] = new Array();
             <portlet:namespace/>portlets['<c:out value="${app.applicationId}"/>'][0] = 'Select. . .';
           <c:forEach items="${app.portletApplicationDefinition.portlets}" var="portlet" varStatus="loopStatus">
             <portlet:namespace/>portlets['<c:out value="${app.applicationId}"/>'][<c:out value="${loopStatus.index + 1}"/>] = '<c:out value="${portlet.portletName}"/>';
+=======
+        <c:forEach items="${portletContainer.containerServices.portletContextService.portletContexts}" var="app">
+            <portlet:namespace/>portlets['<c:out value="${app.applicationName}"/>'] = new Array();
+            <portlet:namespace/>portlets['<c:out value="${app.applicationName}"/>'][0] = 'Select. . .';
+          <c:forEach items="${app.portletApplicationDefinition.portlets}" var="portlet" varStatus="loopStatus">
+            <portlet:namespace/>portlets['<c:out value="${app.applicationName}"/>'][<c:out value="${loopStatus.index + 1}"/>] = '<c:out value="${portlet.portletName}"/>';
+>>>>>>> refs/remotes/apache/master
           </c:forEach>
         </c:forEach>
 
         function <portlet:namespace/>doSwitch(select) {
             var portletsSelectBox = document.forms['adminForm'].elements['availablePortlets'];
+<<<<<<< HEAD
             for(var i = 0; i < portletsSelectBox.options.length;i++) {
                 portletsSelectBox.options[i] = null;
+=======
+             while (portletsSelectBox.options.length > 0) {
+                portletsSelectBox.options[0] = null;
+>>>>>>> refs/remotes/apache/master
             }
             if (select.value == '-') {
                 document.forms['adminForm'].elements['availablePortlets'].disabled = true;
@@ -128,8 +146,8 @@ limitations under the License.
 
     <select name="applications" onChange="<portlet:namespace/>doSwitch(this)">
       <option value='-'>Select. . .</option>
-      <c:forEach items="${portletContainer.optionalContainerServices.portletRegistryService.registeredPortletApplications}" var="app">
-      <option value="<c:out value="${app.applicationId}"/>"><c:out value="${app.applicationName}"/></option>
+      <c:forEach items="${portletContainer.containerServices.portletContextService.portletContexts}" var="app">
+      <option value="<c:out value="${app.applicationName}"/>"><c:out value="${app.applicationName}"/></option>
       </c:forEach>
     </select>
 

@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.driver.portlets;
 
+<<<<<<< HEAD
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +26,13 @@ import org.apache.pluto.driver.config.DriverConfiguration;
 import org.apache.pluto.driver.services.portal.PageConfig;
 import org.apache.pluto.driver.services.portal.PortletWindowConfig;
 import org.apache.pluto.driver.services.portal.RenderConfigService;
+=======
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+>>>>>>> refs/remotes/apache/master
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -32,16 +40,28 @@ import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+=======
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.driver.AttributeKeys;
+import org.apache.pluto.driver.PortalDriverServlet;
+import org.apache.pluto.driver.config.DriverConfiguration;
+import org.apache.pluto.driver.services.portal.PageConfig;
+import org.apache.pluto.driver.services.portal.PortletWindowConfig;
+import org.apache.pluto.driver.services.portal.RenderConfigService;
+>>>>>>> refs/remotes/apache/master
 
 
 public class PageAdminPortlet extends GenericPlutoPortlet {
 
-    private static final Log LOG = LogFactory.getLog(PageAdminPortlet.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PageAdminPortlet.class);
     private static final String JSP_DIR = "/WEB-INF/fragments/admin/page/";
     private static final String VIEW_PAGE = JSP_DIR + "view.jsp";
     private static final String EDIT_PAGE = JSP_DIR + "edit.jsp";
@@ -74,13 +94,18 @@ public class PageAdminPortlet extends GenericPlutoPortlet {
 
     public void doAddPortlet(ActionRequest request) {
         String page = request.getParameter("page");
-        String applicationId = request.getParameter("applications");
-        String portletId = request.getParameter("availablePortlets");
+        String applicationName = request.getParameter("applications");
+        String portletName = request.getParameter("availablePortlets");
 
-        LOG.info("Request: Add [applicationId=" + applicationId + ":portletId=" + portletId + "] to page '" + page + "'");
+        LOG.info("Request: Add [applicationName=" + applicationName + ":portletName=" + portletName + "] to page '" + page + "'");
 
+        String contextPath = applicationName;
+        if (contextPath.length() > 0)
+        {
+            contextPath = "/" + contextPath;
+        }
         PageConfig config = getPageConfig(page);
-        config.addPortlet(applicationId, portletId);
+        config.addPortlet(contextPath, portletName);
 
     }
 
@@ -110,11 +135,19 @@ public class PageAdminPortlet extends GenericPlutoPortlet {
         PageConfig pageConfig = new PageConfig();
         pageConfig.setName(page);
         pageConfig.setUri(uri);
+<<<<<<< HEAD
 
         RenderConfigService renderConfig = driverConfig.getRenderConfigService();
         renderConfig.addPage(pageConfig);
     }
 
+=======
+
+        RenderConfigService renderConfig = driverConfig.getRenderConfigService();
+        renderConfig.addPage(pageConfig);
+    }
+
+>>>>>>> refs/remotes/apache/master
     /**
      * Removes a page from the portal ignoring any requests to remove the default page
      * or the Pluto Admin page. 

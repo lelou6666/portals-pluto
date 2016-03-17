@@ -21,8 +21,13 @@ import java.io.IOException;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderResponse;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.testsuite.TestResult;
 import org.apache.pluto.testsuite.TestUtils;
 
@@ -33,7 +38,11 @@ import org.apache.pluto.testsuite.TestUtils;
 public class RenderResponseNoContentTypeTest
 extends AbstractReflectivePortletTest {
 
+<<<<<<< HEAD
 	private static final Log LOG = LogFactory.getLog(RenderResponseNoContentTypeTest.class);
+=======
+	private static final Logger LOG = LoggerFactory.getLogger(RenderResponseNoContentTypeTest.class);
+>>>>>>> refs/remotes/apache/master
 
 	/**
 	 * Overwrite super implementation to return null. This test requires that

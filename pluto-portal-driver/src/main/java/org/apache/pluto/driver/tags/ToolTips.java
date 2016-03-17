@@ -18,13 +18,17 @@ package org.apache.pluto.driver.tags;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+<<<<<<< HEAD
 import java.util.Locale;
+=======
+import java.util.ListResourceBundle;
+>>>>>>> refs/remotes/apache/master
 
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A class encapsulating access to portlet mode and windowstate tooltips.
@@ -34,8 +38,36 @@ import org.apache.commons.logging.LogFactory;
  */
 class ToolTips
 {
+<<<<<<< HEAD
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle("ToolTips", Locale.US, Thread.currentThread().getContextClassLoader());
     private static final Log LOG = LogFactory.getLog(ToolTips.class);
+=======
+    private static final ResourceBundle BUNDLE;
+    static {
+        ResourceBundle bundle;
+        try {
+            bundle = ResourceBundle.getBundle("ToolTips");
+        } catch (MissingResourceException e) {
+            bundle = new ListResourceBundle() {
+                protected Object[][] getContents() {
+                    return new Object[][] {
+                            {"tooltip.windowstate.maximized", "Maximize"},
+                            {"tooltip.windowstate.minimized", "Minimize"},
+                            {"tooltip.windowstate.normal", "Restore"},
+
+                            {"tooltip.mode.view", "View"},
+                            {"tooltip.mode.help", "Help"},
+                            {"tooltip.mode.edit", "Edit"},
+
+                            {"tooltip.css.classname", "tooltip"},
+                    };
+                }
+            };
+        }
+        BUNDLE = bundle;
+    }
+    private static final Logger LOG = LoggerFactory.getLogger(ToolTips.class);
+>>>>>>> refs/remotes/apache/master
 
     static final ToolTips MAXIMIZE = new ToolTips(BUNDLE.getString("tooltip.windowstate.maximized"));
     static final ToolTips MINIMIZE = new ToolTips(BUNDLE.getString("tooltip.windowstate.minimized"));
@@ -49,6 +81,7 @@ class ToolTips
 
     private String tooltip;
 
+<<<<<<< HEAD
     private ToolTips(String tooltip)
     {
         this.tooltip = tooltip;
@@ -56,34 +89,46 @@ class ToolTips
 
     static ToolTips forMode(PortletMode mode)
     {
+=======
+    private ToolTips(String tooltip) {
+        this.tooltip = tooltip;
+    }
+
+    static ToolTips forMode(PortletMode mode) {
+>>>>>>> refs/remotes/apache/master
         StringBuffer tip = new StringBuffer("");
-        try
-        {
+        try {
             tip.append(BUNDLE.getString("tooltip.mode." + mode));
-        }
-        catch (MissingResourceException e)
-        {
+        } catch (MissingResourceException e) {
             LOG.warn("No tooltip found for portlet mode [" + mode + "]", e);
         }
         return new ToolTips(tip.toString());
     }
 
+<<<<<<< HEAD
     static ToolTips forWindowState(WindowState state)
     {
         StringBuffer tip = new StringBuffer("");
         try
         {
+=======
+    static ToolTips forWindowState(WindowState state) {
+        StringBuffer tip = new StringBuffer("");
+        try {
+>>>>>>> refs/remotes/apache/master
             tip.append(BUNDLE.getString("tooltip.windowstate." + state));
-        }
-        catch (MissingResourceException e)
-        {
+        } catch (MissingResourceException e) {
             LOG.warn("No tooltip found for window state [" + state + "]", e);
         }
         return new ToolTips(tip.toString());
     }
 
+<<<<<<< HEAD
     public String toString()
     {
+=======
+    public String toString() {
+>>>>>>> refs/remotes/apache/master
         return tooltip;
     }
 }

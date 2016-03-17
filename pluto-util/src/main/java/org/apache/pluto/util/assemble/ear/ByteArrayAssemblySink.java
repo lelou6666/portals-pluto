@@ -23,15 +23,24 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Stores assembled bytes in an underlying <code>ByteArrayOutputStream</code>
  */
 class ByteArrayAssemblySink extends AssemblySink {
     
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog( ByteArrayAssemblySink.class );
+=======
+    private static final Logger LOG = LoggerFactory.getLogger( ByteArrayAssemblySink.class );
+>>>>>>> refs/remotes/apache/master
     
     ByteArrayAssemblySink(ByteArrayOutputStream out) {
         super(out);

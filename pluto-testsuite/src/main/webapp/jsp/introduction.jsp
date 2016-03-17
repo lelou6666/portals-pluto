@@ -22,7 +22,11 @@ limitations under the License.
 <%@ page import="org.apache.pluto.testsuite.TestConfig" %>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
+=======
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+>>>>>>> refs/remotes/apache/master
 
 <portlet:defineObjects/>
 
@@ -37,7 +41,11 @@ limitations under the License.
 <p>
   Please select one of the following tests:
   <table>
+<<<<<<< HEAD
     <c:forEach var="testConfig" items="${tests}" varStatus="status">
+=======
+    <c:forEach var="testConfig" items="${testConfigs}" varStatus="status">
+>>>>>>> refs/remotes/apache/master
       <tr>
         <td>
           # <c:out value="${status.index}"/>.
@@ -47,7 +55,11 @@ limitations under the License.
         </td>
         
         <%-- Generate portlet action URL: Start =========================== --%>
+<<<<<<< HEAD
         <portlet:actionURL secure='<%= renderRequest.isSecure() ? "True" : "False" %>'
+=======
+        <portlet:actionURL secure='<%= renderRequest.isSecure() ? "True" : "False" %>' escapeXml="true"
+>>>>>>> refs/remotes/apache/master
                            var="url">
           <portlet:param name="testId"
                          value='<%= ((LoopTagStatus) pageContext.getAttribute("status")).getIndex() + "" %>'/>
@@ -65,7 +77,11 @@ limitations under the License.
         <%-- Generate portlet action URL: End ============================= --%>
         
         <td>
+<<<<<<< HEAD
           <a href="<c:out value="${url}"/>">Test</a>
+=======
+          <a href="<c:out value="${url}" escapeXml="false"/>">Test</a>
+>>>>>>> refs/remotes/apache/master
         </td>
       </tr>
     </c:forEach>

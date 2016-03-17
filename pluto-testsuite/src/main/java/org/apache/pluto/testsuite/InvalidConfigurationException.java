@@ -13,7 +13,10 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+<<<<<<< HEAD
  * 
+=======
+>>>>>>> refs/remotes/apache/master
  */
 package org.apache.pluto.testsuite;
 
@@ -22,6 +25,11 @@ package org.apache.pluto.testsuite;
  */
 public class InvalidConfigurationException extends RuntimeException {
 
+<<<<<<< HEAD
+=======
+	private static final long serialVersionUID = -7010299791708559054L;
+
+>>>>>>> refs/remotes/apache/master
 	public InvalidConfigurationException(String message) {
 		super(message);
 	}

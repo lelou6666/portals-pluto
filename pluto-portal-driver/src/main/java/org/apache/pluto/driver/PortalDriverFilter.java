@@ -16,10 +16,17 @@
  */
 package org.apache.pluto.driver;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pluto.PortletContainer;
 import org.apache.pluto.PortletContainerException;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.container.PortletContainer;
+import org.apache.pluto.container.PortletContainerException;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.driver.core.PortalRequestContext;
 import org.apache.pluto.driver.core.PortletWindowImpl;
 import org.apache.pluto.driver.services.portal.PortletWindowConfig;
@@ -38,7 +45,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+<<<<<<< HEAD
  * The controller filter used to drive static portlet pages.
+=======
+ * The controller filter used to drive static portlet pages (see
+ * <a href="http://portals.apache.org/pluto/faq.html#simple-embed">
+ * http://portals.apache.org/pluto/faq.html#simple-embed</a> in Pluto FAQ).
+>>>>>>> refs/remotes/apache/master
  *
  * @version 1.0
  * @since March 28, 2006
@@ -48,7 +61,11 @@ public class PortalDriverFilter implements Filter {
     /**
      * Internal Logger.
      */
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog(PortalDriverFilter.class);
+=======
+    private static final Logger LOG = LoggerFactory.getLogger(PortalDriverFilter.class);
+>>>>>>> refs/remotes/apache/master
 
     /**
      * The Portal Driver sServlet Context
@@ -71,7 +88,11 @@ public class PortalDriverFilter implements Filter {
      * This method retrieves the portlet container instance
      * from the servlet context scope.
      *
+<<<<<<< HEAD
      * @see org.apache.pluto.PortletContainer
+=======
+     * @see org.apache.pluto.container.PortletContainer
+>>>>>>> refs/remotes/apache/master
      */
     public void init(FilterConfig filterConfig) throws ServletException {
         servletContext = filterConfig.getServletContext();
@@ -104,11 +125,18 @@ public class PortalDriverFilter implements Filter {
             //  filter dispatchers.  B/C of this, we make sure we haven't
             //  allready processed this request. No infinite loops for us!!!!
             if (PortalRequestContext.getContext(req) == null) {
+<<<<<<< HEAD
                 PortalRequestContext ctx = doPortletPrepare(req, (HttpServletResponse) response);
                 LOG.debug("Render Path: " + ctx.getRequestedPortalURL().getRenderPath());
                 LOG.debug("Servlet Path: " + ctx.getRequestedPortalURL().getServletPath());
                 PortalURL url = ctx.getRequestedPortalURL();
                 if (url.getActionWindow() != null) {
+=======
+                boolean actionRequestProcessed = 
+                	doPortletPrepare(req, (HttpServletResponse) response);
+
+                if (actionRequestProcessed) {
+>>>>>>> refs/remotes/apache/master
                     return;
                 }
 
@@ -136,10 +164,23 @@ public class PortalDriverFilter implements Filter {
      * @param response
      * @throws java.io.IOException            if an io exception occurs
      * @throws javax.servlet.ServletException if a servlet exception occurs
+<<<<<<< HEAD
      */
     public PortalRequestContext doPortletPrepare(HttpServletRequest request, HttpServletResponse response)
         throws IOException, ServletException {
 
+=======
+     * @return A boolean flag indicating whether or not an action request was
+     * processed. A value of true indicates than an action request was 
+     * processed while a value of false indicates that an action request was
+     * NOT processed.
+     */
+    public boolean doPortletPrepare(HttpServletRequest request, HttpServletResponse response)
+        throws IOException, ServletException {
+
+    	boolean actionRequestProcessed = false;
+    	
+>>>>>>> refs/remotes/apache/master
         PortalRequestContext portalRequestContext =
             new PortalRequestContext(getServletContext(), request, response);
 
@@ -153,7 +194,11 @@ public class PortalDriverFilter implements Filter {
 
         // Action window config will only exist if there is an action request.
         if (actionWindowConfig != null) {
+<<<<<<< HEAD
             PortletWindowImpl portletWindow = new PortletWindowImpl(
+=======
+            PortletWindowImpl portletWindow = new PortletWindowImpl(container,
+>>>>>>> refs/remotes/apache/master
                 actionWindowConfig, portalURL);
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Processing action request for window: "
@@ -169,8 +214,21 @@ public class PortalDriverFilter implements Filter {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Action request processed.\n\n");
             }
+<<<<<<< HEAD
         }
 
         return portalRequestContext;
+=======
+            
+            actionRequestProcessed = true;
+        }
+        
+        if (LOG.isDebugEnabled()) {
+            LOG.debug("Render Path: " + portalURL.getRenderPath());
+            LOG.debug("Servlet Path: " + portalURL.getServletPath());        	
+        }
+
+        return actionRequestProcessed;
+>>>>>>> refs/remotes/apache/master
     }
 }

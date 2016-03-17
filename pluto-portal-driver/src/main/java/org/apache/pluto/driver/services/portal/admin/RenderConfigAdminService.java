@@ -16,21 +16,37 @@
  */
 package org.apache.pluto.driver.services.portal.admin;
 
+<<<<<<< HEAD
 import org.apache.pluto.driver.services.portal.PageConfig;
 import org.apache.pluto.driver.config.DriverConfigurationException;
+=======
+import org.apache.pluto.driver.config.DriverConfigurationException;
+import org.apache.pluto.driver.services.portal.PageConfig;
+>>>>>>> refs/remotes/apache/master
 
 /**
  *
  *
+<<<<<<< HEAD
+=======
+ * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>:
+>>>>>>> refs/remotes/apache/master
  * @version 1.0
  * @since Nov 30, 2005
  */
 public interface RenderConfigAdminService {
 
+<<<<<<< HEAD
     public void addPage(PageConfig config)
         throws DriverConfigurationException;
     
     public void removePage(PageConfig config)
         throws DriverConfigurationException;
 
+=======
+    void addPage(PageConfig config) throws DriverConfigurationException;
+
+    void removePage(PageConfig pageConfig) throws DriverConfigurationException;
+    
+>>>>>>> refs/remotes/apache/master
 }

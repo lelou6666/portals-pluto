@@ -1,10 +1,18 @@
 /*
+<<<<<<< HEAD
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
+=======
+ * Copyright 2003,2004 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+>>>>>>> refs/remotes/apache/master
  *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,12 +27,19 @@ package org.apache.pluto.driver.services.portal;
 import junit.framework.TestCase;
 
 /**
+<<<<<<< HEAD
  *
+=======
+ * TODO JavaDoc
+ *
+ * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>:
+>>>>>>> refs/remotes/apache/master
  * @version 1.0
  * @since Dec 1, 2005
  */
 public class PortletWindowConfigTest extends TestCase {
 
+<<<<<<< HEAD
     public void testCreatePortletId() {
         assertEquals("context.PortletName!", PortletWindowConfig.createPortletId("context", "PortletName", ""));
         assertEquals("c.PortletName!1234567", PortletWindowConfig.createPortletId("c", "PortletName", "1234567"));
@@ -50,6 +65,28 @@ public class PortletWindowConfigTest extends TestCase {
     public void testParseMetaInfo() {
         assertEquals("A", PortletWindowConfig.parseMetaInfo("c.p!A"));
         assertEquals("", PortletWindowConfig.parseMetaInfo("c.p"));
+=======
+
+    public void testCreatePortletId() {
+//        assertEquals("context.PortletName", PortletWindowConfig.createPortletId("context", "PortletName"));
+//        assertEquals("c.PortletName", PortletWindowConfig.createPortletId("c", "PortletName"));
+//        assertEquals("context.P", PortletWindowConfig.createPortletId("context", "P"));
+//        assertEquals("c.P", PortletWindowConfig.createPortletId("c", "P"));
+    }
+
+    public void testParsePortletName() {
+        assertEquals("PortletName", PortletWindowConfig.parsePortletName("context.PortletName"));
+        assertEquals("PortletName", PortletWindowConfig.parsePortletName("c.PortletName"));
+        assertEquals("P", PortletWindowConfig.parsePortletName("context.P"));
+        assertEquals("P", PortletWindowConfig.parsePortletName("c.P"));
+    }
+
+    public void testParseContextPath() {
+        assertEquals("/context", PortletWindowConfig.parseContextPath("context.PortletName"));
+        assertEquals("/c", PortletWindowConfig.parseContextPath("c.PortletName"));
+        assertEquals("/context", PortletWindowConfig.parseContextPath("context.P"));
+        assertEquals("/c", PortletWindowConfig.parseContextPath("c.P"));
+>>>>>>> refs/remotes/apache/master
     }
 
     public void testParseInvalidId() {

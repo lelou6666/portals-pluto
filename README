@@ -12,8 +12,13 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License
+#
 
+Apach Pluto 2.1 is the second version of the JSR-286 Reference Implementation (Java Portlet API 2.0).
+See the Getting Started page on the Pluto web site (http://portals.apache.org/pluto)
+for instructions on how to build Pluto from source. 
 
+<<<<<<< HEAD
 To run the Pluto Portal Driver deployed in Tomcat 5.5.20:
 
 1. Unzip the binary bundled distribution into a directory.
@@ -271,22 +276,18 @@ Release Notes - Pluto - Version 1.1.0
     * [PLUTO-279] - Include jars for Pluto ant task in binary distribution
     * [PLUTO-286] - Update library versions
     * [PLUTO-301] - Administrative lifcycle hooks in portlet servlet
+=======
+A simplified way to build a bundled Pluto 2.1 distribution is to use the dist-build.xml Ant build which downloads 
+Tomcat and calls the appropriate Maven commands to create a distribution with Pluto embedded in Tomcat. The 
+built distribution, which contains this file, when started via the startup script in the bin directory will 
+start the Pluto portal by browsing to http://localhost:8080/pluto/portal/ and logging in as pluto/pluto 
+(or tomcat/tomcat). See the documentation in dist-build.xml for more details. Also invoke the Help mode on the
+Pluto Admin page for instructions on how to use the admin portlet to deploy custom portlets.
+>>>>>>> refs/remotes/apache/master
 
-** New Feature
-    * [PLUTO-182] - [1.1] Add assembly plugin to create distributions
-    * [PLUTO-214] - Add logout link to portal page.
-    * [PLUTO-252] - Custom Tags with response.encodeUrl( url ) and Render hidden portlet mode.
-    * [PLUTO-268] - Ability to configure portlet dispatch servlet in maven-pluto-plugin
-    * [PLUTO-273] - Remove Portlets From Pages
-    * [PLUTO-291] - Add UserAttributes, PortletModes & WindowStates to PortletAppDD
-    * [PLUTO-292] - Create PortletInfo callback service
-    * [PLUTO-293] - I18n support for portlet.xml elements
-    * [PLUTO-300] - PortletDD needs the following information from the portlet.xml added
+This version was based on Pluto 1.1 and was refactored in the 1.1-286-COMPATIBILITY branch to add 
+JSR-286 features and create the official JSR-286 RI submitted to the Java Community Process.
 
-** Task
-    * [PLUTO-217] - [1.1] Script to package binary release
-    * [PLUTO-218] - [1.1] Script to package source release
-    * [PLUTO-306] - Update license headers for release
+The Pluto 2.0 code was subsequently refactored within the 2.0-spi-refactoring branch to make the descriptor
+API more flexible and fix other issues. This branch became the new trunk on 11/3/2008. 
 
-** Wish
-    * [PLUTO-236] - Removal of log4j + logging configuration from web apps

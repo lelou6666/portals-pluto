@@ -16,11 +16,14 @@
  */
 package org.apache.pluto.testsuite.test;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pluto.testsuite.TestResult;
 import org.apache.pluto.testsuite.TestUtils;
 
+=======
+>>>>>>> refs/remotes/apache/master
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
@@ -37,6 +40,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+<<<<<<< HEAD
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.testsuite.TestResult;
+import org.apache.pluto.testsuite.TestUtils;
+
+>>>>>>> refs/remotes/apache/master
 /**
  *
  * @version 1.0
@@ -46,7 +57,11 @@ public class DispatcherRenderParameterTest
 extends AbstractReflectivePortletTest {
 
 	/** Internal logger. */
+<<<<<<< HEAD
 	private static final Log LOG = LogFactory.getLog(
+=======
+	private static final Logger LOG = LoggerFactory.getLogger(
+>>>>>>> refs/remotes/apache/master
 			DispatcherRenderParameterTest.class);
 
 	// Static Final Constants --------------------------------------------------
@@ -87,8 +102,13 @@ extends AbstractReflectivePortletTest {
      * Overwrites <code>super.getRenderParameters(..)</code> to set the
      * test-specific render parameter in the render URL.
      */
+<<<<<<< HEAD
     public Map getRenderParameters(PortletRequest request) {
     	Map parameterMap = super.getRenderParameters(request);
+=======
+    public Map<String, String[]> getRenderParameters(PortletRequest request) {
+    	Map<String, String[]> parameterMap = super.getRenderParameters(request);
+>>>>>>> refs/remotes/apache/master
     	parameterMap.put(KEY_RENDER, new String[] { VALUE_RENDER });
     	return parameterMap;
     }
@@ -208,7 +228,13 @@ extends AbstractReflectivePortletTest {
 
         // GenericServlet Impl -------------------------------------------------
 
+<<<<<<< HEAD
         public String getServletInfo() {
+=======
+		private static final long serialVersionUID = -963706386141654216L;
+
+		public String getServletInfo() {
+>>>>>>> refs/remotes/apache/master
         	return getClass().getName();
         }
 

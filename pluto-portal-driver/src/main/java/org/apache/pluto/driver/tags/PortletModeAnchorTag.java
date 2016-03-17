@@ -26,8 +26,8 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.pluto.driver.AttributeKeys;
 import org.apache.pluto.driver.config.DriverConfiguration;
 import org.apache.pluto.driver.core.PortalRequestContext;
@@ -45,9 +45,15 @@ import org.apache.taglibs.standard.lang.support.ExpressionEvaluatorManager;
 public class PortletModeAnchorTag extends BodyTagSupport {
 
     /** Logger. */
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog(PortletModeAnchorTag.class);
 
 
+=======
+    private static final Logger LOG = LoggerFactory.getLogger(PortletModeAnchorTag.class);
+        
+    
+>>>>>>> refs/remotes/apache/master
     // Private Member Variables ------------------------------------------------
     private String portletMode;
 
@@ -160,11 +166,24 @@ public class PortletModeAnchorTag extends BodyTagSupport {
     public void setPortletMode(String portletMode) {
         this.portletMode = portletMode;
     }
+<<<<<<< HEAD
 
+=======
+    
+//    private boolean isPortletModeAllowed(DriverConfiguration config, PortletWindowConfig window, String mode) {
+//        LOG.debug("Testing if PortletWindowConfig [" + Integer.toHexString(window.hashCode()) + "] supports mode [" + mode + "]");
+//        return config.isPortletModeSupported(getEvaluatedPortletId(), mode);       
+//    }
+>>>>>>> refs/remotes/apache/master
     private boolean isPortletModeAllowed(DriverConfiguration config, String mode) {
         LOG.debug("Testing if PortletWindowConfig [" + getEvaluatedPortletId() + "] supports mode [" + mode + "]");
         return config.isPortletModeSupported(getEvaluatedPortletId(), mode);
     }
 
+<<<<<<< HEAD
 
 }
+=======
+    
+}
+>>>>>>> refs/remotes/apache/master

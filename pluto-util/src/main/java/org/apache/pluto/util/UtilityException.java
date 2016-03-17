@@ -18,7 +18,10 @@ package org.apache.pluto.util;
 
 import java.io.File;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/apache/master
 /**
  * Exception thrown if an error occurs while managing
  * a portal instance.

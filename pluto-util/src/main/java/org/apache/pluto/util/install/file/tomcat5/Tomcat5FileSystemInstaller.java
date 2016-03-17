@@ -20,7 +20,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> refs/remotes/apache/master
 import java.util.Map;
 
 import org.apache.pluto.util.install.InstallationConfig;
@@ -96,7 +99,11 @@ public class Tomcat5FileSystemInstaller extends FileSystemInstaller {
         if ( new File(config.getInstallationDirectory(), "bin/commons-logging-api.jar").exists()) {
             for (Iterator iter = config.getSharedDependencies().iterator(); iter.hasNext();) {
                 File dep = (File) iter.next();
+<<<<<<< HEAD
                 if (dep.getPath().indexOf("commons-logging-api") != -1) {
+=======
+                if (dep.getPath().contains("commons-logging-api")) {
+>>>>>>> refs/remotes/apache/master
                     iter.remove();
                 }
             }
@@ -136,7 +143,11 @@ public class Tomcat5FileSystemInstaller extends FileSystemInstaller {
     private String getConfigContents(String war, String contextPath) {
         StringBuffer contents = new StringBuffer();
         contents.append("<Context ")
+<<<<<<< HEAD
                 .append("path=\"").append(contextPath).append("\" ")
+=======
+                .append("path=\"/").append(contextPath).append("\" ")
+>>>>>>> refs/remotes/apache/master
                 .append("docBase=\"").append(war).append("\" ")
                 .append("crossContext=\"true\">").append("</Context>");
        return contents.toString();

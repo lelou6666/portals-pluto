@@ -22,15 +22,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
+<<<<<<< HEAD
 import org.apache.pluto.PortletWindow;
 import org.apache.pluto.driver.AttributeKeys;
 
 /**
  * The portlet title tag is used to print the dynamic portlet title to the page.
+=======
+import org.apache.pluto.container.PortletWindow;
+import org.apache.pluto.driver.AttributeKeys;
+import org.apache.pluto.driver.services.portal.PortletWindowConfig;
+
+/**
+ * The portlet title tag is used to print the dynamic portlet title to the page.
+ * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>
+ * @author <a href="mailto:zheng@apache.org">ZHENG Zhong</a>
+>>>>>>> refs/remotes/apache/master
  * @version 1.0
  * @since Oct 4, 2004
  */
 public class PortletTitleTag extends TagSupport {
+<<<<<<< HEAD
 
 	// TagSupport Impl ---------------------------------------------------------
 
@@ -45,6 +57,22 @@ public class PortletTitleTag extends TagSupport {
 	 */
     public int doStartTag() throws JspException {
 
+=======
+	
+	// TagSupport Impl ---------------------------------------------------------
+	
+	/**
+     * Method invoked when the start tag is encountered. This method retrieves
+     * the portlet title and print it to the page.
+     * 
+	 * @see org.apache.pluto.container.services.PortalCallbackService#setTitle(HttpServletRequest, PortletWindow, String)
+	 * @see org.apache.pluto.driver.services.container.PortalCallbackServiceImpl#setTitle(HttpServletRequest, PortletWindow, String)
+	 * 
+	 * @throws JspException
+	 */
+    public int doStartTag() throws JspException {
+    	
+>>>>>>> refs/remotes/apache/master
     	// Ensure that the portlet title tag resides within a portlet tag.
         PortletTag parentTag = (PortletTag) TagSupport.findAncestorWithClass(
         		this, PortletTag.class);
@@ -52,11 +80,29 @@ public class PortletTitleTag extends TagSupport {
             throw new JspException("Portlet title tag may only reside "
             		+ "within a pluto:portlet tag.");
         }
+<<<<<<< HEAD
 
         // Print out the portlet title to page.
         try {
             pageContext.getOut().print(pageContext.getRequest().getAttribute(
             		AttributeKeys.PORTLET_TITLE));
+=======
+        
+        // Print out the portlet title to page.
+        try {
+        	String title = (String) pageContext.getRequest().getAttribute(
+            		AttributeKeys.PORTLET_TITLE);
+        	
+        	if(title == null)
+        	{
+        	 	PortletWindowConfig windowConfig =
+                    PortletWindowConfig.fromId(parentTag.getEvaluatedPortletId());
+        	 	
+        		title = "[ " + windowConfig.getPortletName() + " not ready ]";
+        	}
+        	
+            pageContext.getOut().print(title);
+>>>>>>> refs/remotes/apache/master
         } catch (IOException ex) {
             throw new JspException(ex);
         }

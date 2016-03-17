@@ -16,15 +16,24 @@
  */
 package org.apache.pluto.testsuite.test;
 
+<<<<<<< HEAD
 import org.apache.pluto.testsuite.TestResult;
 import org.apache.pluto.testsuite.TestUtils;
 
+=======
+>>>>>>> refs/remotes/apache/master
 import java.util.Enumeration;
 
 import javax.portlet.PortletContext;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 
+<<<<<<< HEAD
+=======
+import org.apache.pluto.testsuite.TestResult;
+import org.apache.pluto.testsuite.TestUtils;
+
+>>>>>>> refs/remotes/apache/master
 /**
  * Tests basic attribute retrieval and storage functions within the portlet
  * request, session, and context objects.
@@ -97,7 +106,11 @@ public class SimpleAttributeTest extends AbstractReflectivePortletTest {
         }
 
         int found = 0;
+<<<<<<< HEAD
         for (Enumeration en = req.getAttributeNames();
+=======
+        for (Enumeration<String> en = req.getAttributeNames();
+>>>>>>> refs/remotes/apache/master
         		en.hasMoreElements(); ) {
             if (en.nextElement().toString().startsWith(KEY)) {
                 found++;
@@ -181,7 +194,11 @@ public class SimpleAttributeTest extends AbstractReflectivePortletTest {
         }
 
         int found = 0;
+<<<<<<< HEAD
         for (Enumeration en = session.getAttributeNames();
+=======
+        for (Enumeration<String> en = session.getAttributeNames();
+>>>>>>> refs/remotes/apache/master
         		en.hasMoreElements(); ) {
         	String name = (String) en.nextElement();
             if (name.startsWith(KEY)) {
@@ -269,7 +286,11 @@ public class SimpleAttributeTest extends AbstractReflectivePortletTest {
         }
 
         int found = 0;
+<<<<<<< HEAD
         for (Enumeration en = context.getAttributeNames();
+=======
+        for (Enumeration<?> en = context.getAttributeNames();
+>>>>>>> refs/remotes/apache/master
         		en.hasMoreElements(); ) {
             if (en.nextElement().toString().startsWith(KEY)) {
                 found++;

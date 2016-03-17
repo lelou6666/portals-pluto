@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.driver.core;
 
+<<<<<<< HEAD
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletContext;
@@ -24,6 +25,18 @@ import org.apache.pluto.driver.url.PortalURL;
 import org.apache.pluto.driver.url.PortalURLParser;
 import org.apache.pluto.driver.AttributeKeys;
 import org.apache.pluto.driver.config.DriverConfiguration;
+=======
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.driver.AttributeKeys;
+import org.apache.pluto.driver.config.DriverConfiguration;
+import org.apache.pluto.driver.url.PortalURL;
+import org.apache.pluto.driver.url.PortalURLParser;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Defines the context of the currentl portal request.
@@ -36,11 +49,21 @@ import org.apache.pluto.driver.config.DriverConfiguration;
  */
 public class PortalRequestContext {
 
+<<<<<<< HEAD
+=======
+    /** Internal Logger. */
+    private static final Logger LOG = LoggerFactory.getLogger(PortalRequestContext.class);
+
+>>>>>>> refs/remotes/apache/master
     /**
      * The attribute key to bind the portal environment instance to servlet
      * request.
      */
+<<<<<<< HEAD
     public final static String REQUEST_KEY =
+=======
+    private final static String REQUEST_KEY =
+>>>>>>> refs/remotes/apache/master
             PortalRequestContext.class.getName();
 
     /** The servletContext of execution. **/
@@ -105,17 +128,52 @@ public class PortalRequestContext {
      * Returns the requested portal URL.
      * @return the requested portal URL.
      */
+<<<<<<< HEAD
     public PortalURL getRequestedPortalURL() {
         if(requestedPortalURL == null) {
             DriverConfiguration config = (DriverConfiguration)
                 servletContext.getAttribute(AttributeKeys.DRIVER_CONFIG);
             PortalURLParser parser = config.getPortalUrlParser();
             requestedPortalURL = parser.parse(request);
+=======
+    public synchronized PortalURL getRequestedPortalURL() {
+        if(requestedPortalURL == null) {
+            DriverConfiguration config = (DriverConfiguration)
+                servletContext.getAttribute(AttributeKeys.DRIVER_CONFIG);
+            if (config != null) {
+            	PortalURLParser parser = config.getPortalUrlParser();
+            	requestedPortalURL = parser.parse(request);
+            } else {
+            	String msg = "Driver configuration not found while parsing portal URL!";
+            	LOG.error(msg);
+            	throw new IllegalStateException(msg);
+            }
+>>>>>>> refs/remotes/apache/master
         }
         return requestedPortalURL;
     }
 
     public PortalURL createPortalURL() {
+<<<<<<< HEAD
         return (PortalURL)getRequestedPortalURL().clone();
     }
+=======
+        return getRequestedPortalURL().clone();
+    }
+
+    public synchronized void mergePortalURL(PortalURL portalURL, String windowId){
+        if (requestedPortalURL == null)
+        {
+            requestedPortalURL = portalURL;
+        }
+        else
+        {
+            requestedPortalURL.merge(portalURL, windowId);
+        }
+    }
+
+	public ServletContext getServletContext() {
+		return servletContext;
+	}
+>>>>>>> refs/remotes/apache/master
 }

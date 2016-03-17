@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.util.install.file;
 
+<<<<<<< HEAD
 import org.apache.commons.io.FileUtils;
 import org.apache.pluto.util.install.InstallationConfig;
 import org.apache.pluto.util.install.PortalInstaller;
@@ -25,6 +26,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Collection;
+=======
+import java.io.File;
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.pluto.util.UtilityException;
+import org.apache.pluto.util.install.InstallationConfig;
+import org.apache.pluto.util.install.PortalInstaller;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * File System based installer.  Copies files to the appropriate

@@ -19,7 +19,11 @@ limitations under the License.
 --%>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
+=======
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+>>>>>>> refs/remotes/apache/master
 
 <portlet:defineObjects/>
 
@@ -30,7 +34,11 @@ limitations under the License.
     <portlet:renderURL windowState="<%=WindowState.MAXIMIZED.toString()%>" secure='<%= renderRequest.isSecure() ? "True" : "False" %>'
                        var="url">
       <portlet:param name="maxInactiveIntervalSet" value="<%= Boolean.TRUE.toString() %>"/>
+<<<<<<< HEAD
       <portlet:param name="testId" value="<%= renderRequest.getParameter(\"testId\") %>"/>
+=======
+      <portlet:param name="testId" value='<%= renderRequest.getParameter("testId") %>'/>
+>>>>>>> refs/remotes/apache/master
     </portlet:renderURL>
     <%-- Generate portlet action URL: End ================================= --%>
   

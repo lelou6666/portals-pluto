@@ -26,6 +26,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
 import org.apache.commons.io.IOUtils;
+<<<<<<< HEAD
 import org.apache.pluto.descriptors.portlet.PortletAppDD;
 import org.apache.pluto.descriptors.portlet.PortletDD;
 import org.apache.pluto.descriptors.services.PortletAppDescriptorService;
@@ -37,6 +38,16 @@ import org.apache.pluto.descriptors.servlet.WebAppDD;
 import org.apache.pluto.util.assemble.Assembler;
 import org.apache.pluto.util.assemble.AssemblerConfig;
 import org.apache.pluto.util.assemble.ArchiveBasedAssemblyTest;
+=======
+import org.apache.pluto.container.PortletAppDescriptorService;
+import org.apache.pluto.container.impl.PortletAppDescriptorServiceImpl;
+import org.apache.pluto.container.om.portlet.PortletApplicationDefinition;
+import org.apache.pluto.container.om.portlet.PortletDefinition;
+import org.apache.pluto.util.assemble.ArchiveBasedAssemblyTest;
+import org.apache.pluto.util.assemble.Assembler;
+import org.apache.pluto.util.assemble.AssemblerConfig;
+import org.apache.pluto.util.descriptors.web.PlutoWebXmlRewriter;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * This test assembles an EAR file which contains two portlet
@@ -97,6 +108,7 @@ public class ComplexEarAssemblerTest extends ArchiveBasedAssemblyTest {
                 earFile.exists() && earFile.canRead() );
         
         PortletAppDescriptorService portletSvc = new PortletAppDescriptorServiceImpl();
+<<<<<<< HEAD
         WebAppDescriptorService webSvc = new WebAppDescriptorServiceImpl();
         PortletAppDD portletAppDD = null;
         WebAppDD webAppDD = null;
@@ -104,6 +116,15 @@ public class ComplexEarAssemblerTest extends ArchiveBasedAssemblyTest {
         List portletWarEntries = Arrays.asList( testWarEntryNames );
         List unassembledWarEntries = Arrays.asList( unassembledWarEntryName );
         List testPortlets = Arrays.asList( testPortletNames );
+=======
+        PortletApplicationDefinition portletApp = null;
+        
+        PlutoWebXmlRewriter webXmlRewriter = null;
+        
+        List<String> portletWarEntries = Arrays.asList( testWarEntryNames );
+        List<String> unassembledWarEntries = Arrays.asList( unassembledWarEntryName );
+        List<String> testPortlets = Arrays.asList( testPortletNames );
+>>>>>>> refs/remotes/apache/master
         
         int earEntryCount = 0;
         int totalWarEntryCount = 0;
@@ -124,17 +145,26 @@ public class ComplexEarAssemblerTest extends ArchiveBasedAssemblyTest {
                 
                 while ( ( warEntry = warIn.getNextJarEntry() ) != null ) {
                     if ( Assembler.PORTLET_XML.equals( warEntry.getName() ) ) {
+<<<<<<< HEAD
                         portletAppDD = portletSvc.read( 
                                 new ByteArrayInputStream( IOUtils.toByteArray( warIn ) ) );
                     }
                     if ( Assembler.SERVLET_XML.equals( warEntry.getName() ) ) {
                         webAppDD = webSvc.read( 
                                 new ByteArrayInputStream( IOUtils.toByteArray( warIn ) ) );
+=======
+                        portletApp = portletSvc.read( "test", "/test",
+                                new ByteArrayInputStream( IOUtils.toByteArray( warIn ) ) );
+                    }
+                    if ( Assembler.SERVLET_XML.equals( warEntry.getName() ) ) {
+                        webXmlRewriter = new PlutoWebXmlRewriter( new ByteArrayInputStream( IOUtils.toByteArray( warIn ) ) );
+>>>>>>> refs/remotes/apache/master
                     }
                 }
                 
                 if ( portletWarEntries.contains( earEntry.getName() ) ) {
                     portletWarEntryCount++;
+<<<<<<< HEAD
                     assertNotNull( "WAR archive did not contain a portlet.xml", portletAppDD );
                     assertNotNull( "WAR archive did not contain a servlet.xml", webAppDD );
                     assertTrue( "WAR archive did not contain any servlets", webAppDD.getServlets().size() > 0 );
@@ -150,12 +180,34 @@ public class ComplexEarAssemblerTest extends ArchiveBasedAssemblyTest {
                         assertNotNull( "web.xml does not contain assembly for test portlet", servlet );
                         assertEquals( "web.xml does not contain correct dispatch servet", Assembler.DISPATCH_SERVLET_CLASS, 
                                 servlet.getServletClass() );
+=======
+                    assertNotNull( "WAR archive did not contain a portlet.xml", portletApp );
+                    assertNotNull( "WAR archive did not contain a servlet.xml", webXmlRewriter );
+                    assertTrue( "WAR archive did not contain any servlets", webXmlRewriter.hasServlets() );
+                    assertTrue( "WAR archive did not contain any servlet mappings", webXmlRewriter.hasServletMappings() );
+                    assertTrue( "WAR archive did not contain any portlets", portletApp.getPortlets().size() > 0 );
+                    
+                    for ( Iterator<? extends PortletDefinition> iter = portletApp.getPortlets().iterator(); iter.hasNext(); ) {
+                        PortletDefinition portlet = iter.next();
+                        if (! testPortlets.contains( portlet.getPortletName() ) ) {
+                            fail( "Unexpected test portlet name encountered: [" + portlet.getPortletName() + "]" );
+                        }
+                        String servletClassName = webXmlRewriter.getServletClass( portlet.getPortletName() );
+                        assertNotNull( "web.xml does not contain assembly for test portlet", servletClassName );
+                        assertEquals( "web.xml does not contain correct dispatch servet", Assembler.DISPATCH_SERVLET_CLASS, 
+                                servletClassName );
+>>>>>>> refs/remotes/apache/master
                     } 
                     
                 }
                 
+<<<<<<< HEAD
                 webAppDD = null;
                 portletAppDD = null;
+=======
+                webXmlRewriter = null;
+                portletApp = null;
+>>>>>>> refs/remotes/apache/master
                                 
             }
             
@@ -175,5 +227,8 @@ public class ComplexEarAssemblerTest extends ArchiveBasedAssemblyTest {
     protected File getFileToAssemble() {
         return earFile;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/apache/master
 }

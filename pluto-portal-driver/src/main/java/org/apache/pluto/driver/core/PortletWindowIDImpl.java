@@ -21,7 +21,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+<<<<<<< HEAD
 import org.apache.pluto.PortletWindowID;
+=======
+import org.apache.pluto.container.PortletWindowID;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Wraps around the internal Object IDs. By holding both the string and the
@@ -29,6 +33,7 @@ import org.apache.pluto.PortletWindowID;
  * processing.
  */
 public class PortletWindowIDImpl implements PortletWindowID, Serializable {
+<<<<<<< HEAD
 
 	// Private Member Variables ------------------------------------------------
 
@@ -38,6 +43,17 @@ public class PortletWindowIDImpl implements PortletWindowID, Serializable {
 
     // Constructor -------------------------------------------------------------
 
+=======
+	
+	// Private Member Variables ------------------------------------------------
+	
+    private String stringId = null;
+    private int intId;
+    
+    
+    // Constructor -------------------------------------------------------------
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Private constructor that prevents external instantiation.
      * @param intId  the integer ID.
@@ -46,6 +62,7 @@ public class PortletWindowIDImpl implements PortletWindowID, Serializable {
     private PortletWindowIDImpl(int intId, String stringId) {
         this.stringId = stringId;
         this.intId = intId;
+<<<<<<< HEAD
     }
 
 
@@ -57,6 +74,19 @@ public class PortletWindowIDImpl implements PortletWindowID, Serializable {
 
     // Internal Methods --------------------------------------------------------
 
+=======
+    }   
+    
+    
+    // PortletWindowID Impl ----------------------------------------------------
+    
+    public String getStringId() {
+        return stringId;
+    }
+    
+    // Internal Methods --------------------------------------------------------
+    
+>>>>>>> refs/remotes/apache/master
     private void readObject(ObjectInputStream stream) throws IOException {
     	intId = stream.readInt();
         stringId = String.valueOf(intId);
@@ -67,7 +97,11 @@ public class PortletWindowIDImpl implements PortletWindowID, Serializable {
     }
 
     // Common Object Methods ---------------------------------------------------
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
     /**
     public boolean equals(Object object) {
         boolean result = false;
@@ -81,6 +115,7 @@ public class PortletWindowIDImpl implements PortletWindowID, Serializable {
         return (result);
     }
     **/
+<<<<<<< HEAD
 
     public int hashCode() {
         return intId;
@@ -93,6 +128,20 @@ public class PortletWindowIDImpl implements PortletWindowID, Serializable {
         return intId;
     }
 
+=======
+    
+    public int hashCode() {
+        return intId;
+    }
+    
+    
+    // Additional Methods ------------------------------------------------------
+    
+    public int intValue() {
+        return intId;
+    }
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Creates a portlet window ID instance from a string.
      * @param stringId  the string ID from which the instance is created.
@@ -111,5 +160,9 @@ public class PortletWindowIDImpl implements PortletWindowID, Serializable {
         }
         return new PortletWindowIDImpl(_id, stringId);
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
 }

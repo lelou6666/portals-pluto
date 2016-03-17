@@ -20,7 +20,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+<<<<<<< HEAD
 import org.apache.pluto.util.assemble.io.JarStreamingAssembly;
+=======
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.util.assemble.io.WebXmlStreamingAssembly;
 
 /**

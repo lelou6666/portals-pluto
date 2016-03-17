@@ -21,9 +21,15 @@ package org.apache.pluto.driver.services.portal;
  * Configuration of a portlet window on the portal page.
  */
 public class PortletWindowConfig {
+<<<<<<< HEAD
 
 	// Private Member Variables ------------------------------------------------
 
+=======
+	
+	// Private Member Variables ------------------------------------------------
+	
+>>>>>>> refs/remotes/apache/master
     /** The context path of the associated portlet. */
     private String contextPath;
 
@@ -34,12 +40,20 @@ public class PortletWindowConfig {
     private String metaInfo;
 
     // Constructor -------------------------------------------------------------
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * No-arg constructor.
      */
     public PortletWindowConfig() {
+<<<<<<< HEAD
 
+=======
+    	// Do nothing.
+>>>>>>> refs/remotes/apache/master
     }
 
     private PortletWindowConfig(String contextPath, String portletName, String metaInfo) {
@@ -49,7 +63,11 @@ public class PortletWindowConfig {
     }
 
     // Public Methods ----------------------------------------------------------
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
     public String getId() {
     	return createPortletId(contextPath, portletName, metaInfo);
     }
@@ -79,15 +97,26 @@ public class PortletWindowConfig {
     }
 
     // Public Static Methods ---------------------------------------------------
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Creates the portlet ID from context path and portlet name. The portlet ID
      * is constructed by concatinating the context path and the portlet name
      * using a dot ('.').
+<<<<<<< HEAD
      *
      * The method checks that the portlet name parameter does not have a dot. This check
      * is not done for the portlet ID.
      *
+=======
+     * 
+     * The method checks that the portlet name parameter does not have a dot. This check
+     * is not done for the portlet ID.
+     * 
+>>>>>>> refs/remotes/apache/master
      * @param contextPath  the portlet context path.
      * @param portletName  the portlet name.
      * @throws IllegalArgumentException if the portletName has a dot
@@ -109,9 +138,19 @@ public class PortletWindowConfig {
         if(metaInfo == null) {
             metaInfo = "";
         }
+<<<<<<< HEAD
         return contextPath + "." + portletName + "!" + metaInfo;
     }
 
+=======
+        if (contextPath.charAt(0) == '/')
+        {
+            contextPath = contextPath.substring(1);
+        }
+        return contextPath + "." + portletName + "!" + metaInfo;
+    }
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Parses out the portlet context path from the portlet ID.
      * @param portletId  the portlet ID to parse.
@@ -119,9 +158,22 @@ public class PortletWindowConfig {
      */
     public static String parseContextPath(String portletId) {
     	int index = getSeparatorIndex(portletId);
+<<<<<<< HEAD
         return portletId.substring(0, index);
     }
 
+=======
+    	if (portletId.charAt(0) != '/')
+    	{
+            return "/" + portletId.substring(0, index);
+    	}
+    	else
+    	{
+            return portletId.substring(0, index);
+    	}
+    }
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Parses out the portlet context path from the portlet ID.
      * @param portletId  the portlet ID to parse.
@@ -147,7 +199,11 @@ public class PortletWindowConfig {
 
 
     // Private Static Method ---------------------------------------------------
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> refs/remotes/apache/master
     /**
      * Parses the portlet ID and returns the separator (".") index. The portlet
      * ID passed in should be a valid ID: not null and contains ".". The portlet 

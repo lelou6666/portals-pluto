@@ -30,6 +30,7 @@ import javax.portlet.RenderResponse;
  * @since 2006-02-09
  */
 public class AboutPortlet extends GenericPortlet {
+<<<<<<< HEAD
 
 	private static final String VIEW_PAGE = "/WEB-INF/fragments/about/view.jsp";
 	private static final String EDIT_PAGE = "/WEB-INF/fragments/about/edit.jsp";
@@ -39,6 +40,18 @@ public class AboutPortlet extends GenericPortlet {
 
     public void doView(RenderRequest request, RenderResponse response)
     throws PortletException, IOException {
+=======
+	
+	private static final String VIEW_PAGE = "/WEB-INF/fragments/about/view.jsp";
+	private static final String EDIT_PAGE = "/WEB-INF/fragments/about/edit.jsp";
+	private static final String HELP_PAGE = "/WEB-INF/fragments/about/help.jsp";
+	
+	// GenericPortlet Impl -----------------------------------------------------
+	
+    public void doView(RenderRequest request, RenderResponse response)
+    throws PortletException, IOException {
+    	response.setContentType("text/html");
+>>>>>>> refs/remotes/apache/master
         PortletContext context = getPortletContext();
         PortletRequestDispatcher requestDispatcher =
         		context.getRequestDispatcher(VIEW_PAGE);
@@ -47,19 +60,33 @@ public class AboutPortlet extends GenericPortlet {
 
     protected void doEdit(RenderRequest request, RenderResponse response)
     throws PortletException, IOException {
+<<<<<<< HEAD
+=======
+    	response.setContentType("text/html");
+>>>>>>> refs/remotes/apache/master
         PortletContext context = getPortletContext();
         PortletRequestDispatcher requestDispatcher =
         		context.getRequestDispatcher(EDIT_PAGE);
         requestDispatcher.include(request, response);
     }
+<<<<<<< HEAD
 
     protected void doHelp(RenderRequest request, RenderResponse response)
     throws PortletException, IOException {
+=======
+    
+    protected void doHelp(RenderRequest request, RenderResponse response)
+    throws PortletException, IOException {
+    	response.setContentType("text/html");
+>>>>>>> refs/remotes/apache/master
     	PortletContext context = getPortletContext();
     	PortletRequestDispatcher requestDispatcher =
     			context.getRequestDispatcher(HELP_PAGE);
     	requestDispatcher.include(request, response);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/apache/master
 }

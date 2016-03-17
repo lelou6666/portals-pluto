@@ -19,17 +19,28 @@ package org.apache.pluto.testsuite;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+<<<<<<< HEAD
 import java.util.Collections;
+=======
+>>>>>>> refs/remotes/apache/master
 
 /**
  * This class contains one or more test results.
  */
 public class TestResults implements Serializable {
 
+<<<<<<< HEAD
 
     private String name;
 
     private final ArrayList list = new ArrayList();
+=======
+	private static final long serialVersionUID = 279901260532957514L;
+
+	private String name;
+
+    private ArrayList<TestResult> list = new ArrayList<TestResult>();
+>>>>>>> refs/remotes/apache/master
 
     private boolean failed = false;
     private boolean inQuestion = false;
@@ -63,8 +74,13 @@ public class TestResults implements Serializable {
         return inQuestion;
     }
 
+<<<<<<< HEAD
     public Collection getCollection() {
         return Collections.unmodifiableCollection(list);
+=======
+    public Collection<TestResult> getCollection() {
+        return list;
+>>>>>>> refs/remotes/apache/master
     }
 
     /**

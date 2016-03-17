@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.testsuite.test;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pluto.testsuite.TestResult;
@@ -23,19 +24,34 @@ import org.apache.pluto.testsuite.TestUtils;
 
 import java.util.Enumeration;
 import java.util.Iterator;
+=======
+import java.util.Enumeration;
+>>>>>>> refs/remotes/apache/master
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.ReadOnlyException;
 
+<<<<<<< HEAD
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.testsuite.TestResult;
+import org.apache.pluto.testsuite.TestUtils;
+
+>>>>>>> refs/remotes/apache/master
 /**
  * Common portlet preferences test.
  */
 public class PreferenceCommonTest extends AbstractReflectivePortletTest {
 
 	/** Logger. */
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog(PreferenceCommonTest.class);
+=======
+    private static final Logger LOG = LoggerFactory.getLogger(PreferenceCommonTest.class);
+>>>>>>> refs/remotes/apache/master
 
     protected static final String BOGUS_KEY = "org.apache.pluto.testsuite.BOGUS_KEY";
 
@@ -183,10 +199,18 @@ public class PreferenceCommonTest extends AbstractReflectivePortletTest {
         }
 
         String value = preferences.getValue("TEST", DEF_VALUE);
+<<<<<<< HEAD
         if (DEF_VALUE.equals(value)) {
         	result.setReturnCode(TestResult.PASSED);
         } else {
         	TestUtils.failOnAssertion("preference value", value, DEF_VALUE, result);
+=======
+        // see PLUTO-609: behavioral change!
+        if (null == value) {
+            result.setReturnCode(TestResult.PASSED);
+        } else {
+            TestUtils.failOnAssertion("preference value", value, null, result);
+>>>>>>> refs/remotes/apache/master
         }
         return result;
     }
@@ -376,9 +400,16 @@ public class PreferenceCommonTest extends AbstractReflectivePortletTest {
         result.setSpecPLT("14.1");
 
         PortletPreferences preferences = request.getPreferences();
+<<<<<<< HEAD
         Map prefMap = preferences.getMap();
         boolean hasAll = true;
         for (Enumeration en = preferences.getNames(); en.hasMoreElements(); ) {
+=======
+        Map<String, String[]> prefMap = preferences.getMap();
+        boolean hasAll = true;
+        for (Enumeration<String> en = preferences.getNames(); 
+        		en.hasMoreElements(); ) {
+>>>>>>> refs/remotes/apache/master
             if (!prefMap.containsKey(en.nextElement())) {
                 hasAll = false;
                 break;
@@ -422,7 +453,11 @@ public class PreferenceCommonTest extends AbstractReflectivePortletTest {
         }
 
         // Modify the returned preference map.
+<<<<<<< HEAD
     	Map prefMap = preferences.getMap();
+=======
+    	Map<String, String[]> prefMap = preferences.getMap();
+>>>>>>> refs/remotes/apache/master
     	String[] values = (String[]) prefMap.get(PREF_NAME);
     	String originalValue = null;
     	String modifiedValue = "Value modified in preferences map.";
@@ -457,9 +492,14 @@ public class PreferenceCommonTest extends AbstractReflectivePortletTest {
      */
     protected void logPreferences(PortletPreferences preferences) {
     	StringBuffer buffer = new StringBuffer();
+<<<<<<< HEAD
     	Map map = preferences.getMap();
     	for (Iterator it = map.keySet().iterator(); it.hasNext(); ) {
     		String key = (String) it.next();
+=======
+    	Map<String, String[]> map = preferences.getMap();
+    	for (String key : map.keySet()) {
+>>>>>>> refs/remotes/apache/master
     		String[] values = (String[]) map.get(key);
     		buffer.append(key).append("=");
     		if (values != null) {

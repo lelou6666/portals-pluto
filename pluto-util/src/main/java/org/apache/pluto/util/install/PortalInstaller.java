@@ -16,10 +16,17 @@
  */
 package org.apache.pluto.util.install;
 
+<<<<<<< HEAD
 import org.apache.pluto.util.UtilityException;
 
 import java.io.File;
 
+=======
+import java.io.File;
+
+import org.apache.pluto.util.UtilityException;
+
+>>>>>>> refs/remotes/apache/master
 public interface PortalInstaller {
 
     void install(InstallationConfig config) throws UtilityException, UtilityException;

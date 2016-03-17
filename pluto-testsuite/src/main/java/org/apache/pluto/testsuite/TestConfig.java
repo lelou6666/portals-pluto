@@ -34,24 +34,41 @@ import java.util.Map;
  */
 public class TestConfig implements Serializable {
 
+<<<<<<< HEAD
+=======
+	private static final long serialVersionUID = -6878431356359186658L;
+
+>>>>>>> refs/remotes/apache/master
 	// Private Member Variables ------------------------------------------------
 
 	/** PortletTest class name. */
     private String testClassName;
 
     /** Test name. */
+<<<<<<< HEAD
     private String name = null;
 
     private String displayURI;
 
     private final Map initParameters = new HashMap();
+=======
+    private String name;
+
+    private String displayURI;
+
+    private Map<String, String> initParameters = new HashMap<String, String>();
+>>>>>>> refs/remotes/apache/master
 
     /**
      * The action parameters list holding TestConfig.Parameter objects.
      * We are not using Map to hold action parameters because parameters with
      * the same name are allowed.
      */
+<<<<<<< HEAD
     private final List actionParameters = new ArrayList();
+=======
+    private List<Parameter> actionParameters = new ArrayList<Parameter>();
+>>>>>>> refs/remotes/apache/master
 
     /**
      * The render parameters list holding TestConfig.Parameter objects.
@@ -60,7 +77,11 @@ public class TestConfig implements Serializable {
      *
      * FIXME: when is this field used?
      */
+<<<<<<< HEAD
     private final List renderParameters = new ArrayList();
+=======
+//    private List renderParameters = new ArrayList();
+>>>>>>> refs/remotes/apache/master
 
 
     // Constructor -------------------------------------------------------------
@@ -102,7 +123,11 @@ public class TestConfig implements Serializable {
         initParameters.put(parameter, value);
     }
 
+<<<<<<< HEAD
     public Map getInitParameters() {
+=======
+    public Map<String, String> getInitParameters() {
+>>>>>>> refs/remotes/apache/master
         return Collections.unmodifiableMap(initParameters);
     }
 
@@ -110,23 +135,43 @@ public class TestConfig implements Serializable {
     	actionParameters.add(new Parameter(name, value));
     }
 
+<<<<<<< HEAD
     public List getActionParameters() {
+=======
+    public List<Parameter> getActionParameters() {
+>>>>>>> refs/remotes/apache/master
     	return actionParameters;
     }
 
     /**
      * FIXME: why is this method required?
      */
+<<<<<<< HEAD
     public void addRenderParameter(String name, String value) {
     	renderParameters.add(new Parameter(name, value));
     }
+=======
+    /*
+    public void addRenderParameter(String name, String value) {
+    	renderParameters.add(new Parameter(name, value));
+    }
+    */
+>>>>>>> refs/remotes/apache/master
 
     /**
      * FIXME: when is this method used?
      */
+<<<<<<< HEAD
     public List getRenderParameters() {
     	return renderParameters;
     }
+=======
+    /*
+    public List getRenderParameters() {
+    	return renderParameters;
+    }
+    */
+>>>>>>> refs/remotes/apache/master
 
     public String toString() {
     	StringBuffer buffer = new StringBuffer();

@@ -14,15 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD:pluto-descriptor-impl/src/main/java/org/apache/pluto/descriptors/services/castor/EntityResolverImpl.java
+package org.apache.pluto.descriptors.services.castor;
+=======
 package org.apache.pluto.util.assemble;
+
+import java.io.IOException;
+import java.io.InputStream;
+>>>>>>> refs/remotes/apache/master:pluto-util/src/test/java/org/apache/pluto/util/assemble/ResourceEntityResolver.java
 
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+<<<<<<< HEAD:pluto-descriptor-impl/src/main/java/org/apache/pluto/descriptors/services/castor/EntityResolverImpl.java
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Entity Resolver which first looks for dtd and xls
+ * locally in our packaged.
+ *
+ * @version 1.0
+ * @since 1.1
+ */
+public class EntityResolverImpl implements EntityResolver {
+
+    public InputSource resolveEntity(String publicId, String systemId)
+        throws SAXException, IOException {
+        int idx = systemId.lastIndexOf('/');
+        String name = systemId.substring(idx+1);
+        InputStream in = getClass().getResourceAsStream(name);
+        if(in != null) {
+            return new InputSource(in);
+        }
+        return null;
+=======
 /**
  * Resolves entities by parsing the path from the System ID and resolving
  * the file using {@link Class#getResourceAsStream}.
@@ -49,5 +76,6 @@ public class ResourceEntityResolver implements EntityResolver
 
         InputStream in = this.getClass().getResourceAsStream( path );
         return ( in == null ) ? null : new InputSource( in );
+>>>>>>> refs/remotes/apache/master:pluto-util/src/test/java/org/apache/pluto/util/assemble/ResourceEntityResolver.java
     }
 }

@@ -21,6 +21,10 @@ import java.io.IOException;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
+<<<<<<< HEAD
+=======
+import org.apache.pluto.util.assemble.ArchiveBasedAssemblyTest;
+>>>>>>> refs/remotes/apache/master
 import org.apache.pluto.util.assemble.Assembler;
 import org.apache.pluto.util.assemble.AssemblerConfig;
 import org.apache.pluto.util.assemble.ArchiveBasedAssemblyTest;
@@ -33,7 +37,12 @@ public class WarAssemblerTest extends ArchiveBasedAssemblyTest {
     private static final String portletResourceNoManifest = "/org/apache/pluto/util/assemble/war/WarDeployerTestPortletNoManifest.war";
     private static final String portletResource = "/org/apache/pluto/util/assemble/war/WarDeployerTestPortlet.war";
     private File portletFile = null;    
+<<<<<<< HEAD
     
+=======
+        
+
+>>>>>>> refs/remotes/apache/master
     
     protected void setUp() throws Exception {
         final URL portletUrl = this.getClass().getResource(portletResource);

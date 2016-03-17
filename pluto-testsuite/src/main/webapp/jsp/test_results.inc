@@ -20,7 +20,11 @@ limitations under the License.
 <%@ page import="org.apache.pluto.testsuite.TestResult" %>
 
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<<<<<<< HEAD
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
+=======
+<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+>>>>>>> refs/remotes/apache/master
 
 <%
     pageContext.setAttribute("PASSED_CODE", new Integer(TestResult.PASSED));
@@ -40,7 +44,11 @@ limitations under the License.
       </tr>
       <tr>
         <td valign="top">
+<<<<<<< HEAD
           <img src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/images/question.gif") %>"
+=======
+          <img src="<%= response.encodeURL(request.getContextPath() + "/images/question.gif") %>"
+>>>>>>> refs/remotes/apache/master
                border="0" />
         </td>
         <td>
@@ -91,6 +99,7 @@ limitations under the License.
       <td valign="top">
         <c:choose>
           <c:when test="${result.returnCode == PASSED_CODE}">
+<<<<<<< HEAD
             <img src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/images/yes.gif") %>"
                  border="0" />
           </c:when>
@@ -100,6 +109,17 @@ limitations under the License.
           </c:when>
           <c:otherwise>
             <img src="<%= renderResponse.encodeURL(renderRequest.getContextPath() + "/images/question.gif") %>"
+=======
+            <img src="<%= response.encodeURL(request.getContextPath() + "/images/yes.gif") %>"
+                 border="0" />
+          </c:when>
+          <c:when test="${result.returnCode == FAILED_CODE}">
+            <img src="<%= response.encodeURL(request.getContextPath() + "/images/no.gif") %>"
+                 border="0" />
+          </c:when>
+          <c:otherwise>
+            <img src="<%= response.encodeURL(request.getContextPath() + "/images/question.gif") %>"
+>>>>>>> refs/remotes/apache/master
                  border="0" />
           </c:otherwise>
         </c:choose>

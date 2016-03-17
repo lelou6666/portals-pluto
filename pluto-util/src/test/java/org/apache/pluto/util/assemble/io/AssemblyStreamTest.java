@@ -30,6 +30,7 @@ import java.util.jar.JarOutputStream;
 import junit.framework.TestCase;
 
 import org.apache.commons.io.IOUtils;
+<<<<<<< HEAD
 import org.apache.pluto.descriptors.portlet.PortletAppDD;
 import org.apache.pluto.descriptors.portlet.PortletDD;
 import org.apache.pluto.descriptors.services.PortletAppDescriptorService;
@@ -39,6 +40,14 @@ import org.apache.pluto.descriptors.services.castor.WebAppDescriptorServiceImpl;
 import org.apache.pluto.descriptors.servlet.ServletDD;
 import org.apache.pluto.descriptors.servlet.WebAppDD;
 import org.apache.pluto.util.assemble.Assembler;
+=======
+import org.apache.pluto.container.PortletAppDescriptorService;
+import org.apache.pluto.container.impl.PortletAppDescriptorServiceImpl;
+import org.apache.pluto.container.om.portlet.PortletApplicationDefinition;
+import org.apache.pluto.container.om.portlet.PortletDefinition;
+import org.apache.pluto.util.assemble.Assembler;
+import org.apache.pluto.util.descriptors.web.PlutoWebXmlRewriter;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * This test class directly tests the Jar streaming assembly,
@@ -86,6 +95,7 @@ public class AssemblyStreamTest extends TestCase {
     }
     
     protected void verifyAssembly( InputStream webXml, InputStream portletXml ) throws Exception {
+<<<<<<< HEAD
         WebAppDescriptorService webSvc = new WebAppDescriptorServiceImpl();
         PortletAppDescriptorService portletSvc = new PortletAppDescriptorServiceImpl();
         WebAppDD webApp = webSvc.read( webXml ) ;
@@ -107,12 +117,38 @@ public class AssemblyStreamTest extends TestCase {
 
     protected void verifyAssembly( File warFile ) throws Exception {
         WebAppDescriptorService webSvc = new WebAppDescriptorServiceImpl();
+=======
+        PortletAppDescriptorService portletSvc = new PortletAppDescriptorServiceImpl();
+        PlutoWebXmlRewriter webXmlRewriter = new PlutoWebXmlRewriter( webXml );
+        PortletApplicationDefinition portletApp = portletSvc.read( "test", "/test", portletXml );
+        
+        assertNotNull( "Web Application Descripter was null.", webXmlRewriter );
+        assertNotNull( "Portlet Application Descriptor was null.", portletApp );
+        assertTrue( "Portlet Application Descriptor doesn't define any portlets.", portletApp.getPortlets().size() > 0 );
+        assertTrue( "Web Application Descriptor doesn't define any servlets.", webXmlRewriter.hasServlets() );
+        assertTrue( "Web Application Descriptor doesn't define any servlet mappings.", webXmlRewriter.hasServletMappings() );
+        
+        PortletDefinition portlet = (PortletDefinition) portletApp.getPortlets().iterator().next();
+        assertTrue( "Unable to retrieve test portlet named [" + testPortletName + "]", portlet.getPortletName().equals( testPortletName ) );
+        
+        String servletClassName = webXmlRewriter.getServletClass( testPortletName );
+        assertNotNull( "Unable to retrieve portlet dispatch for portlet named [" + testPortletName + "]", servletClassName );        
+        assertEquals( "Dispatcher servlet incorrect for test portlet [" + testPortletName + "]",  Assembler.DISPATCH_SERVLET_CLASS, servletClassName );        
+    }
+
+    protected void verifyAssembly( File warFile ) throws Exception {
+        PlutoWebXmlRewriter webXmlRewriter = null;
+>>>>>>> refs/remotes/apache/master
         PortletAppDescriptorService portletSvc = new PortletAppDescriptorServiceImpl();
         int entryCount = 0;
         ByteArrayOutputStream portletXmlBytes = new ByteArrayOutputStream();
         ByteArrayOutputStream webXmlBytes = new ByteArrayOutputStream();
+<<<<<<< HEAD
         WebAppDD webApp = null;
         PortletAppDD portletApp = null;        
+=======
+        PortletApplicationDefinition portletApp = null;        
+>>>>>>> refs/remotes/apache/master
                 
         JarInputStream assembledWarIn = new JarInputStream( new FileInputStream( warFile ) );
         JarEntry tempEntry;
@@ -122,15 +158,24 @@ public class AssemblyStreamTest extends TestCase {
             
             if ( Assembler.PORTLET_XML.equals( tempEntry.getName() ) ) {
                 IOUtils.copy( assembledWarIn, portletXmlBytes );
+<<<<<<< HEAD
                 portletApp = portletSvc.read( new ByteArrayInputStream( portletXmlBytes.toByteArray() ) );
             }
             if ( Assembler.SERVLET_XML.equals( tempEntry.getName() ) ) {
                 IOUtils.copy( assembledWarIn, webXmlBytes );
                 webApp = webSvc.read( new ByteArrayInputStream( webXmlBytes.toByteArray() ) );
+=======
+                portletApp = portletSvc.read( "test", "/test", new ByteArrayInputStream( portletXmlBytes.toByteArray() ) );
+            }
+            if ( Assembler.SERVLET_XML.equals( tempEntry.getName() ) ) {
+                IOUtils.copy( assembledWarIn, webXmlBytes );
+                webXmlRewriter = new PlutoWebXmlRewriter( new ByteArrayInputStream( webXmlBytes.toByteArray() ) );
+>>>>>>> refs/remotes/apache/master
             }
         }
         
         assertTrue( "Assembled WAR file was empty.", entryCount > 0 );
+<<<<<<< HEAD
         assertNotNull( "Web Application Descripter was null.", webApp );
         assertNotNull( "Portlet Application Descriptor was null.", portletApp );
         assertTrue( "Portlet Application Descriptor doesn't define any portlets.", portletApp.getPortlets().size() > 0 );
@@ -143,5 +188,19 @@ public class AssemblyStreamTest extends TestCase {
         ServletDD servlet = webApp.getServlet( testPortletName );
         assertNotNull( "Unable to retrieve portlet dispatch for portlet named [" + testPortletName + "]", servlet );        
         assertEquals( "Dispatcher servlet incorrect for test portlet [" + testPortletName + "]",  Assembler.DISPATCH_SERVLET_CLASS, servlet.getServletClass() );
+=======
+        assertNotNull( "Web Application Descripter was null.", webXmlRewriter );
+        assertNotNull( "Portlet Application Descriptor was null.", portletApp );
+        assertTrue( "Portlet Application Descriptor doesn't define any portlets.", portletApp.getPortlets().size() > 0 );
+        assertTrue( "Web Application Descriptor doesn't define any servlets.", webXmlRewriter.hasServlets() );
+        assertTrue( "Web Application Descriptor doesn't define any servlet mappings.", webXmlRewriter.hasServletMappings() );
+
+        PortletDefinition portlet = (PortletDefinition) portletApp.getPortlets().iterator().next();
+        assertTrue( "Unable to retrieve test portlet named [" + testPortletName + "]", portlet.getPortletName().equals( testPortletName ) );
+
+        String servletClassName = webXmlRewriter.getServletClass( testPortletName );
+        assertNotNull( "Unable to retrieve portlet dispatch for portlet named [" + testPortletName + "]", servletClassName );        
+        assertEquals( "Dispatcher servlet incorrect for test portlet [" + testPortletName + "]",  Assembler.DISPATCH_SERVLET_CLASS, servletClassName );
+>>>>>>> refs/remotes/apache/master
     }
 }

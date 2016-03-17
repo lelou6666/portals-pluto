@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.driver.services.container;
 
+<<<<<<< HEAD
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -26,6 +27,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.pluto.PortletWindow;
 import org.apache.pluto.driver.core.PortalRequestContext;
 import org.apache.pluto.spi.ResourceURLProvider;
+=======
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.pluto.container.PortletWindow;
+import org.apache.pluto.container.ResourceURLProvider;
+>>>>>>> refs/remotes/apache/master
 
 public class ResourceURLProviderImpl implements ResourceURLProvider {
 
@@ -33,7 +40,11 @@ public class ResourceURLProviderImpl implements ResourceURLProvider {
     private String base = "";
 
     public ResourceURLProviderImpl(HttpServletRequest req,
+<<<<<<< HEAD
                                    PortletWindow internalPortletWindow) {
+=======
+                                   PortletWindow portletWindow) {
+>>>>>>> refs/remotes/apache/master
     }
 
     public void setAbsoluteURL(String path) {

@@ -34,7 +34,11 @@ import org.apache.pluto.testsuite.TestResult;
  * the portlet request, session, and context objects.
  *
  */
+<<<<<<< HEAD
 public class ResourceBundleTest extends AbstractReflectivePortletTest {
+=======
+public class ResourceBundleTest extends AbstractReflectivePortletTest  {
+>>>>>>> refs/remotes/apache/master
 
 	// Static Constant Definitions ---------------------------------------------
 
@@ -96,7 +100,11 @@ public class ResourceBundleTest extends AbstractReflectivePortletTest {
         result.setDescription("Retrieve the property names and ensure that "
         		+ "the required keys are present.");
 
+<<<<<<< HEAD
         List requiredKeys = new ArrayList();
+=======
+        List<String> requiredKeys = new ArrayList<String>();
+>>>>>>> refs/remotes/apache/master
         requiredKeys.add(TITLE_KEY);
         requiredKeys.add(SHORT_TITLE_KEY);
         requiredKeys.add(KEYWORDS_KEY);
@@ -110,7 +118,12 @@ public class ResourceBundleTest extends AbstractReflectivePortletTest {
         	return result;
         }
 
+<<<<<<< HEAD
         for (Enumeration en = bundle.getKeys(); en.hasMoreElements(); ) {
+=======
+        for (Enumeration<String> en = bundle.getKeys(); 
+        			en.hasMoreElements(); ) {
+>>>>>>> refs/remotes/apache/master
             String key = (String) en.nextElement();
             requiredKeys.remove(key);
         }
@@ -120,7 +133,11 @@ public class ResourceBundleTest extends AbstractReflectivePortletTest {
         } else {
         	result.setReturnCode(TestResult.FAILED);
             StringBuffer buffer = new StringBuffer();
+<<<<<<< HEAD
             for (Iterator it = requiredKeys.iterator(); it.hasNext(); ) {
+=======
+            for (Iterator<String> it = requiredKeys.iterator(); it.hasNext(); ) {
+>>>>>>> refs/remotes/apache/master
             	buffer.append(it.next()).append(", ");
             }
             result.setResultMessage("Required keys [" + buffer.toString()
@@ -175,7 +192,11 @@ public class ResourceBundleTest extends AbstractReflectivePortletTest {
 
         // Retrieve expected title, short title and keywords from test config.
         String suffix = isBundleDeclared() ? ("_" + locale.getLanguage()) : "";
+<<<<<<< HEAD
         Map initParams = getInitParameters();
+=======
+        Map<String, String> initParams = getInitParameters();
+>>>>>>> refs/remotes/apache/master
         String expectedTitle = (String) initParams.get(
         		TITLE_PARAM + suffix);
         String expectedShortTitle = (String) initParams.get(

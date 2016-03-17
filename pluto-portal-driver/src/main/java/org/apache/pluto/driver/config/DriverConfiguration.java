@@ -17,6 +17,7 @@
 package org.apache.pluto.driver.config;
 
 import java.util.Collection;
+<<<<<<< HEAD
 
 import javax.servlet.ServletContext;
 
@@ -25,6 +26,18 @@ import org.apache.pluto.driver.services.portal.RenderConfigService;
 import org.apache.pluto.driver.url.PortalURLParser;
 import org.apache.pluto.spi.PortalCallbackService;
 import org.apache.pluto.spi.optional.PortletPreferencesService;
+=======
+import java.util.Set;
+
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletMode;
+
+import org.apache.pluto.container.PortletContainerException;
+import org.apache.pluto.container.PortletPreferencesService;
+import org.apache.pluto.driver.services.portal.PageConfig;
+import org.apache.pluto.driver.services.portal.RenderConfigService;
+import org.apache.pluto.driver.url.PortalURLParser;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Interface defining a means for retrieving driver services
@@ -33,12 +46,17 @@ import org.apache.pluto.spi.optional.PortletPreferencesService;
  * the portal's ServletContext.
  *
  *
+<<<<<<< HEAD
+=======
+ * @author <a href="mailto:ddewolf@apache.org">David H. DeWolf</a>
+>>>>>>> refs/remotes/apache/master
  * @since Sep 2, 2005
  *
  */
 public interface DriverConfiguration {
 
 //
+<<<<<<< HEAD
 // Lifecycle Methods
 //
 
@@ -58,6 +76,8 @@ public interface DriverConfiguration {
     void destroy() throws DriverConfigurationException;
 
 //
+=======
+>>>>>>> refs/remotes/apache/master
 // Service / Configuration Methods
 //
 
@@ -87,15 +107,28 @@ public interface DriverConfiguration {
     Collection getSupportedPortletModes();
 
     Collection getSupportedWindowStates();
+<<<<<<< HEAD
+=======
+    
+//    Collection getPortletApplications();
+>>>>>>> refs/remotes/apache/master
 
     Collection getPages();
 
     PageConfig getPageConfig(String pageId);
+<<<<<<< HEAD
 
     boolean isPortletModeSupportedByPortal(String mode);
 
     boolean isPortletModeSupportedByPortlet(String portletId, String mode);
 
+=======
+    
+    boolean isPortletModeSupportedByPortal(String mode);
+    
+    boolean isPortletModeSupportedByPortlet(String portletId, String mode);
+    
+>>>>>>> refs/remotes/apache/master
     boolean isPortletModeSupported(String portletId, String mode);
 
     boolean isWindowStateSupportedByPortal(String windowState);
@@ -107,11 +140,24 @@ public interface DriverConfiguration {
 //
 // Utility methods for the container
 //
+<<<<<<< HEAD
     PortalCallbackService getPortalCallbackService();
 
+=======
+>>>>>>> refs/remotes/apache/master
     PortletPreferencesService getPortletPreferencesService();
 
     PortalURLParser getPortalUrlParser();
     
     public RenderConfigService getRenderConfigService();
+<<<<<<< HEAD
+=======
+
+    public Set<PortletMode> getSupportedPortletModes(String portletId) throws PortletContainerException; 
+    
+    public PortletConfig getPortletConfig(String portletId)  throws PortletContainerException;
+
+	public boolean isPortletManagedMode(String portletId, String mode);
+    
+>>>>>>> refs/remotes/apache/master
 }

@@ -22,6 +22,11 @@ import java.io.PrintWriter;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
+<<<<<<< HEAD
+=======
+import org.apache.pluto.driver.services.portal.PortletWindowConfig;
+
+>>>>>>> refs/remotes/apache/master
 /**
  * The portlet render tag is used to print portlet rendering result (or error
  * details) to the page.
@@ -30,6 +35,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @since Oct 4, 2004
  */
 public class PortletRenderTag extends TagSupport {
+<<<<<<< HEAD
 
 	// TagSupport Impl ---------------------------------------------------------
 
@@ -39,6 +45,17 @@ public class PortletRenderTag extends TagSupport {
 	 */
     public int doEndTag() throws JspException {
 
+=======
+	
+	// TagSupport Impl ---------------------------------------------------------
+	
+	/**
+	 * 
+	 * @see PortletTag
+	 */
+    public int doEndTag() throws JspException {
+    	
+>>>>>>> refs/remotes/apache/master
     	// Ensure that the portlet render tag resides within a portlet tag.
         PortletTag parentTag = (PortletTag) TagSupport.findAncestorWithClass(
         		this, PortletTag.class);
@@ -46,7 +63,11 @@ public class PortletRenderTag extends TagSupport {
             throw new JspException("Portlet render tag may only reside "
             		+ "within a pluto:portlet tag.");
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> refs/remotes/apache/master
         // If the portlet is rendered successfully, print the rendering result.
         if (parentTag.getStatus() == PortletTag.SUCCESS) {
             try {
@@ -60,7 +81,14 @@ public class PortletRenderTag extends TagSupport {
         // Otherwise, print the error stack trace.
         else {
             try {
+<<<<<<< HEAD
                 pageContext.getOut().print("Error rendering portlet.");
+=======
+            	PortletWindowConfig windowConfig =
+                    PortletWindowConfig.fromId(parentTag.getEvaluatedPortletId());
+            	
+                pageContext.getOut().print("Error rendering portlet " + windowConfig.getPortletName() + ".");
+>>>>>>> refs/remotes/apache/master
                 pageContext.getOut().print("<pre>");
                 parentTag.getThrowable().printStackTrace(
                 		new PrintWriter(pageContext.getOut()));
@@ -69,7 +97,11 @@ public class PortletRenderTag extends TagSupport {
                 throw new JspException(ex);
             }
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> refs/remotes/apache/master
         // Return.
         return SKIP_BODY;
     }

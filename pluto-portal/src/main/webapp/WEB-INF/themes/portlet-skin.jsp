@@ -24,6 +24,7 @@ limitations under the License.
 
   <!-- Assemble the rendering result -->
   <div class="portlet">
+<<<<<<< HEAD
     <div class="header">
       <!-- Portlet Mode Controls -->
       <pluto:modeAnchor portletMode="view"/>
@@ -36,6 +37,25 @@ limitations under the License.
       <!-- Portlet Title -->
       <h2 class="title"><pluto:title/></h2>
     </div>
+=======
+    <table class="header" width="100%">
+    	<tr>
+    	<td class="header" align="left">
+	      <!-- Portlet Title -->
+	      <h2 class="title"><pluto:title/></h2>
+	</td>
+        <td class="header" align="right">
+	      <!-- Portlet Mode Controls -->
+	      <pluto:modeDropDown />
+	
+	      <!-- Window State Controls -->
+	      <pluto:windowStateAnchor windowState="minimized" icon='<%= request.getContextPath() + "/images/controls/min.png"%>' />
+	      <pluto:windowStateAnchor windowState="maximized" icon='<%= request.getContextPath() + "/images/controls/max.png"%>' />
+	      <pluto:windowStateAnchor windowState="normal" icon='<%= request.getContextPath() + "/images/controls/norm.png"%>' />
+    	</td>
+    	</tr>
+    </table>
+>>>>>>> refs/remotes/apache/master
     <div class="body">
       <pluto:render/>
     </div>

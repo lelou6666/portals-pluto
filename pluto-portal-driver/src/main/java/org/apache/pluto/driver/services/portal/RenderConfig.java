@@ -22,14 +22,24 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 
 /**
  */
 public class RenderConfig {
+<<<<<<< HEAD
     private static final Log LOG =
         LogFactory.getLog(RenderConfig.class);
+=======
+    private static final Logger LOG =
+        LoggerFactory.getLogger(RenderConfig.class);
+>>>>>>> refs/remotes/apache/master
 
     private Map pages;
     private String defaultPageId;
@@ -86,6 +96,7 @@ public class RenderConfig {
             pageId = defaultPageId;
         }
 //        return (PageConfig) pages.get(pageId);
+<<<<<<< HEAD
 
          // TODO: Make sure this is needed.
          //This is the PLUTO-251 fix submitted by Charles Severence. Thank you!!!
@@ -102,20 +113,49 @@ public class RenderConfig {
 
          if (retval == null)
          {
+=======
+         
+         // TODO: Make sure this is needed. 
+         //This is the PLUTO-251 fix submitted by Charles Severence. Thank you!!!
+         // Sometimes pages come with a prefix of a slash - if the page is not 
+         // found, and the first character of the pageId is a slash we attempt 
+         // to look up the page without the slash. 
+         
+         PageConfig retval = (PageConfig) pages.get(pageId); 
+         
+         if ( retval == null && pageId.startsWith("/") && pageId.length() > 2 ) { 
+        	 retval = (PageConfig) pages.get(pageId.substring(1)); 
+         }
+
+         
+         if (retval == null)
+         {             
+>>>>>>> refs/remotes/apache/master
              LOG.warn("Couldn't find a PageConfig for page ID: [" + pageId + "]");
              if ((retval = (PageConfig)pages.get(defaultPageId)) != null)
              {
                  if (LOG.isDebugEnabled())
+<<<<<<< HEAD
                  {
+=======
+                 {                                      
+>>>>>>> refs/remotes/apache/master
                      LOG.debug("Returning default page ID: [" + defaultPageId + "]");
                  }
              }
              else
              {
+<<<<<<< HEAD
                  LOG.error("Could not find default page Id for render config!");
              }
          }
          return retval;
+=======
+                 LOG.error("Could not find default page Id for render config!");                 
+             }             
+         }
+         return retval; 
+>>>>>>> refs/remotes/apache/master
     }
 
     public void addPage(PageConfig config) {

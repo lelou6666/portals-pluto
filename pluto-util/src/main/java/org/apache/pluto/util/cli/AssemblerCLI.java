@@ -19,6 +19,7 @@ package org.apache.pluto.util.cli;
 import java.io.File;
 import java.io.IOException;
 
+<<<<<<< HEAD
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.CommandLine;
@@ -30,17 +31,39 @@ import org.apache.pluto.util.assemble.Assembler;
 import org.apache.pluto.util.assemble.AssemblerFactory;
 import org.apache.pluto.util.assemble.AssemblerConfig;
 import org.apache.pluto.util.UtilityException;
+=======
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.PosixParser;
+import org.apache.pluto.util.UtilityException;
+import org.apache.pluto.util.assemble.Assembler;
+import org.apache.pluto.util.assemble.AssemblerConfig;
+import org.apache.pluto.util.assemble.AssemblerFactory;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Command Line Interface to the Pluto Assembler.
  *
+<<<<<<< HEAD
+=======
+ * @author <a href="ddewolf@apache.org">David H. DeWolf</a>
+>>>>>>> refs/remotes/apache/master
  * @version 1.0
  * @since Oct 15, 2004
  */
 public class AssemblerCLI {
 
+<<<<<<< HEAD
     private final Options options;
     private final String[] args;
+=======
+    private Options options;
+    private String[] args;
+>>>>>>> refs/remotes/apache/master
 
     public AssemblerCLI(String[] args) {
         this.args = args;
@@ -91,7 +114,11 @@ public class AssemblerCLI {
         config.setWebappDescriptor(webXml);
         config.setPortletDescriptor(portletXml);
         config.setDestination(webXml);
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> refs/remotes/apache/master
         Assembler assembler = AssemblerFactory.getFactory()
             .createAssembler(config);
 

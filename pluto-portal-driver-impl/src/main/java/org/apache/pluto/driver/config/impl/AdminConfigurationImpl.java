@@ -16,12 +16,21 @@
  */
 package org.apache.pluto.driver.config.impl;
 
+<<<<<<< HEAD
 import org.apache.pluto.driver.services.portal.admin.RenderConfigAdminService;
 import org.apache.pluto.driver.services.portal.admin.PortletRegistryAdminService;
 import org.apache.pluto.driver.config.AdminConfiguration;
 
 import javax.servlet.ServletContext;
 
+=======
+import javax.servlet.ServletContext;
+
+import org.apache.pluto.driver.config.AdminConfiguration;
+import org.apache.pluto.driver.services.portal.admin.PortletRegistryAdminService;
+import org.apache.pluto.driver.services.portal.admin.RenderConfigAdminService;
+
+>>>>>>> refs/remotes/apache/master
 /**
  *
  * @version 1.0
@@ -33,7 +42,11 @@ public class AdminConfigurationImpl implements AdminConfiguration {
     private RenderConfigAdminService renderConfigAdminService;
 
     public void init(ServletContext context) {
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> refs/remotes/apache/master
     }
 
     public void destroy() {

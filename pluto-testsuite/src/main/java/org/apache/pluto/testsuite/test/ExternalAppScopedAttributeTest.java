@@ -14,13 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/apache/master
 package org.apache.pluto.testsuite.test;
 
 import java.io.IOException;
 
+<<<<<<< HEAD
 import org.apache.pluto.testsuite.TestResult;
 
+=======
+>>>>>>> refs/remotes/apache/master
 import javax.portlet.PortletSession;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,9 +35,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+<<<<<<< HEAD
 /**
  */
 public class ExternalAppScopedAttributeTest extends AbstractReflectivePortletTest {
+=======
+import org.apache.pluto.testsuite.TestResult;
+
+/**
+ */
+public class ExternalAppScopedAttributeTest 
+extends AbstractReflectivePortletTest {
+>>>>>>> refs/remotes/apache/master
 
     public static final String INT_KEY = "org.apache.pluto.testsuite.INTERNALLY_SET_APP_SCOPED_SESSION_TEST_KEY";
     public static final String EXT_KEY = "org.apache.pluto.testsuite.EXTERNALLY_SET_APP_SCOPED_SESSION_TEST_KEY";
@@ -78,7 +93,13 @@ public class ExternalAppScopedAttributeTest extends AbstractReflectivePortletTes
      */
     public static class CompanionServlet extends HttpServlet {
 
+<<<<<<< HEAD
         public void doGet(HttpServletRequest request,
+=======
+		private static final long serialVersionUID = 8921101365853307609L;
+
+		public void doGet(HttpServletRequest request,
+>>>>>>> refs/remotes/apache/master
                           HttpServletResponse response)
         throws ServletException, IOException {
             HttpSession session = request.getSession();

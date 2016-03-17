@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.testsuite.test;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.pluto.testsuite.ActionTest;
@@ -25,11 +26,17 @@ import org.apache.pluto.testsuite.validator.PreferencesValidatorImpl;
 
 import java.io.IOException;
 
+=======
+import java.io.IOException;
+
+import javax.portlet.ActionRequest;
+>>>>>>> refs/remotes/apache/master
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
+<<<<<<< HEAD
 /**
  */
 public class PreferenceInActionTest extends PreferenceCommonTest
@@ -37,11 +44,31 @@ implements ActionTest {
 
 	/** Logger. */
     private static final Log LOG = LogFactory.getLog(PreferenceInActionTest.class);
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.apache.pluto.testsuite.TestResult;
+import org.apache.pluto.testsuite.TestUtils;
+import org.apache.pluto.testsuite.annotations.DefaultTestPhase;
+import org.apache.pluto.testsuite.validator.PreferencesValidatorImpl;
+
+/**
+ */
+@DefaultTestPhase(PortletRequest.ACTION_PHASE)
+public class PreferenceInActionTest extends PreferenceCommonTest {
+
+	/** Logger. */
+    private static final Logger LOG = LoggerFactory.getLogger(PreferenceInActionTest.class);
+>>>>>>> refs/remotes/apache/master
 
 
     // Test Methods ------------------------------------------------------------
 
+<<<<<<< HEAD
     protected TestResult checkPreferenceValidator(PortletRequest request) {
+=======
+    protected TestResult checkPreferenceValidator(ActionRequest request) {
+>>>>>>> refs/remotes/apache/master
         TestResult result = new TestResult();
         result.setDescription("Ensure the validator catches invalid preferences.");
         result.setSpecPLT("14.4");
@@ -78,7 +105,11 @@ implements ActionTest {
                 preferences.setValue("TEST", "OK");
             	preferences.reset("TEST");
             } catch (Throwable th) {
+<<<<<<< HEAD
             	LOG.error(th);
+=======
+            	LOG.error(th.getMessage(),th);
+>>>>>>> refs/remotes/apache/master
             }
         }
 
@@ -92,7 +123,11 @@ implements ActionTest {
     }
 
     protected TestResult checkOnePreferenceValidatorPerPortletDefinition(
+<<<<<<< HEAD
     		PortletRequest request) {
+=======
+    		ActionRequest request) {
+>>>>>>> refs/remotes/apache/master
         TestResult result = new TestResult();
         result.setDescription("Ensure only one validator instance is created "
         		+ "per portlet definition.");
@@ -125,7 +160,11 @@ implements ActionTest {
         return result;
     }
 
+<<<<<<< HEAD
     protected TestResult checkStorePreferences(PortletRequest request) {
+=======
+    protected TestResult checkStorePreferences(ActionRequest request) {
+>>>>>>> refs/remotes/apache/master
         TestResult result = new TestResult();
         result.setDescription("Ensure storage works for portlet preferences.");
         result.setSpecPLT("14.1");

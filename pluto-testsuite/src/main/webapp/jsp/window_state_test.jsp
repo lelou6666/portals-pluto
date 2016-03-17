@@ -17,7 +17,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 --%>
 <%@ page import="javax.portlet.WindowState"%>
+<<<<<<< HEAD
 <%@ taglib uri='http://java.sun.com/portlet' prefix='portlet'%>
+=======
+<%@ taglib uri='http://java.sun.com/portlet_2_0' prefix='portlet'%>
+>>>>>>> refs/remotes/apache/master
 
 <portlet:defineObjects/>
 
@@ -29,24 +33,39 @@ limitations under the License.
         to ensure that it passes.  Click on the links below
         and make sure that the specified state is displayed.</TD></TR>
 
+<<<<<<< HEAD
 <portlet:actionURL windowState="<%=WindowState.MAXIMIZED.toString()%>" secure="<%=renderRequest.isSecure()?"True":"False"%>" var="url">
 	<portlet:param name="testId" value="<%=renderRequest.getParameter(\"testId\")%>"/>
+=======
+<portlet:actionURL windowState="<%=WindowState.MAXIMIZED.toString()%>" secure='<%=renderRequest.isSecure()?"True":"False"%>' var="url">
+	<portlet:param name="testId" value='<%=renderRequest.getParameter("testId")%>'/>
+>>>>>>> refs/remotes/apache/master
 </portlet:actionURL>
 
 <TR><TD style="font-size: 12px" valign="top"><A href="<%=url%>">Max</A></TD>
     <TD style="font-size: 10px;">The help mode provides help info.  Click to ensure that help info is
         displayed.</TD></TR>
 
+<<<<<<< HEAD
 <portlet:actionURL windowState="<%=WindowState.MINIMIZED.toString()%>" secure="<%=renderRequest.isSecure()?"True":"False"%>" var="url">
 	<portlet:param name="testId" value="<%=renderRequest.getParameter(\"testId\")%>"/>
+=======
+<portlet:actionURL windowState="<%=WindowState.MINIMIZED.toString()%>" secure='<%=renderRequest.isSecure()?"True":"False"%>' var="url">
+	<portlet:param name="testId" value='<%=renderRequest.getParameter("testId")%>'/>
+>>>>>>> refs/remotes/apache/master
 </portlet:actionURL>
 
 <TR><TD style="font-size: 12px" valign="top"><A href="<%=url%>">Min</A></TD>
     <TD style="font-size: 10px;">The edit mode allows you to edit preferences. Click to view all preferences
     currently stored in this portlet.</TD></TR>
 
+<<<<<<< HEAD
 <portlet:actionURL windowState="<%=WindowState.NORMAL.toString()%>" secure="<%=renderRequest.isSecure()?"True":"False"%>" var="url">
 	<portlet:param name="testId" value="<%=renderRequest.getParameter(\"testId\")%>"/>
+=======
+<portlet:actionURL windowState="<%=WindowState.NORMAL.toString()%>" secure='<%=renderRequest.isSecure()?"True":"False"%>' var="url">
+	<portlet:param name="testId" value='<%=renderRequest.getParameter("testId")%>'/>
+>>>>>>> refs/remotes/apache/master
 </portlet:actionURL>
 
 <TR><TD style="font-size: 12px" valign="top"><A href="<%=url%>">Nor</A></TD>

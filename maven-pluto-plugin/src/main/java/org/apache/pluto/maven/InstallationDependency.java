@@ -23,6 +23,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+<<<<<<< HEAD
+=======
+//import sun.security.provider.SHA;
+
+//import com.sun.corba.se.impl.protocol.SharedCDRClientRequestDispatcherImpl;
+
+>>>>>>> refs/remotes/apache/master
 /**
  *
  */
@@ -43,6 +50,7 @@ class InstallationDependency {
     }
 
     public static final InstallationDependency PORTLET_API =
+<<<<<<< HEAD
         new InstallationDependency("javax.portlet", "portlet-api", 
                 VERSION_PROPERTIES.getProperty("portlet-api.version"));
 
@@ -68,6 +76,33 @@ class InstallationDependency {
 
     public static final InstallationDependency  TESTSUITE =
             new InstallationDependency("org.apache.pluto", "pluto-testsuite", 
+=======
+        new InstallationDependency("org.apache.portals", "portlet-api_2.0_spec", 
+                VERSION_PROPERTIES.getProperty("portals.portlet2-api-spec.version"));
+
+    public static final InstallationDependency CONTAINER_API =
+        new InstallationDependency("org.apache.portals.pluto", "pluto-container-api", 
+                VERSION_PROPERTIES.getProperty("pluto.version"));
+
+    public static final InstallationDependency  CONTAINER =
+            new InstallationDependency("org.apache.portals.pluto", "pluto-container", 
+                    VERSION_PROPERTIES.getProperty("pluto.version"));
+
+    public static final InstallationDependency  TAGLIB =
+            new InstallationDependency("org.apache.portals.pluto", "pluto-taglib", 
+                    VERSION_PROPERTIES.getProperty("pluto.version"));
+
+    public static final InstallationDependency CONTAINER_DRIVER_API =
+        new InstallationDependency("org.apache.portals.pluto", "pluto-container-driver-api", 
+                VERSION_PROPERTIES.getProperty("pluto.version"));
+
+    public static final InstallationDependency  PORTAL =
+            new InstallationDependency("org.apache.portals.pluto", "pluto-portal", 
+                    VERSION_PROPERTIES.getProperty("pluto.version"), "war");
+
+    public static final InstallationDependency  TESTSUITE =
+            new InstallationDependency("org.apache.portals.pluto", "pluto-testsuite", 
+>>>>>>> refs/remotes/apache/master
                     VERSION_PROPERTIES.getProperty("pluto.version"), "war");
 
     public static final InstallationDependency  CASTOR =
@@ -75,9 +110,15 @@ class InstallationDependency {
                     VERSION_PROPERTIES.getProperty("castor.version"));
 
     public static final InstallationDependency  COMMONS_LOGGING_API =
+<<<<<<< HEAD
         new InstallationDependency("commons-logging", "commons-logging-api",
                 VERSION_PROPERTIES.getProperty("commons-logging.version"));
     
+=======
+            new InstallationDependency("commons-logging", "commons-logging-api",
+                    VERSION_PROPERTIES.getProperty("commons-logging.version"));
+
+>>>>>>> refs/remotes/apache/master
     public static final InstallationDependency  XERCES =
             new InstallationDependency("xerces", "xercesImpl", 
                     VERSION_PROPERTIES.getProperty("xercesImpl.version"));
@@ -85,11 +126,52 @@ class InstallationDependency {
     public static final InstallationDependency  XML_PARSER_APIS =
             new InstallationDependency("xerces", "xmlParserAPIs", 
                     VERSION_PROPERTIES.getProperty("xmlParserAPIs.version"));
+<<<<<<< HEAD
+=======
+    
+    
+    public static final InstallationDependency JAXB_API =
+		new InstallationDependency("javax.xml.bind","jaxb-api",
+				VERSION_PROPERTIES.getProperty("jaxb.version"));
+    public static final InstallationDependency JAXB_IMPL =
+		new InstallationDependency("com.sun.xml.bind","jaxb-impl",
+				VERSION_PROPERTIES.getProperty("jaxb-impl.version"));
+    
+    public static final InstallationDependency STAX_API =
+		new InstallationDependency("stax","stax-api",
+				VERSION_PROPERTIES.getProperty("stax.api.version"));
+    public static final InstallationDependency STAX_IMPL =
+		new InstallationDependency("stax","stax",
+				VERSION_PROPERTIES.getProperty("stax.impl.version"));
+    
+    public static final InstallationDependency XALAN =
+		new InstallationDependency("xalan","xalan",
+				VERSION_PROPERTIES.getProperty("xalan.version"));
+    public static final InstallationDependency ACTIVATION =
+		new InstallationDependency("javax.activation","activation",
+				VERSION_PROPERTIES.getProperty("activation.version"));
+
+    public static final InstallationDependency CCPP_API =
+		new InstallationDependency("javax.ccpp","ccpp",
+				VERSION_PROPERTIES.getProperty("ccpp-api.version"));
+//    public static final InstallationDependency CCPP_IMPL=
+//		new InstallationDependency("com.sun.ccpp","ccpp-ri",
+//				VERSION_PROPERTIES.getProperty("ccpp-ri.version"));
+//    public static final InstallationDependency RDF_FILTER =
+//		new InstallationDependency("com.megginson.sax.rdf.rdffilter","rdffilter",
+//				VERSION_PROPERTIES.getProperty("rdffilter.version"));
+//    public static final InstallationDependency JENA =
+//		new InstallationDependency("com.hp.hpl.jena","jena",
+//				VERSION_PROPERTIES.getProperty("jena.version"));
+ 
+    
+>>>>>>> refs/remotes/apache/master
 
     private static final List ENDORSED = new ArrayList();
     private static final List SHARED = new ArrayList();
 
     static {
+<<<<<<< HEAD
         ENDORSED.add(XERCES);
         ENDORSED.add(XML_PARSER_APIS);
 
@@ -101,6 +183,15 @@ class InstallationDependency {
         SHARED.add(CASTOR);
         SHARED.add(COMMONS_LOGGING_API);        
     }    
+=======
+        SHARED.add(PORTLET_API);
+        SHARED.add(CONTAINER_API);
+        SHARED.add(CONTAINER_DRIVER_API);
+        SHARED.add(TAGLIB);
+        SHARED.add(CCPP_API);
+    }
+
+>>>>>>> refs/remotes/apache/master
 
     public static Collection getEndorsedDependencies() {
         return Collections.unmodifiableCollection(ENDORSED);

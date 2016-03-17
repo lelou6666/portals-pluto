@@ -16,8 +16,13 @@
  */
 package org.apache.pluto.testsuite;
 
+<<<<<<< HEAD
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+>>>>>>> refs/remotes/apache/master
 
 /**
  * Static class that provides utility methods for Pluto testsuite.
@@ -26,7 +31,11 @@ import org.apache.commons.logging.LogFactory;
 public class TestUtils {
 
 	/** Logger. */
+<<<<<<< HEAD
 	private static final Log LOG = LogFactory.getLog(TestUtils.class);
+=======
+	private static final Logger LOG = LoggerFactory.getLogger(TestUtils.class);
+>>>>>>> refs/remotes/apache/master
 
 
 	// Private Constructor -----------------------------------------------------

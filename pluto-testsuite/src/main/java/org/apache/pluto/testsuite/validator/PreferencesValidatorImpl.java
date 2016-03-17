@@ -16,6 +16,7 @@
  */
 package org.apache.pluto.testsuite.validator;
 
+<<<<<<< HEAD
 import javax.portlet.PortletPreferences;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.ValidatorException;
@@ -23,24 +24,45 @@ import javax.portlet.ValidatorException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+=======
+>>>>>>> refs/remotes/apache/master
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
+<<<<<<< HEAD
+=======
+import javax.portlet.PortletPreferences;
+import javax.portlet.PreferencesValidator;
+import javax.portlet.ValidatorException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+>>>>>>> refs/remotes/apache/master
 /**
  * Implementation of the portlet preferences validator.
  */
 public class PreferencesValidatorImpl implements PreferencesValidator {
 
 	/** Logger. */
+<<<<<<< HEAD
     private static final Log LOG = LogFactory.getLog(PreferencesValidatorImpl.class);
+=======
+    private static final Logger LOG = LoggerFactory.getLogger(PreferencesValidatorImpl.class);
+>>>>>>> refs/remotes/apache/master
 
     public static final String CHECK_VALIDATOR_COUNT = "checkValidatorCount";
 
     /** Count of instances created. */
+<<<<<<< HEAD
     private static final Map INSTANCE_COUNTER = new HashMap();
+=======
+    private static final Map<String, Integer> INSTANCE_COUNTER = 
+    	new HashMap<String, Integer>();
+>>>>>>> refs/remotes/apache/master
 
     /** Count of invocation number of method <code>validate()</code>. */
     private int validateInvoked = 0;
@@ -80,8 +102,14 @@ public class PreferencesValidatorImpl implements PreferencesValidator {
         //   anymore.  When enabled, all preferences fail in testsuite.
         //
         final String[] DEFAULT_VALUES = new String[] { "no values" };
+<<<<<<< HEAD
     	Collection failedNames = new ArrayList();
         for (Enumeration en = preferences.getNames(); en.hasMoreElements(); ) {
+=======
+    	Collection<String> failedNames = new ArrayList<String>();
+        for (Enumeration<String> en = preferences.getNames(); 
+        		en.hasMoreElements(); ) {
+>>>>>>> refs/remotes/apache/master
             String name = (String) en.nextElement();
             String[] values = preferences.getValues(name, DEFAULT_VALUES);
             if (values != null) { // null values are allowed

@@ -35,8 +35,16 @@ group (the left column) displays portlets with odd IDs, while the second group
     <style type="text/css" title="currentStyle" media="screen">
         @import "<c:out value="${pageContext.request.contextPath}"/>/pluto.css";
         @import "<c:out value="${pageContext.request.contextPath}"/>/portlet-spec-1.0.css";
+<<<<<<< HEAD
     </style>
     <script type="text/javascript" src="<c:out value="${pageContext.request.contextPath}"/>/pluto.js"></script>
+=======
+        @import "<c:out value="${pageContext.request.contextPath}"/>/portlet-spec-2.0.css";
+    </style>
+    <script type="text/javascript"
+            src="<c:out value="${pageContext.request.contextPath}"/>/pluto.js">
+    </script>
+>>>>>>> refs/remotes/apache/master
 </head>
 
 <body>
@@ -46,6 +54,10 @@ group (the left column) displays portlets with odd IDs, while the second group
     <!-- Header block: the Apache Pluto banner image and description -->
     <div id="header">
         <h1>Apache Pluto</h1>
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/apache/master
         <p>An Apache Portals Project</p>
     </div>
 

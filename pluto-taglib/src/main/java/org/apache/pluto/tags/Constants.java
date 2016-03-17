@@ -5,9 +5,15 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
+<<<<<<< HEAD
  * 
  *      http://www.apache.org/licenses/LICENSE-2.0
  * 
+=======
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+>>>>>>> refs/remotes/apache/master
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,6 +25,10 @@ package org.apache.pluto.tags;
 /**
  * Constant values as defined by the specification
  * typically to a request.
+<<<<<<< HEAD
+=======
+ * 
+>>>>>>> refs/remotes/apache/master
  * @version 1.0
  */
 public class Constants {
@@ -40,5 +50,10 @@ public class Constants {
      * PortletConfig.
      */
     public final static String PORTLET_CONFIG = "javax.portlet.config";
+<<<<<<< HEAD
+=======
+    
+	public final static String ESCAPE_XML_RUNTIME_OPTION = "javax.portlet.escapeXml";
+>>>>>>> refs/remotes/apache/master
 
 }

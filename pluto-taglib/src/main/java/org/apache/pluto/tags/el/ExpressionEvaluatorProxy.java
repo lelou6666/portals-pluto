@@ -20,19 +20,30 @@ import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
+<<<<<<< HEAD
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+=======
+>>>>>>> refs/remotes/apache/master
 
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 
+<<<<<<< HEAD
 public abstract class ExpressionEvaluatorProxy {
 
     private static final Log LOG = LogFactory.getLog(ExpressionEvaluatorProxy.class);
 
     private static final Map FACTORIES = new TreeMap();
+=======
+public abstract class ExpressionEvaluatorProxy 
+{
+    private static final Map<String, String> FACTORIES = new TreeMap<String, String>();
+>>>>>>> refs/remotes/apache/master
 
     private static ExpressionEvaluatorProxy proxy;
 
@@ -42,19 +53,23 @@ public abstract class ExpressionEvaluatorProxy {
         // And finally, a default that should always be provided, but for which an additional jar is needed.
         FACTORIES.put("getRequest", "ApacheTaglibStandardExpressionEvaluatorProxy");
 
-        Iterator entrySetIterator = FACTORIES.entrySet().iterator();
+        Iterator<Map.Entry<String, String>> entrySetIterator = FACTORIES.entrySet().iterator();
         while(entrySetIterator.hasNext()) {
-            Map.Entry entry = (Map.Entry)entrySetIterator.next();
+            Map.Entry<String, String> entry = entrySetIterator.next();
             if(isPageContextMethodAvailable(entry.getKey().toString())) {
                 try {
                     String className =
                         ExpressionEvaluatorProxy.class.getPackage().getName()+"."+entry.getValue();
+<<<<<<< HEAD
 
                     if(LOG.isInfoEnabled()) {
                         LOG.info("Attempting to utilize expression evaluator proxy '"+className+"'");
                     }
 
                     Class proxyClass = Class.forName(className);
+=======
+                    Class<?> proxyClass = Class.forName(className);
+>>>>>>> refs/remotes/apache/master
                     proxy = (ExpressionEvaluatorProxy)proxyClass.newInstance();
 
                     if(proxy != null) {
@@ -70,11 +85,16 @@ public abstract class ExpressionEvaluatorProxy {
                 }
             }
         }
-        if(proxy == null) {
+        if(proxy == null) 
+        {
             throw new RuntimeException("Unable to find a supported proxy");
+<<<<<<< HEAD
         } else {
             LOG.info("ExpressionEvaluator Proxy Found: "+proxy.getClass().getName());
         }
+=======
+        } 
+>>>>>>> refs/remotes/apache/master
     }
 
 
@@ -84,7 +104,7 @@ public abstract class ExpressionEvaluatorProxy {
 
     private static boolean isPageContextMethodAvailable(String signature) {
          try {
-            Method method = PageContext.class.getMethod(signature, null);
+            Method method = PageContext.class.getMethod(signature);
             return method != null;
         } catch (NoSuchMethodException e) {
              return false;
