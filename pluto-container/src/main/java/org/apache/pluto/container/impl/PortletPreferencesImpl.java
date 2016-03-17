@@ -154,7 +154,7 @@ public class PortletPreferencesImpl implements PortletPreferences {
     public String[] getValues(String key, String[] defaultValues) {
         if (key == null) {
             throw new IllegalArgumentException(
-            		EXCEPTIONS.getString("error.null", "Preference key "));
+                    EXCEPTIONS.getString("error.null", "Preference key "));
         }
         String[] values = null;
         PortletPreference pref = preferences.get(key);
@@ -170,7 +170,7 @@ public class PortletPreferencesImpl implements PortletPreferences {
     public void setValue(String key, String value) throws ReadOnlyException {
         if (isReadOnly(key)) {
             throw new ReadOnlyException(EXCEPTIONS.getString(
-            		"error.preference.readonly", key));
+                    "error.preference.readonly", key));
         }
         PortletPreference pref = preferences.get(key);
         String[] values = value == null ? new String[0] : new String[] { value };
@@ -185,7 +185,10 @@ public class PortletPreferencesImpl implements PortletPreferences {
     public void setValues(String key, String[] values) throws ReadOnlyException {
         if (isReadOnly(key)) {
             throw new ReadOnlyException(EXCEPTIONS.getString(
-            		"error.preference.readonly", key));
+                    "error.preference.readonly", key));
+        }
+        if (values == null) {
+            values = new String[0];
         }
         if (values == null) {
             values = new String[0];

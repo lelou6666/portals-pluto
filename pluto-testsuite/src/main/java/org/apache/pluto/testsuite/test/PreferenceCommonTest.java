@@ -184,9 +184,15 @@ public class PreferenceCommonTest extends AbstractReflectivePortletTest {
         String value = preferences.getValue("TEST", DEF_VALUE);
         // see PLUTO-609: behavioral change!
         if (null == value) {
+<<<<<<< HEAD
         	result.setReturnCode(TestResult.PASSED);
         } else {
         	TestUtils.failOnAssertion("preference value", value, null, result);
+=======
+            result.setReturnCode(TestResult.PASSED);
+        } else {
+            TestUtils.failOnAssertion("preference value", value, null, result);
+>>>>>>> refs/remotes/apache/master
         }
         return result;
     }

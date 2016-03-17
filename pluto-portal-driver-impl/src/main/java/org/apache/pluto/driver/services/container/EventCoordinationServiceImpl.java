@@ -79,44 +79,60 @@ public class EventCoordinationServiceImpl implements EventCoordinationService
                               HttpServletResponse response, List<Event> events)
     {
         ServletContext containerServletContext = PortalRequestContext.getContext(request).getServletContext();
-		DriverConfiguration driverConfig = (DriverConfiguration) containerServletContext
-				.getAttribute(AttributeKeys.DRIVER_CONFIG);
+        DriverConfiguration driverConfig = (DriverConfiguration) containerServletContext
+                .getAttribute(AttributeKeys.DRIVER_CONFIG);
 
-		PortalURL portalURL = PortalURLParserImpl.getParser().parse(request);
+        PortalURL portalURL = PortalURLParserImpl.getParser().parse(request);
 
+<<<<<<< HEAD
 //	    Map<String, PortletWindowThread> portletWindowThreads = new HashMap<String, PortletWindowThread>();
 
 //	    ThreadGroup threadGroup = new ThreadGroup("FireEventThreads");
+=======
+//      Map<String, PortletWindowThread> portletWindowThreads = new HashMap<String, PortletWindowThread>();
 
-		for (Event event : events)
-		{
-			List<String> portletNames = getAllPortletsRegisteredForEvent(
-					event, driverConfig, containerServletContext);
+//      ThreadGroup threadGroup = new ThreadGroup("FireEventThreads");
+>>>>>>> refs/remotes/apache/master
 
-			Collection<PortletWindowConfig> portlets = getAllPortlets(driverConfig);
+        for (Event event : events)
+        {
+            List<String> portletNames = getAllPortletsRegisteredForEvent(
+                    event, driverConfig, containerServletContext);
 
+            Collection<PortletWindowConfig> portlets = getAllPortlets(driverConfig);
+
+<<<<<<< HEAD
 			// iterate all portlets in the portal
 			for (PortletWindowConfig config : portlets) {
 				PortletWindow window = new PortletWindowImpl(container, config, portalURL);
 				if (portletNames != null) {
 					for (String portlet : portletNames) {
 						if (portlet.equals(config.getId())) {
+=======
+            // iterate all portlets in the portal
+            for (PortletWindowConfig config : portlets) {
+                PortletWindow window = new PortletWindowImpl(container, config, portalURL);
+                if (portletNames != null) {
+                    for (String portlet : portletNames) {
+                        if (portlet.equals(config.getId())) {
+>>>>>>> refs/remotes/apache/master
 /* PLUTO-569: multi-threaded (event) request processing isn't thread save with the Pluto Portal Driver handling of request attributes
    as they all are stored/managed within the single underlying HttpServletRequest.
    Providing proper thread save parallel request processing would require extensive enhancements to the Pluto Portal Driver and as
    such is out-of-scope for the purpose of the Portal Driver itself.
 
-							// the thread now is a new one, with possible
-							// waiting,
-							// for the old to exit
-							
+                            // the thread now is a new one, with possible
+                            // waiting,
+                            // for the old to exit
+                            
 
-							PortletWindowThread portletWindowThread = getPortletWindowThread(portletWindowThreads,
-									threadGroup, container, config, window, request, response, containerServletContext);
+                            PortletWindowThread portletWindowThread = getPortletWindowThread(portletWindowThreads,
+                                    threadGroup, container, config, window, request, response, containerServletContext);
 
-							// is this event
-							portletWindowThread.addEvent(event);
+                            // is this event
+                            portletWindowThread.addEvent(event);
 
+<<<<<<< HEAD
 							portletWindowThread.start();
 							
 						}
@@ -213,6 +229,104 @@ public class EventCoordinationServiceImpl implements EventCoordinationService
 		throw new IllegalStateException();
 	}
 	
+=======
+                            portletWindowThread.start();
+                            
+                        }
+                    }
+                }
+            }
+            waitForEventExecution(threadGroup);
+            try {
+                Thread.sleep(WAITING_CYCLE);
+            } catch (InterruptedException e) {
+                LOG.warn(e.getMessage(),e);
+            }
+        }
+        waitForEventExecution(threadGroup);
+*/                          
+                            doEvent(container, window, event, request, response);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    protected void doEvent(PortletContainer container, PortletWindow portletWindow, Event event, 
+                               HttpServletRequest request, HttpServletResponse response ) {
+        try {
+            Object value = event.getValue();
+            
+            XMLStreamReader xml = null;
+            try {
+                if (value instanceof String) {
+                    String in = (String) value; 
+                    xml = XMLInputFactory.newInstance().createXMLStreamReader(new StringReader(in));
+                }           
+            }  
+            catch (XMLStreamException e1) {
+                throw new IllegalStateException(e1);
+            } catch (FactoryConfigurationError e1) {
+                throw new IllegalStateException(e1);
+            }
+            
+            if (xml != null) {
+                //XMLStreamReader xml = (XMLStreamReader) event.getValue();
+                
+                    //provider.getEventDefinition(event.getQName());
+                try {
+                    // now test if object is jaxb
+                    EventDefinition eventDefinitionDD = getEventDefintion(portletWindow, event.getQName()); 
+                    
+                    ClassLoader loader = portletContextService.getClassLoader(portletWindow.getPortletDefinition().getApplication().getName());
+                    Class<? extends Serializable> clazz = loader.loadClass(eventDefinitionDD.getValueType()).asSubclass(Serializable.class);
+
+                    JAXBContext jc = JAXBContext.newInstance(clazz);
+                    Unmarshaller unmarshaller  = jc.createUnmarshaller();
+
+//                  unmarshaller.setEventHandler(new javax.xml.bind.helpers.DefaultValidationEventHandler());
+
+                    JAXBElement result = unmarshaller.unmarshal(xml,clazz);
+
+                    event =  new EventImpl(event.getQName(),(Serializable) result.getValue());
+                } catch (JAXBException e) {
+                    throw new IllegalStateException(e);
+                } catch (ClassCastException e) {
+                    throw new IllegalStateException(e);
+                } catch (ClassNotFoundException e) {
+                    throw new IllegalStateException(e);
+                } catch (PortletContainerException e) {
+                    throw new IllegalStateException(e);
+                }
+            }                   
+            container.doEvent(portletWindow, request, response, event); 
+        } catch (PortletException e) {
+            LOG.warn(e.getMessage(),e);
+        } catch (IOException e) {
+            LOG.warn(e.getMessage(),e);
+        } catch (PortletContainerException e) {
+            LOG.warn(e.getMessage(),e);
+        }   
+    }
+
+    private EventDefinition getEventDefintion(PortletWindow portletWindow, QName name) {
+        PortletApplicationDefinition appDD = portletWindow.getPortletDefinition().getApplication();
+        for (EventDefinition def : appDD.getEventDefinitions()){
+            if (def.getQName() != null){
+                if (def.getQName().equals(name))
+                    return def;
+            }
+            else{
+                QName tmp = new QName(appDD.getDefaultNamespace(),def.getName());
+                if (tmp.equals(name))
+                    return def;
+            }
+        }
+        throw new IllegalStateException();
+    }
+    
+>>>>>>> refs/remotes/apache/master
 	private List<String> getAllPortletsRegisteredForEvent(Event event,
 			DriverConfiguration driverConfig, ServletContext containerServletContext) {
 		Set<String> resultSet = new HashSet<String>();

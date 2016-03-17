@@ -35,25 +35,25 @@
     <dependency>
       <groupId>org.apache.portals.pluto</groupId>
       <artifactId>pluto-container-api</artifactId>
-      <version>${pom.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.portals.pluto</groupId>
       <artifactId>pluto-container-driver-api</artifactId>
-      <version>${pom.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.portals.pluto</groupId>
       <artifactId>pluto-container</artifactId>
-      <version>${pom.version}</version>
+      <version>${project.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.portals.pluto</groupId>
       <artifactId>pluto-taglib</artifactId>
-      <version>${pom.version}</version>
+      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -79,12 +79,12 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
-      <scope>compile</scope>
+      <scope>${dependency.scope}</scope>
     </dependency>
     <dependency>
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
-      <scope>compile</scope>
+      <scope>${dependency.scope}</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>

@@ -42,9 +42,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <scope>${dependency.scope}</scope>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-            <scope>compile</scope>
+            <scope>${dependency.scope}</scope>
             <exclusions>
                 <exclusion>
                     <groupId>javax.servlet</groupId>
@@ -53,14 +58,14 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>commons-digester</groupId>
-            <artifactId>commons-digester</artifactId>
-            <scope>compile</scope>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>${dependency.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-jdk14</artifactId>
-            <scope>compile</scope>
+            <scope>${dependency.scope}</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -70,7 +75,7 @@
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
-            <scope>compile</scope>
+            <scope>${dependency.scope}</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -89,6 +94,7 @@
         <plugins>
             <!-- configure maven-war-plugin to use updated web.xml -->
             <plugin>
+   			  	<groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <webXml>${project.build.directory}/pluto-resources/web.xml</webXml>
@@ -98,7 +104,7 @@
             <plugin>
                 <groupId>org.apache.portals.pluto</groupId>
                 <artifactId>maven-pluto-plugin</artifactId>
-                <version>${pom.version}</version>
+                <version>${project.version}</version>
                 <executions>
                     <execution>
                         <phase>generate-resources</phase>
@@ -118,7 +124,7 @@
                             <goal>process</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/${build.finalName}</outputDirectory>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
                             <attached>false</attached>
                         </configuration>
                     </execution>
@@ -166,7 +172,7 @@
                                     -->
                                         <property environment="env" />
                                         <property name="deploy.dir" value="${env.PORTLET_DEPLOY_DIR}" />
-                                        <copy file="target/${pom.build.finalName}.war" tofile="${deploy.dir}/testsuite.war" />
+                                        <copy file="target/${project.build.finalName}.war" tofile="${deploy.dir}/testsuite.war" />
                                     </tasks>
                                 </configuration>
                                 <goals>
@@ -203,7 +209,7 @@
                                     -->
                                         <property environment="env" />
                                         <property name="deploy.dir" value="${env.PORTLET_DEPLOY_DIR}" />
-                                        <copy file="target/${pom.build.finalName}.war" tofile="${deploy.dir}/testsuite.war" />
+                                        <copy file="target/${project.build.finalName}.war" tofile="${deploy.dir}/testsuite.war" />
                                     </tasks>
                                 </configuration>
                                 <goals>
